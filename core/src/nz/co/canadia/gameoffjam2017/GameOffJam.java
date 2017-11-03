@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class GameOffJam extends ApplicationAdapter {
@@ -25,10 +25,10 @@ public class GameOffJam extends ApplicationAdapter {
 		// create the camera
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false,
-				Constants.CANVAS_WIDTH,
-				Constants.CANVAS_HEIGHT);
-		viewport = new FillViewport(Constants.CANVAS_WIDTH,
-				Constants.CANVAS_HEIGHT, camera);
+				Constants.GAME_WIDTH,
+				Constants.GAME_HEIGHT);
+		viewport = new ExtendViewport(Constants.GAME_WIDTH,
+				Constants.GAME_HEIGHT, camera);
 
 		shapeRenderer = new ShapeRenderer();
 	}
@@ -43,16 +43,19 @@ public class GameOffJam extends ApplicationAdapter {
 		shapeRenderer.setProjectionMatrix(camera.combined);
 		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 		shapeRenderer.setColor(0, 0, 0, 1);
-		shapeRenderer.rect(Constants.GAME_LEFT, Constants.GAME_BOTTOM,
-				Constants.GAME_WIDTH, Constants.GAME_HEIGHT);
+		shapeRenderer.rect(0, 0, Constants.GAME_WIDTH, Constants.GAME_HEIGHT);
 		shapeRenderer.end();
 
 		batch.begin();
-		batch.draw(img, Constants.GAME_RIGHT - img.getWidth() / 2,
-				Constants.GAME_TOP - img.getHeight());
+		batch.draw(img, 0, 0, Constants.GAME_WIDTH / 2,
+				Constants.GAME_WIDTH / 2);
+		batch.draw(img, Constants.GAME_WIDTH * 3 / 4,
+				Constants.GAME_HEIGHT - Constants.GAME_WIDTH / 2,
+				Constants.GAME_WIDTH / 2,
+				Constants.GAME_WIDTH / 2);
 		batch.end();
 	}
-	
+
 	@Override
 	public void dispose () {
 		batch.dispose();

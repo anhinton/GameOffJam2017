@@ -15,15 +15,7 @@ public class Constants {
     public static final int HTML_WIDTH = DESKTOP_WIDTH * 3 / 4;
     public static final int HTML_HEIGHT = DESKTOP_HEIGHT * 3 / 4;
 
-    // canvas dimensions
-    static final int CANVAS_WIDTH = 2560;
-    static final int CANVAS_HEIGHT = 1920;
-
-    // game area
-    static final int GAME_WIDTH = CANVAS_HEIGHT * 9 / 16;
-    static final int GAME_HEIGHT = CANVAS_HEIGHT;
-    static final int GAME_LEFT = CANVAS_WIDTH / 2 - GAME_WIDTH / 2;
-    static final int GAME_RIGHT = CANVAS_WIDTH / 2 + GAME_WIDTH / 2;
-    static final int GAME_BOTTOM = 0;
-    static final int GAME_TOP = GAME_HEIGHT;
+    // game area dimensions
+    static final int GAME_WIDTH = 18;
+    static final int GAME_HEIGHT = 32;
 }
