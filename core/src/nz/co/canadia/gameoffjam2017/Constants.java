@@ -12,10 +12,10 @@ public class Constants {
     public static final int DESKTOP_HEIGHT = 720;
 
     // display dimensions for html
-    public static final int HTML_WIDTH = DESKTOP_WIDTH * 3 / 4;
-    public static final int HTML_HEIGHT = DESKTOP_HEIGHT * 3 / 4;
+    public static final int HTML_WIDTH = DESKTOP_WIDTH;
+    public static final int HTML_HEIGHT = DESKTOP_HEIGHT;
 
     // game area dimensions
-    static final int GAME_WIDTH = 18;
-    static final int GAME_HEIGHT = 32;
+    static final float GAME_WIDTH = (float) (9.0 / 2);
+    static final float GAME_HEIGHT = 16 / 2;
 }
