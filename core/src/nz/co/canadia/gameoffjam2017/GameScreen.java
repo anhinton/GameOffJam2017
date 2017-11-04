@@ -19,7 +19,6 @@ public class GameScreen implements Screen {
 
     private final GameOffJam game;
     private TextureRegion region;
-    private Texture img;
     private Sprite gpig;
     private Texture texture;
     private OrthographicCamera camera;
@@ -27,22 +26,21 @@ public class GameScreen implements Screen {
 
     GameScreen(GameOffJam game) {
         this.game = game;
-        img = new Texture("badlogic.jpg");
         texture = new Texture(Gdx.files.internal("gpig.png"));
         texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         region = new TextureRegion(texture, 0,0, texture.getWidth(), texture.getHeight());
         gpig = new Sprite(region);
         gpig.setOrigin(gpig.getWidth() / 2, gpig.getHeight() / 2);
-        gpig.setPosition(0, Constants.GAME_HEIGHT / 2);
+        gpig.setPosition(0, Constants.CANVAS_HEIGHT / 2);
         gpig.setSize(1, 1);
 
         // create the camera
         camera = new OrthographicCamera();
         camera.setToOrtho(false,
-                Constants.GAME_WIDTH,
-                Constants.GAME_HEIGHT);
-        viewport = new ExtendViewport(Constants.GAME_WIDTH,
-                Constants.GAME_HEIGHT, camera);
+                Constants.CANVAS_WIDTH,
+                Constants.CANVAS_HEIGHT);
+        viewport = new ExtendViewport(Constants.CANVAS_WIDTH,
+                Constants.CANVAS_HEIGHT, camera);
     }
 
     @Override
@@ -60,27 +58,31 @@ public class GameScreen implements Screen {
         game.shapeRenderer.setProjectionMatrix(camera.combined);
         game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         game.shapeRenderer.setColor(0, 0, 0, 1);
-        game.shapeRenderer.rect(0, 0, Constants.GAME_WIDTH, Constants.GAME_HEIGHT);
+        game.shapeRenderer.rect(0, 0, Constants.CANVAS_WIDTH, Constants.CANVAS_HEIGHT);
         game.shapeRenderer.end();
 
         game.shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+
         game.shapeRenderer.setColor(1, 1, 1, 1);
+
         // plot unit grid
-        for (int i = 1; i < Constants.GAME_HEIGHT; i++) {
-            game.shapeRenderer.line(0, i, Constants.GAME_WIDTH, i);
-        }
-        for (int i = 1; i < Constants.GAME_WIDTH; i++) {
-            game.shapeRenderer.line(i, 0, i, Constants.GAME_HEIGHT);
-        }
+//        for (float i = Constants.GAME_BOTTOM; i < Constants.CANVAS_HEIGHT; i++) {
+//            game.shapeRenderer.line(0, i, Constants.CANVAS_WIDTH, i);
+//        }
+//        for (float i = Constants.GAME_LEFT; i < Constants.CANVAS_WIDTH; i++) {
+//            game.shapeRenderer.line(i, 0, i, Constants.CANVAS_HEIGHT);
+//        }
+
+        // plot game area border
+        game.shapeRenderer.setColor((float) (0.3), (float) (0.4), (float) (0.9), 1);
+        game.shapeRenderer.rect(Constants.GAME_LEFT,
+                Constants.GAME_BOTTOM,
+                Constants.GAME_RIGHT - Constants.GAME_LEFT,
+                Constants.GAME_TOP - Constants.GAME_BOTTOM);
+
         game.shapeRenderer.end();
 
         game.batch.begin();
-        game.batch.draw(img, 0, 0, Constants.GAME_WIDTH / 2,
-                Constants.GAME_WIDTH / 2);
-        game.batch.draw(img, Constants.GAME_WIDTH * 3 / 4,
-                Constants.GAME_HEIGHT - Constants.GAME_WIDTH / 2,
-                Constants.GAME_WIDTH / 2,
-                Constants.GAME_WIDTH / 2);
         gpig.draw(game.batch);
         game.batch.end();
 
@@ -108,6 +110,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-        img.dispose();
+        texture.dispose();
     }
 }
