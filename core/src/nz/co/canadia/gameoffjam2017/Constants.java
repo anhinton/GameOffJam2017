@@ -12,8 +12,8 @@ public class Constants {
     public static final int DESKTOP_HEIGHT = 720;
 
     // app dimensions for html
-    public static final int HTML_WIDTH = DESKTOP_WIDTH;
-    public static final int HTML_HEIGHT = DESKTOP_HEIGHT;
+    public static final int HTML_WIDTH = 640;
+    public static final int HTML_HEIGHT = 480;
 
     // main display canvas dimensions
     static final float CANVAS_WIDTH = (float) (9.0 / 2);
