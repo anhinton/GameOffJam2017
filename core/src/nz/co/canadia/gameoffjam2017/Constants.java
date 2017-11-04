@@ -20,7 +20,7 @@ public class Constants {
     static final float CANVAS_HEIGHT = 16 / 2;
 
     // game area boundaries
-    static final float GAME_MARGIN = CANVAS_WIDTH / 18;
+    static final float GAME_MARGIN = CANVAS_WIDTH / 20;
     static final float GAME_LEFT = GAME_MARGIN;
     static final float GAME_RIGHT = CANVAS_WIDTH - GAME_MARGIN;
     static final float GAME_BOTTOM = GAME_MARGIN;
