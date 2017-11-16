@@ -22,6 +22,7 @@ public class GameScreen implements Screen, InputProcessor {
     private boolean debug;
 
     GameScreen(GameOffJam game) {
+        Gdx.input.setCursorPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight());
         this.game = game;
 
         // create player object
