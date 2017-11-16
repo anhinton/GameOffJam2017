@@ -15,21 +15,21 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 class Player {
     private Texture bitmap;
     private Sprite sprite;
-    private Vector2 xy;
+    private Vector2 targetXY;
 
     Player() {
-        xy = new Vector2(0, Constants.CANVAS_HEIGHT / 2);
+        targetXY = new Vector2(0, Constants.CANVAS_HEIGHT / 2);
         bitmap = new Texture(Gdx.files.internal("gpig.png"));
         bitmap.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         sprite = new Sprite(new TextureRegion(
                 bitmap, 0,0, bitmap.getWidth(), bitmap.getHeight()));
-        sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
-        sprite.setPosition(xy.x, xy.y);
-        sprite.setSize(1, 1);
+        sprite.setPosition(targetXY.x - Constants.PLAYER_WIDTH / 2, targetXY.y);
+        sprite.setSize(Constants.PLAYER_WIDTH, Constants.PLAYER_HEIGHT);
     }
 
     void update(Viewport viewport) {
-        sprite.setPosition(xy.x, xy.y);
+        move();
+        clamp();
     }
 
     void draw(SpriteBatch batch) {
@@ -40,7 +40,36 @@ class Player {
         bitmap.dispose();
     }
 
-    void move(int x, int y, Viewport viewport) {
-        xy = viewport.unproject(new Vector2(x, y));
+    private void clamp() {
+        if (sprite.getX() < Constants.GAME_LEFT) {
+            sprite.setX(Constants.GAME_LEFT);
+        }
+        if (sprite.getX() + Constants.PLAYER_WIDTH > Constants.GAME_RIGHT) {
+            sprite.setX(Constants.GAME_RIGHT - Constants.PLAYER_WIDTH);
+        }
+        if (sprite.getY() < Constants.GAME_BOTTOM) {
+            sprite.setY(Constants.GAME_BOTTOM);
+        }
+        if (sprite.getY() + Constants.PLAYER_HEIGHT > Constants.GAME_TOP) {
+            sprite.setY(Constants.GAME_TOP - Constants.PLAYER_HEIGHT);
+        }
+    }
+
+    private void move() {
+        // calculate change in X and Y positions
+        float deltaX = targetXY.x - sprite.getX() - Constants.PLAYER_WIDTH / 2;
+        float deltaY = targetXY.y - sprite.getY();
+        if (Math.abs(deltaX) > Constants.PLAYER_MOVEMENT_THRESHOLD |
+                Math.abs(deltaY) > Constants.PLAYER_MOVEMENT_THRESHOLD) {
+            float length = (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+            float changeX = deltaX / length;
+            float changeY = deltaY / length;
+            sprite.setX(sprite.getX() + changeX * Constants.PLAYER_SPEED * Gdx.graphics.getDeltaTime());
+            sprite.setY(sprite.getY() + changeY * Constants.PLAYER_SPEED * Gdx.graphics.getDeltaTime());
+        }
+    }
+
+    void setTargetXY(int x, int y, Viewport viewport) {
+        targetXY = viewport.unproject(new Vector2(x, y));
     }
 }

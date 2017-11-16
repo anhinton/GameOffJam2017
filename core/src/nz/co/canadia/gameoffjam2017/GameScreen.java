@@ -124,7 +124,7 @@ public class GameScreen implements Screen, InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        player.move(screenX, screenY, viewport);
+        player.setTargetXY(screenX, screenY, viewport);
         return true;
     }
 
@@ -135,13 +135,13 @@ public class GameScreen implements Screen, InputProcessor {
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        player.move(screenX, screenY, viewport);
+        player.setTargetXY(screenX, screenY, viewport);
         return true;
     }
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-        player.move(screenX, screenY, viewport);
+        player.setTargetXY(screenX, screenY, viewport);
         return true;
     }
 
