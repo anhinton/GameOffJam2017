@@ -59,13 +59,17 @@ class Player {
         // calculate change in X and Y positions
         float deltaX = targetXY.x - sprite.getX() - Constants.PLAYER_WIDTH / 2;
         float deltaY = targetXY.y - sprite.getY();
-        if (Math.abs(deltaX) > Constants.PLAYER_MOVEMENT_THRESHOLD |
-                Math.abs(deltaY) > Constants.PLAYER_MOVEMENT_THRESHOLD) {
-            float length = (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+        float length = (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+        if (length > Constants.PLAYER_MOVEMENT_THRESHOLD) {
+            // if the distance to move is large enough move towards the target
             float changeX = deltaX / length;
             float changeY = deltaY / length;
             sprite.setX(sprite.getX() + changeX * Constants.PLAYER_SPEED * Gdx.graphics.getDeltaTime());
             sprite.setY(sprite.getY() + changeY * Constants.PLAYER_SPEED * Gdx.graphics.getDeltaTime());
+        } else {
+            // if it's a small distance just go straight there
+            sprite.setX(targetXY.x - Constants.PLAYER_WIDTH / 2);
+            sprite.setY(targetXY.y);
         }
     }
 

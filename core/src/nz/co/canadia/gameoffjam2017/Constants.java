@@ -30,5 +30,5 @@ public class Constants {
     static final float PLAYER_WIDTH = 1;
     static final float PLAYER_HEIGHT = 1;
     static final float PLAYER_SPEED = 8;
-    static final float PLAYER_MOVEMENT_THRESHOLD = PLAYER_WIDTH / 15;
+    static final float PLAYER_MOVEMENT_THRESHOLD = PLAYER_WIDTH / 10;
 }
