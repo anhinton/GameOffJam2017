@@ -56,12 +56,13 @@ public class GameScreen implements Screen, InputProcessor {
         // update objects
         player.update(viewport);
 
-        // draw background
         game.shapeRenderer.setProjectionMatrix(camera.combined);
-        game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        game.shapeRenderer.setColor(0, 0, 0, 1);
-        game.shapeRenderer.rect(0, 0, Constants.CANVAS_WIDTH, Constants.CANVAS_HEIGHT);
-        game.shapeRenderer.end();
+
+//        // draw background
+//        game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+//        game.shapeRenderer.setColor(0, 0, 0, 1);
+//        game.shapeRenderer.rect(0, 0, Constants.CANVAS_WIDTH, Constants.CANVAS_HEIGHT);
+//        game.shapeRenderer.end();
 
         // draw sprites
         game.batch.begin();

@@ -27,8 +27,8 @@ public class Constants {
     static final float GAME_TOP = CANVAS_HEIGHT - GAME_MARGIN * 2;
 
     // Player constants
-    static final float PLAYER_WIDTH = 1;
+    static final float PLAYER_WIDTH = (float) 164 / 300;
     static final float PLAYER_HEIGHT = 1;
     static final float PLAYER_SPEED = 8;
-    static final float PLAYER_MOVEMENT_THRESHOLD = PLAYER_WIDTH / 10;
+    static final float PLAYER_MOVEMENT_THRESHOLD = 1;
 }

@@ -19,7 +19,7 @@ class Player {
 
     Player() {
         targetXY = new Vector2(Constants.CANVAS_WIDTH / 2, 0);
-        bitmap = new Texture(Gdx.files.internal("gpig.png"));
+        bitmap = new Texture(Gdx.files.internal("PlayerCan.png"));
         bitmap.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         sprite = new Sprite(new TextureRegion(
                 bitmap, 0,0, bitmap.getWidth(), bitmap.getHeight()));
