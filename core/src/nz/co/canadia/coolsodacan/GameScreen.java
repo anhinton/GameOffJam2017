@@ -1,4 +1,4 @@
-package nz.co.canadia.gameoffjam2017;
+package nz.co.canadia.coolsodacan;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
@@ -15,13 +15,13 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class GameScreen implements Screen, InputProcessor {
 
-    private final GameOffJam game;
+    private final CoolSodaCan game;
     private Player player;
     private OrthographicCamera camera;
     private Viewport viewport;
     private boolean debug;
 
-    GameScreen(GameOffJam game) {
+    GameScreen(CoolSodaCan game) {
         Gdx.input.setCursorPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight());
         this.game = game;
 

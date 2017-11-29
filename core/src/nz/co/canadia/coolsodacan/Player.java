@@ -1,4 +1,4 @@
-package nz.co.canadia.gameoffjam2017;
+package nz.co.canadia.coolsodacan;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;

@@ -1,10 +1,10 @@
-package nz.co.canadia.gameoffjam2017;
+package nz.co.canadia.coolsodacan;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-public class GameOffJam extends Game {
+public class CoolSodaCan extends Game {
 	SpriteBatch batch;
 	ShapeRenderer shapeRenderer;
 

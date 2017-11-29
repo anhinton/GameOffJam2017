@@ -1,11 +1,11 @@
-package nz.co.canadia.gameoffjam2017.client;
+package nz.co.canadia.coolsodacan.client;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
 
-import nz.co.canadia.gameoffjam2017.Constants;
-import nz.co.canadia.gameoffjam2017.GameOffJam;
+import nz.co.canadia.coolsodacan.Constants;
+import nz.co.canadia.coolsodacan.CoolSodaCan;
 
 public class HtmlLauncher extends GwtApplication {
 
@@ -18,6 +18,6 @@ public class HtmlLauncher extends GwtApplication {
 
         @Override
         public ApplicationListener createApplicationListener () {
-                return new GameOffJam();
+                return new CoolSodaCan();
         }
 }

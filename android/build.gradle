@@ -18,7 +18,7 @@ android {
         exclude 'META-INF/robovm/ios/robovm.xml'
     }
     defaultConfig {
-        applicationId "nz.co.canadia.gameoffjam2017"
+        applicationId "nz.co.canadia.coolsodacan"
         minSdkVersion 8
         targetSdkVersion 20
     }
@@ -71,7 +71,7 @@ task run(type: Exec) {
     }
 
     def adb = path + "/platform-tools/adb"
-    commandLine "$adb", 'shell', 'am', 'start', '-n', 'nz.co.canadia.gameoffjam2017/nz.co.canadia.gameoffjam2017.AndroidLauncher'
+    commandLine "$adb", 'shell', 'am', 'start', '-n', 'nz.co.canadia.coolsodacan/AndroidLauncher'
 }
 
 // sets up the Android Eclipse project, using the old Ant based build.

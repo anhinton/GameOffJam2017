@@ -1,10 +1,9 @@
-package nz.co.canadia.gameoffjam2017;
+package nz.co.canadia.coolsodacan;
 
 import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import nz.co.canadia.gameoffjam2017.GameOffJam;
 
 public class AndroidLauncher extends AndroidApplication {
 	@Override
@@ -14,6 +13,6 @@ public class AndroidLauncher extends AndroidApplication {
 		config.useAccelerometer = false;
 		config.useCompass = false;
 		config.useImmersiveMode = true;
-		initialize(new GameOffJam(), config);
+		initialize(new CoolSodaCan(), config);
 	}
 }

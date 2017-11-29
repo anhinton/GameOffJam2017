@@ -1,11 +1,11 @@
-package nz.co.canadia.gameoffjam2017;
+package nz.co.canadia.coolsodacan;
 
 /**
  * Game constants
  */
 
 public class Constants {
-    public static final String GAME_NAME = "GameOff Jam 2017 by Ashley Noel Hinton";
+    public static final String GAME_NAME = "Cool Soda Can by Ashley Noel Hinton";
 
     // app dimensions for Desktop
     public static final int DESKTOP_WIDTH = 800;

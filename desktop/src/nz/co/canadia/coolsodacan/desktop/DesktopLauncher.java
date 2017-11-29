@@ -1,10 +1,10 @@
-package nz.co.canadia.gameoffjam2017.desktop;
+package nz.co.canadia.coolsodacan.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
-import nz.co.canadia.gameoffjam2017.Constants;
-import nz.co.canadia.gameoffjam2017.GameOffJam;
+import nz.co.canadia.coolsodacan.Constants;
+import nz.co.canadia.coolsodacan.CoolSodaCan;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
@@ -12,6 +12,6 @@ public class DesktopLauncher {
 		config.width = Constants.DESKTOP_WIDTH;
 		config.height = Constants.DESKTOP_HEIGHT;
 		config.title = Constants.GAME_NAME;
-		new LwjglApplication(new GameOffJam(), config);
+		new LwjglApplication(new CoolSodaCan(), config);
 	}
 }
