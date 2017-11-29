@@ -1,10 +1,12 @@
-# GameOff Jam 2017
+# Cool Soda Can
 
 by Ashley Noel Hinton
 
-A video game for [GameOff Jam 2017](https://itch.io/jam/game-off-2017).
+A video game that started as a game
+for [GameOff Jam 2017](https://itch.io/jam/game-off-2017), but didn't
+get finished, so now it's just a game.
 
-GameOff Jam 2017 copyright 2017 Ashley Noel Hinton.
+Cool Soda Can 2017 copyright 2017 Ashley Noel Hinton.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
