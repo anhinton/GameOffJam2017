@@ -6,7 +6,15 @@ A video game that started as a game
 for [GameOff Jam 2017](https://itch.io/jam/game-off-2017), but didn't
 get finished, so now it's just a game.
 
-Cool Soda Can 2017 copyright 2017 Ashley Noel Hinton.
+This game is built using the libGDX Java game development
+framework <http://libgdx.badlogicgames.com/>. Instructions for
+importing and running the project in IntelliJ IDEA or Android Studio
+can be found
+at <https://github.com/libgdx/libgdx/wiki/Gradle-and-Intellij-IDEA>.
+
+### License
+
+Cool Soda Can copyright 2017 Ashley Noel Hinton.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -20,3 +28,11 @@ General Public License for more details.
           
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#### Assets
+
+[![Creative Commons Licence](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-sa/4.0/)
+
+Unless declared otherwise below the assets in `android/assets` are licensed 
+under a [Creative Commons Attribution-ShareAlike 4.0 International 
+License](http://creativecommons.org/licenses/by-sa/4.0/).
