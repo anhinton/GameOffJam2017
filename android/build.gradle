@@ -1,6 +1,6 @@
 android {
-    buildToolsVersion "28.0.3"
-    compileSdkVersion 28
+    buildToolsVersion "23.0.1"
+    compileSdkVersion 20
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -20,7 +20,7 @@ android {
     defaultConfig {
         applicationId "nz.co.canadia.coolsodacan"
         minSdkVersion 8
-        targetSdkVersion 26
+        targetSdkVersion 20
     }
 }
 

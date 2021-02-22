@@ -1,5 +1,8 @@
 package nz.co.canadia.coolsodacan;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.MathUtils;
+
 /**
  * Game constants
  */
@@ -7,28 +10,14 @@ package nz.co.canadia.coolsodacan;
 public class Constants {
     public static final String GAME_NAME = "Cool Soda Can by Ashley Noel Hinton";
 
+    public static final Color BACKGROUND_COLOUR = new Color(0f / 255, 205f / 255, 111f / 255, 1);
+    public static final int GAME_WIDTH = 720;
+    public static final int GAME_HEIGHT = 1280;
+
     // app dimensions for Desktop
-    public static final int DESKTOP_WIDTH = 800;
-    public static final int DESKTOP_HEIGHT = 600;
+    public static final int DESKTOP_WIDTH = MathUtils.round(GAME_WIDTH * 2f / 3);
+    public static final int DESKTOP_HEIGHT = MathUtils.round(GAME_HEIGHT * 2f / 3);
 
-    // app dimensions for html
-    public static final int HTML_WIDTH = DESKTOP_WIDTH;
-    public static final int HTML_HEIGHT = DESKTOP_HEIGHT;
-
-    // main display canvas dimensions
-    static final float CANVAS_WIDTH = (float) (9.0 / 2);
-    static final float CANVAS_HEIGHT = 16 / 2;
-
-    // game area boundaries
-    private static final float GAME_MARGIN = 0;
-    static final float GAME_LEFT = GAME_MARGIN;
-    static final float GAME_RIGHT = CANVAS_WIDTH - GAME_MARGIN;
-    static final float GAME_BOTTOM = GAME_MARGIN;
-    static final float GAME_TOP = CANVAS_HEIGHT - GAME_MARGIN * 2;
-
-    // Player constants
-    static final float PLAYER_WIDTH = (float) 164 / 300;
-    static final float PLAYER_HEIGHT = 1;
-    static final float PLAYER_SPEED = 8;
-    static final float PLAYER_MOVEMENT_THRESHOLD = 1;
+    public static final float PLAYER_SPEED = 640f;
+    static final float PLAYER_MOVEMENT_THRESHOLD = 80f;
 }

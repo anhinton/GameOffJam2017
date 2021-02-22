@@ -13,22 +13,23 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  */
 
 class Player {
-    private Texture bitmap;
-    private Sprite sprite;
+    private final Texture bitmap;
+    private final Sprite sprite;
     private Vector2 targetXY;
 
     Player() {
-        targetXY = new Vector2(Constants.CANVAS_WIDTH / 2, 0);
+        targetXY = new Vector2(Constants.GAME_WIDTH / 2f, 0);
         bitmap = new Texture(Gdx.files.internal("PlayerCan.png"));
         bitmap.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         sprite = new Sprite(new TextureRegion(
                 bitmap, 0,0, bitmap.getWidth(), bitmap.getHeight()));
-        sprite.setPosition(targetXY.x - Constants.PLAYER_WIDTH / 2, targetXY.y);
-        sprite.setSize(Constants.PLAYER_WIDTH, Constants.PLAYER_HEIGHT);
+        sprite.setPosition(targetXY.x - sprite.getWidth() / 2, targetXY.y);
+        sprite.setSize(sprite.getWidth(), sprite.getHeight());
     }
 
     void update(Viewport viewport) {
         move();
+//        Gdx.app.log("Player", "X: " + String.valueOf(sprite.getX()) + " Y: " + String.valueOf(sprite.getY()));
         clamp();
     }
 
@@ -41,23 +42,23 @@ class Player {
     }
 
     private void clamp() {
-        if (sprite.getX() < Constants.GAME_LEFT) {
-            sprite.setX(Constants.GAME_LEFT);
+        if (sprite.getX() < 0) {
+            sprite.setX(0);
         }
-        if (sprite.getX() + Constants.PLAYER_WIDTH > Constants.GAME_RIGHT) {
-            sprite.setX(Constants.GAME_RIGHT - Constants.PLAYER_WIDTH);
+        if (sprite.getX() + sprite.getWidth() > Constants.GAME_WIDTH) {
+            sprite.setX(Constants.GAME_WIDTH - sprite.getWidth());
         }
-        if (sprite.getY() < Constants.GAME_BOTTOM) {
-            sprite.setY(Constants.GAME_BOTTOM);
+        if (sprite.getY() < 0) {
+            sprite.setY(0);
         }
-        if (sprite.getY() + Constants.PLAYER_HEIGHT > Constants.GAME_TOP) {
-            sprite.setY(Constants.GAME_TOP - Constants.PLAYER_HEIGHT);
+        if (sprite.getY() + sprite.getHeight() > Constants.GAME_HEIGHT) {
+            sprite.setY(Constants.GAME_HEIGHT - sprite.getHeight());
         }
     }
 
     private void move() {
         // calculate change in X and Y positions
-        float deltaX = targetXY.x - sprite.getX() - Constants.PLAYER_WIDTH / 2;
+        float deltaX = targetXY.x - sprite.getX() - sprite.getWidth() / 2;
         float deltaY = targetXY.y - sprite.getY();
         float length = (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
         if (length > Constants.PLAYER_MOVEMENT_THRESHOLD) {
@@ -68,7 +69,7 @@ class Player {
             sprite.setY(sprite.getY() + changeY * Constants.PLAYER_SPEED * Gdx.graphics.getDeltaTime());
         } else {
             // if it's a small distance just go straight there
-            sprite.setX(targetXY.x - Constants.PLAYER_WIDTH / 2);
+            sprite.setX(targetXY.x - sprite.getWidth() / 2);
             sprite.setY(targetXY.y);
         }
     }

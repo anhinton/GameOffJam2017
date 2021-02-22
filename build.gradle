@@ -17,7 +17,7 @@ allprojects {
 
     version = '2017-11-02'
     ext {
-        appName = "Cool"
+        appName = "Cool Soda Can"
         gdxVersion = '1.9.8'
         roboVMVersion = '2.3.1'
         box2DLightsVersion = '1.4'
@@ -28,6 +28,7 @@ allprojects {
     repositories {
         mavenLocal()
         mavenCentral()
+	jcenter()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://oss.sonatype.org/content/repositories/releases/" }
     }

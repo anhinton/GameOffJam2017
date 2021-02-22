@@ -30,11 +30,9 @@ public class GameScreen implements Screen, InputProcessor {
 
         // create the camera
         camera = new OrthographicCamera();
-        camera.setToOrtho(false,
-                Constants.CANVAS_WIDTH,
-                Constants.CANVAS_HEIGHT);
-        viewport = new ExtendViewport(Constants.CANVAS_WIDTH,
-                Constants.CANVAS_HEIGHT, camera);
+        camera.setToOrtho(false, Constants.GAME_WIDTH, Constants.GAME_HEIGHT);
+        viewport = new ExtendViewport(Constants.GAME_WIDTH,
+                Constants.GAME_HEIGHT, camera);
 
         Gdx.input.setInputProcessor(this);
 
@@ -48,7 +46,9 @@ public class GameScreen implements Screen, InputProcessor {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClearColor(Constants.BACKGROUND_COLOUR.r,
+                Constants.BACKGROUND_COLOUR.g,
+                Constants.BACKGROUND_COLOUR.b, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
@@ -58,29 +58,10 @@ public class GameScreen implements Screen, InputProcessor {
 
         game.shapeRenderer.setProjectionMatrix(camera.combined);
 
-//        // draw background
-//        game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-//        game.shapeRenderer.setColor(0, 0, 0, 1);
-//        game.shapeRenderer.rect(0, 0, Constants.CANVAS_WIDTH, Constants.CANVAS_HEIGHT);
-//        game.shapeRenderer.end();
-
         // draw sprites
         game.batch.begin();
         player.draw(game.batch);
         game.batch.end();
-
-        if (debug) {
-            game.shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-
-            // plot game area border
-            game.shapeRenderer.setColor((float) (0.3), (float) (0.4), (float) (0.9), 1);
-            game.shapeRenderer.rect(Constants.GAME_LEFT,
-                    Constants.GAME_BOTTOM,
-                    Constants.GAME_RIGHT - Constants.GAME_LEFT,
-                    Constants.GAME_TOP - Constants.GAME_BOTTOM);
-
-            game.shapeRenderer.end();
-        }
 
     }
 
