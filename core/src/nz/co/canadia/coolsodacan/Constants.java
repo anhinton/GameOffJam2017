@@ -18,6 +18,10 @@ public class Constants {
     public static final int DESKTOP_WIDTH = 1280;
     public static final int DESKTOP_HEIGHT = 720;
 
+    // app dimensions for Web
+    public static final int HTML_WIDTH = 1280;
+    public static final int HTML_HEIGHT = 720;
+
     public static final float PLAYER_SPEED = 640f;
     static final float PLAYER_MOVEMENT_THRESHOLD = 10f;
 }
