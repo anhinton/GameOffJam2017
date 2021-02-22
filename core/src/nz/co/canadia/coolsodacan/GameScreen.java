@@ -1,11 +1,13 @@
 package nz.co.canadia.coolsodacan;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -16,6 +18,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class GameScreen implements Screen, InputProcessor {
 
     private final CoolSodaCan game;
+    private final Sprite bannerLeftSprite;
+    private final Sprite bannerRightSprite;
     private Player player;
     private OrthographicCamera camera;
     private Viewport viewport;
@@ -27,6 +31,17 @@ public class GameScreen implements Screen, InputProcessor {
 
         // create player object
         player = new Player();
+
+        Texture bannerLeftTexture = new Texture("banner_left.png");
+        bannerLeftTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        bannerLeftSprite = new Sprite(bannerLeftTexture);
+        bannerLeftSprite.setPosition(-778, 0);
+        bannerLeftSprite.setSize(bannerLeftSprite.getWidth(), Constants.GAME_HEIGHT);
+        Texture bannerRightTexture = new Texture("banner_right.png");
+        bannerRightTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        bannerRightSprite = new Sprite(bannerRightTexture);
+        bannerRightSprite.setPosition(Constants.GAME_WIDTH, 0);
+        bannerRightSprite.setSize(bannerRightSprite.getWidth(), Constants.GAME_HEIGHT);
 
         // create the camera
         camera = new OrthographicCamera();
@@ -61,6 +76,8 @@ public class GameScreen implements Screen, InputProcessor {
         // draw sprites
         game.batch.begin();
         player.draw(game.batch);
+        bannerLeftSprite.draw(game.batch);
+        bannerRightSprite.draw(game.batch);
         game.batch.end();
 
     }
@@ -92,7 +109,20 @@ public class GameScreen implements Screen, InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
-        return false;
+        switch(keycode) {
+            case Input.Keys.ESCAPE:
+            case Input.Keys.BACK:
+                Gdx.app.exit();
+                break;
+            case Input.Keys.F:
+                if (Gdx.graphics.isFullscreen()) {
+                    Gdx.graphics.setWindowedMode(Constants.DESKTOP_WIDTH, Constants.DESKTOP_HEIGHT);
+                } else {
+                    Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
+                }
+                break;
+        }
+        return true;
     }
 
     @Override

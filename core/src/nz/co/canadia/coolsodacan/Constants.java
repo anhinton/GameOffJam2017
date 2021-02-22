@@ -15,9 +15,9 @@ public class Constants {
     public static final int GAME_HEIGHT = 1280;
 
     // app dimensions for Desktop
-    public static final int DESKTOP_WIDTH = MathUtils.round(GAME_WIDTH * 2f / 3);
-    public static final int DESKTOP_HEIGHT = MathUtils.round(GAME_HEIGHT * 2f / 3);
+    public static final int DESKTOP_WIDTH = 1280;
+    public static final int DESKTOP_HEIGHT = 720;
 
     public static final float PLAYER_SPEED = 640f;
-    static final float PLAYER_MOVEMENT_THRESHOLD = 80f;
+    static final float PLAYER_MOVEMENT_THRESHOLD = 10f;
 }
