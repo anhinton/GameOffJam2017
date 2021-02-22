@@ -32,16 +32,16 @@ public class GameScreen implements Screen, InputProcessor {
         // create player object
         player = new Player();
 
-        Texture bannerLeftTexture = new Texture("banner_left.png");
+        Texture bannerLeftTexture = new Texture("banner_left.jpg");
         bannerLeftTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         bannerLeftSprite = new Sprite(bannerLeftTexture);
         bannerLeftSprite.setPosition(-778, 0);
-        bannerLeftSprite.setSize(bannerLeftSprite.getWidth(), Constants.GAME_HEIGHT);
-        Texture bannerRightTexture = new Texture("banner_right.png");
+        bannerLeftSprite.setSize(778, Constants.GAME_HEIGHT);
+        Texture bannerRightTexture = new Texture("banner_right.jpg");
         bannerRightTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         bannerRightSprite = new Sprite(bannerRightTexture);
         bannerRightSprite.setPosition(Constants.GAME_WIDTH, 0);
-        bannerRightSprite.setSize(bannerRightSprite.getWidth(), Constants.GAME_HEIGHT);
+        bannerRightSprite.setSize(778, Constants.GAME_HEIGHT);
 
         // create the camera
         camera = new OrthographicCamera();
