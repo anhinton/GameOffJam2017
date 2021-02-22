@@ -15,9 +15,11 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 class Player {
     private final Texture bitmap;
     private final Sprite sprite;
+    private final int gameHeight;
     private Vector2 targetXY;
 
-    Player() {
+    Player(int gameHeight) {
+        this.gameHeight = gameHeight;
         targetXY = new Vector2(Constants.GAME_WIDTH / 2f, 0);
         bitmap = new Texture(Gdx.files.internal("PlayerCan.png"));
         bitmap.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -51,8 +53,8 @@ class Player {
         if (sprite.getY() < 0) {
             sprite.setY(0);
         }
-        if (sprite.getY() + sprite.getHeight() > Constants.GAME_HEIGHT) {
-            sprite.setY(Constants.GAME_HEIGHT - sprite.getHeight());
+        if (sprite.getY() + sprite.getHeight() > gameHeight) {
+            sprite.setY(gameHeight - sprite.getHeight());
         }
     }
 

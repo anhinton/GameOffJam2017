@@ -30,24 +30,29 @@ public class GameScreen implements Screen, InputProcessor {
         this.game = game;
 
         // create player object
-        player = new Player();
+        player = new Player(game.getGameHeight());
+
+        int a = Gdx.graphics.getSafeInsetTop();
+        int b = Gdx.graphics.getSafeInsetBottom();
+        int c = Gdx.graphics.getSafeInsetLeft();
+        int d = Gdx.graphics.getSafeInsetRight();
 
         Texture bannerLeftTexture = new Texture("banner_left.jpg");
         bannerLeftTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         bannerLeftSprite = new Sprite(bannerLeftTexture);
         bannerLeftSprite.setPosition(-778, 0);
-        bannerLeftSprite.setSize(778, Constants.GAME_HEIGHT);
+        bannerLeftSprite.setSize(778, game.getGameHeight());
         Texture bannerRightTexture = new Texture("banner_right.jpg");
         bannerRightTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         bannerRightSprite = new Sprite(bannerRightTexture);
         bannerRightSprite.setPosition(Constants.GAME_WIDTH, 0);
-        bannerRightSprite.setSize(778, Constants.GAME_HEIGHT);
+        bannerRightSprite.setSize(778, game.getGameHeight());
 
         // create the camera
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, Constants.GAME_WIDTH, Constants.GAME_HEIGHT);
+        camera.setToOrtho(false, Constants.GAME_WIDTH, game.getGameHeight());
         viewport = new ExtendViewport(Constants.GAME_WIDTH,
-                Constants.GAME_HEIGHT, camera);
+                game.getGameHeight(), camera);
 
         Gdx.input.setInputProcessor(this);
 
@@ -159,7 +164,7 @@ public class GameScreen implements Screen, InputProcessor {
     }
 
     @Override
-    public boolean scrolled(int amount) {
+    public boolean scrolled(float amountX, float amountY) {
         return false;
     }
 }
