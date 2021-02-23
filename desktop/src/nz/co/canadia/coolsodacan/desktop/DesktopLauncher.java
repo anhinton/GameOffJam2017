@@ -1,17 +1,17 @@
 package nz.co.canadia.coolsodacan.desktop;
 
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 
 import nz.co.canadia.coolsodacan.Constants;
 import nz.co.canadia.coolsodacan.CoolSodaCan;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = Constants.DESKTOP_WIDTH;
-		config.height = Constants.DESKTOP_HEIGHT;
-		config.title = Constants.GAME_NAME;
-		new LwjglApplication(new CoolSodaCan(), config);
+		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
+		config.setTitle(Constants.GAME_NAME);
+		config.setWindowedMode(Constants.DESKTOP_WIDTH, Constants.DESKTOP_HEIGHT);
+
+		new Lwjgl3Application(new CoolSodaCan(), config);
 	}
 }
