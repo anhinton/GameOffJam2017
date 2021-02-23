@@ -2,7 +2,10 @@ package nz.co.canadia.coolsodacan;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 
@@ -10,6 +13,7 @@ public class CoolSodaCan extends Game {
 	SpriteBatch batch;
 	ShapeRenderer shapeRenderer;
 	private int gameHeight;
+	public AssetManager manager;
 
 	@Override
 	public void create () {
@@ -20,6 +24,8 @@ public class CoolSodaCan extends Game {
 		if (screenRatio < gameRatio) {
 			gameHeight = MathUtils.round(gameWidth / screenRatio);
 		}
+
+		manager = new AssetManager();
 
 		batch = new SpriteBatch();
 		shapeRenderer = new ShapeRenderer();
@@ -39,5 +45,6 @@ public class CoolSodaCan extends Game {
 	public void dispose () {
 		batch.dispose();
 		shapeRenderer.dispose();
+		manager.dispose();
 	}
 }

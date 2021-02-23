@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -20,29 +21,35 @@ public class GameScreen implements Screen, InputProcessor {
     private final CoolSodaCan game;
     private final Sprite bannerLeftSprite;
     private final Sprite bannerRightSprite;
-    private Player player;
-    private OrthographicCamera camera;
-    private Viewport viewport;
-    private boolean debug;
+    private final Player player;
+    private final OrthographicCamera camera;
+    private final Viewport viewport;
 
     GameScreen(CoolSodaCan game) {
         Gdx.input.setCursorPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight());
         this.game = game;
 
+        game.manager.load("graphics/graphics.atlas", TextureAtlas.class);
+        game.manager.load("banner/banner_left.jpg", Texture.class);
+        game.manager.load("banner/banner_right.jpg", Texture.class);
+        game.manager.finishLoading();
+
+        TextureAtlas atlas = game.manager.get("graphics/graphics.atlas", TextureAtlas.class);
+
         // create player object
-        player = new Player(game.getGameHeight());
+        player = new Player(game.getGameHeight(), atlas);
 
         int a = Gdx.graphics.getSafeInsetTop();
         int b = Gdx.graphics.getSafeInsetBottom();
         int c = Gdx.graphics.getSafeInsetLeft();
         int d = Gdx.graphics.getSafeInsetRight();
 
-        Texture bannerLeftTexture = new Texture("banner_left.jpg");
+        Texture bannerLeftTexture = game.manager.get("banner/banner_left.jpg", Texture.class);
         bannerLeftTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         bannerLeftSprite = new Sprite(bannerLeftTexture);
         bannerLeftSprite.setPosition(-778, 0);
         bannerLeftSprite.setSize(778, game.getGameHeight());
-        Texture bannerRightTexture = new Texture("banner_right.jpg");
+        Texture bannerRightTexture = game.manager.get("banner/banner_right.jpg", Texture.class);
         bannerRightTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         bannerRightSprite = new Sprite(bannerRightTexture);
         bannerRightSprite.setPosition(Constants.GAME_WIDTH, 0);
@@ -56,7 +63,7 @@ public class GameScreen implements Screen, InputProcessor {
 
         Gdx.input.setInputProcessor(this);
 
-        debug = true;
+        boolean debug = true;
     }
 
     @Override
@@ -109,7 +116,7 @@ public class GameScreen implements Screen, InputProcessor {
 
     @Override
     public void dispose() {
-        player.dispose();
+
     }
 
     @Override

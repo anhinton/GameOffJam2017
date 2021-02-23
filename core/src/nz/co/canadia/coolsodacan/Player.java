@@ -1,10 +1,9 @@
 package nz.co.canadia.coolsodacan;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -13,18 +12,14 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  */
 
 class Player {
-    private final Texture bitmap;
     private final Sprite sprite;
     private final int gameHeight;
     private Vector2 targetXY;
 
-    Player(int gameHeight) {
+    Player(int gameHeight, TextureAtlas atlas) {
         this.gameHeight = gameHeight;
         targetXY = new Vector2(Constants.GAME_WIDTH / 2f, 0);
-        bitmap = new Texture(Gdx.files.internal("PlayerCan.png"));
-        bitmap.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        sprite = new Sprite(new TextureRegion(
-                bitmap, 0,0, bitmap.getWidth(), bitmap.getHeight()));
+        sprite = atlas.createSprite("blue_soda_small");
         sprite.setPosition(targetXY.x - sprite.getWidth() / 2, targetXY.y);
         sprite.setSize(sprite.getWidth(), sprite.getHeight());
     }
@@ -37,10 +32,6 @@ class Player {
 
     void draw(SpriteBatch batch) {
         sprite.draw(batch);
-    }
-
-    void dispose() {
-        bitmap.dispose();
     }
 
     private void clamp() {
