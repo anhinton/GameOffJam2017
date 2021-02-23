@@ -1,0 +1,97 @@
+
+graphics.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+blue_soda_small
+  rotate: false
+  xy: 678, 244
+  size: 80, 131
+  orig: 80, 131
+  offset: 0, 0
+  index: -1
+fern01
+  rotate: false
+  xy: 2, 305
+  size: 335, 193
+  orig: 335, 193
+  offset: 0, 0
+  index: -1
+flower01
+  rotate: false
+  xy: 2, 109
+  size: 126, 194
+  orig: 126, 194
+  offset: 0, 0
+  index: -1
+grass01
+  rotate: false
+  xy: 678, 377
+  size: 91, 121
+  orig: 91, 121
+  offset: 0, 0
+  index: -1
+grass02
+  rotate: false
+  xy: 760, 283
+  size: 93, 84
+  orig: 93, 84
+  offset: 0, 0
+  index: -1
+grass03
+  rotate: false
+  xy: 2, 2
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: -1
+grass04
+  rotate: false
+  xy: 935, 405
+  size: 70, 93
+  orig: 70, 93
+  offset: 0, 0
+  index: -1
+orange_soda_small
+  rotate: false
+  xy: 212, 172
+  size: 80, 131
+  orig: 80, 131
+  offset: 0, 0
+  index: -1
+purple_soda_small
+  rotate: false
+  xy: 130, 171
+  size: 80, 132
+  orig: 80, 132
+  offset: 0, 0
+  index: -1
+silver_soda_small
+  rotate: false
+  xy: 771, 369
+  size: 80, 129
+  orig: 80, 129
+  offset: 0, 0
+  index: -1
+tree01
+  rotate: false
+  xy: 339, 181
+  size: 186, 317
+  orig: 186, 317
+  offset: 0, 0
+  index: -1
+tree02
+  rotate: false
+  xy: 527, 170
+  size: 149, 328
+  orig: 149, 328
+  offset: 0, 0
+  index: -1
+yellow_soda_small
+  rotate: false
+  xy: 853, 369
+  size: 80, 129
+  orig: 80, 129
+  offset: 0, 0
+  index: -1
