@@ -3,15 +3,12 @@ package nz.co.canadia.coolsodacan;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 
 public class CoolSodaCan extends Game {
 	SpriteBatch batch;
-	ShapeRenderer shapeRenderer;
 	private int gameHeight;
 	public AssetManager manager;
 
@@ -28,7 +25,6 @@ public class CoolSodaCan extends Game {
 		manager = new AssetManager();
 
 		batch = new SpriteBatch();
-		shapeRenderer = new ShapeRenderer();
 		this.setScreen(new GameScreen(this));
 	}
 
@@ -44,7 +40,6 @@ public class CoolSodaCan extends Game {
 	@Override
 	public void dispose () {
 		batch.dispose();
-		shapeRenderer.dispose();
 		manager.dispose();
 	}
 }

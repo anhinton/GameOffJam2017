@@ -72,13 +72,12 @@ public class GameScreen implements Screen, InputProcessor {
                 Constants.BACKGROUND_COLOUR.g,
                 Constants.BACKGROUND_COLOUR.b, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        camera.update();
-        game.batch.setProjectionMatrix(camera.combined);
+
+        viewport.getCamera().update();
+        game.batch.setProjectionMatrix(viewport.getCamera().combined);
 
         // update objects
-        player.update(viewport);
-
-        game.shapeRenderer.setProjectionMatrix(camera.combined);
+        player.update();
 
         // draw sprites
         game.batch.begin();

@@ -25,7 +25,7 @@ class Player {
         sprite.setSize(sprite.getWidth(), sprite.getHeight());
     }
 
-    void update(Viewport viewport) {
+    void update() {
         move();
 //        Gdx.app.log("Player", "X: " + String.valueOf(sprite.getX()) + " Y: " + String.valueOf(sprite.getY()));
         clamp();
