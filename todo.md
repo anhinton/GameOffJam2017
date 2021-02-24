@@ -1,6 +1,4 @@
 # todo.md
-
-  + GameScreen side banners displayed using different viewport
   
   + Add grass and trees to game
       - "Randomly" distributed
@@ -46,3 +44,8 @@
           - Music volume
           - Sound volume
           - Credits
+
+## Done
+
+  + ~~GameScreen side banners displayed using FillViewport~~
+  
