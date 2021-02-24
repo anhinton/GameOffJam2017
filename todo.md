@@ -1,6 +1,6 @@
 # todo.md
 
-  + GameScreen side banners displayed using UI
+  + GameScreen side banners displayed using different viewport
   
   + Add grass and trees to game
       - "Randomly" distributed
