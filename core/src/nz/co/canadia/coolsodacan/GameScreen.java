@@ -27,10 +27,8 @@ public class GameScreen implements Screen, InputProcessor {
     private final Stage bannerStage;
 
     GameScreen(CoolSodaCan game) {
-        Gdx.input.setCursorPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight());
-        this.game = game;
-
         Gdx.input.setCursorCatched(true);
+        this.game = game;
 
         // Load assets
         game.manager.load("graphics/graphics.atlas", TextureAtlas.class);
@@ -51,7 +49,6 @@ public class GameScreen implements Screen, InputProcessor {
         camera.setToOrtho(false, Constants.GAME_WIDTH, game.getGameHeight());
         viewport = new ExtendViewport(Constants.GAME_WIDTH,
                 game.getGameHeight(), camera);
-
 
         // Create the side banners.
         // These are in a different Viewport to game objects so they can be wholly or partially "off-screen"
@@ -135,6 +132,9 @@ public class GameScreen implements Screen, InputProcessor {
                 } else {
                     Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
                 }
+                break;
+            case Input.Keys.C:
+                Gdx.input.setCursorCatched(!Gdx.input.isCursorCatched());
                 break;
         }
         return true;
