@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -22,7 +23,6 @@ public class GameScreen implements Screen, InputProcessor {
     private final Sprite bannerLeftSprite;
     private final Sprite bannerRightSprite;
     private final Player player;
-    private final OrthographicCamera camera;
     private final Viewport viewport;
 
     GameScreen(CoolSodaCan game) {
@@ -53,7 +53,7 @@ public class GameScreen implements Screen, InputProcessor {
         bannerRightSprite.setSize(778, game.getGameHeight());
 
         // create the camera
-        camera = new OrthographicCamera();
+        OrthographicCamera camera = new OrthographicCamera();
         camera.setToOrtho(false, Constants.GAME_WIDTH, game.getGameHeight());
         viewport = new ExtendViewport(Constants.GAME_WIDTH,
                 game.getGameHeight(), camera);
@@ -68,10 +68,7 @@ public class GameScreen implements Screen, InputProcessor {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(Constants.BACKGROUND_COLOUR.r,
-                Constants.BACKGROUND_COLOUR.g,
-                Constants.BACKGROUND_COLOUR.b, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        ScreenUtils.clear(Constants.BACKGROUND_COLOUR);
 
         viewport.getCamera().update();
         game.batch.setProjectionMatrix(viewport.getCamera().combined);
