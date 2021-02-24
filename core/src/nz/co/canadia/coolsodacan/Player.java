@@ -1,5 +1,6 @@
 package nz.co.canadia.coolsodacan;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -69,5 +70,8 @@ class Player {
 
     void setTargetXY(int x, int y, Viewport viewport) {
         targetXY = viewport.unproject(new Vector2(x, y));
+        if (Gdx.app.getType() == Application.ApplicationType.Android | Gdx.app.getType() == Application.ApplicationType.iOS) {
+            targetXY.y += sprite.getHeight();
+        }
     }
 }
