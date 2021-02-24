@@ -29,6 +29,8 @@ public class GameScreen implements Screen, InputProcessor {
         Gdx.input.setCursorPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight());
         this.game = game;
 
+        Gdx.input.setCursorCatched(true);
+
         game.manager.load("graphics/graphics.atlas", TextureAtlas.class);
         game.manager.load("banner/banner_left.jpg", Texture.class);
         game.manager.load("banner/banner_right.jpg", Texture.class);
@@ -38,11 +40,6 @@ public class GameScreen implements Screen, InputProcessor {
 
         // create player object
         player = new Player(game.getGameHeight(), atlas);
-
-        int a = Gdx.graphics.getSafeInsetTop();
-        int b = Gdx.graphics.getSafeInsetBottom();
-        int c = Gdx.graphics.getSafeInsetLeft();
-        int d = Gdx.graphics.getSafeInsetRight();
 
         Texture bannerLeftTexture = game.manager.get("banner/banner_left.jpg", Texture.class);
         bannerLeftTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -62,8 +59,6 @@ public class GameScreen implements Screen, InputProcessor {
                 game.getGameHeight(), camera);
 
         Gdx.input.setInputProcessor(this);
-
-        boolean debug = true;
     }
 
     @Override
@@ -116,7 +111,7 @@ public class GameScreen implements Screen, InputProcessor {
 
     @Override
     public void dispose() {
-
+        Gdx.input.setCursorCatched(false);
     }
 
     @Override
