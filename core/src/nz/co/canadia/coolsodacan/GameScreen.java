@@ -24,7 +24,7 @@ public class GameScreen implements Screen, InputProcessor {
     private final CoolSodaCan game;
     private final Player player;
     private final Viewport viewport;
-    private final Stage stage;
+    private final Stage bannerStage;
 
     GameScreen(CoolSodaCan game) {
         Gdx.input.setCursorPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight());
@@ -32,6 +32,7 @@ public class GameScreen implements Screen, InputProcessor {
 
         Gdx.input.setCursorCatched(true);
 
+        // Load assets
         game.manager.load("graphics/graphics.atlas", TextureAtlas.class);
         TextureLoader.TextureParameter param = new TextureLoader.TextureParameter();
         param.minFilter = Texture.TextureFilter.Linear;
@@ -45,25 +46,25 @@ public class GameScreen implements Screen, InputProcessor {
         // create player object
         player = new Player(game.getGameHeight(), atlas);
 
-        Texture bannerLeftTexture = game.manager.get("banner/banner_left.jpg", Texture.class);
-        Texture bannerRightTexture = game.manager.get("banner/banner_right.jpg", Texture.class);
-
         // create the game viewport
         OrthographicCamera camera = new OrthographicCamera();
         camera.setToOrtho(false, Constants.GAME_WIDTH, game.getGameHeight());
         viewport = new ExtendViewport(Constants.GAME_WIDTH,
                 game.getGameHeight(), camera);
 
-        // Create the banner stage
-        FillViewport bannerViewport = new FillViewport(1280, 720);
-        stage = new Stage(bannerViewport);
 
-        Image left = new Image(bannerLeftTexture);
-        left.setPosition(0, 0);
-        stage.addActor(left);
-        Image right = new Image(bannerRightTexture);
-        right.setPosition(stage.getWidth() - bannerRightTexture.getWidth(), 0);
-        stage.addActor(right);
+        // Create the side banners.
+        // These are in a different Viewport to game objects so they can be wholly or partially "off-screen"
+        FillViewport bannerViewport = new FillViewport(Constants.BANNER_WIDTH, Constants.BANNER_HEIGHT);
+        bannerStage = new Stage(bannerViewport);
+        Texture bannerLeftTexture = game.manager.get("banner/banner_left.jpg", Texture.class);
+        Texture bannerRightTexture = game.manager.get("banner/banner_right.jpg", Texture.class);
+        Image bannerLeftImage = new Image(bannerLeftTexture);
+        bannerLeftImage.setPosition(0, 0);
+        bannerStage.addActor(bannerLeftImage);
+        Image bannerRightImage = new Image(bannerRightTexture);
+        bannerRightImage.setPosition(bannerStage.getWidth() - bannerRightTexture.getWidth(), 0);
+        bannerStage.addActor(bannerRightImage);
 
         Gdx.input.setInputProcessor(this);
     }
@@ -76,22 +77,20 @@ public class GameScreen implements Screen, InputProcessor {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(Constants.BACKGROUND_COLOUR);
-
-        stage.getViewport().apply();
-        stage.draw();
-
-        viewport.apply();
         viewport.getCamera().update();
-        game.batch.setProjectionMatrix(viewport.getCamera().combined);
 
         // update objects
         player.update();
 
+        // Draw side banners
+        bannerStage.getViewport().apply();
+        bannerStage.draw();
+
         // draw sprites
+        viewport.apply();
+        game.batch.setProjectionMatrix(viewport.getCamera().combined);
         game.batch.begin();
         player.draw(game.batch);
-//        bannerLeftSprite.draw(game.batch);
-//        bannerRightSprite.draw(game.batch);
         game.batch.end();
 
     }
@@ -99,7 +98,7 @@ public class GameScreen implements Screen, InputProcessor {
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height);
-        stage.getViewport().update(width, height);
+        bannerStage.getViewport().update(width, height);
     }
 
     @Override
@@ -120,6 +119,7 @@ public class GameScreen implements Screen, InputProcessor {
     @Override
     public void dispose() {
         Gdx.input.setCursorCatched(false);
+        bannerStage.dispose();
     }
 
     @Override
