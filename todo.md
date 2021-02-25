@@ -1,10 +1,5 @@
 # todo.md
   
-  + Add grass to game
-      - ~~"Randomly" distributed~~
-      - ~~Game scrolls over time~~
-      - New grass "randomly" added to the top
-  
   + Add trees to game
       - "Randomly" distributed
       - Game scrolls over time
@@ -51,6 +46,11 @@
           - Credits
 
 ## Done
+  
+  + ~~Add grass to game~~
+      - ~~"Randomly" distributed~~
+      - ~~Game scrolls over time~~
+      - ~~New grass "randomly" added to the top~~
       
   + ~~The higher on the screen an object is, the "further back" from the camera it is~~
       - ~~Sort gameObjectArray by Y value~~

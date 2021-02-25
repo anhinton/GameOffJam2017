@@ -59,12 +59,6 @@ public class GameScreen implements Screen, InputProcessor {
         }
         gameObjectArray.sort();
         gameObjectArray.reverse();
-
-        //DEBUG SORT
-        for (int i = 0; i < gameObjectArray.size; i++) {
-            Gdx.app.log("GameScreen", "Y[" + i + "]: " + gameObjectArray.get(i).getY());
-        }
-
         nextGrass = MathUtils.randomTriangular(0, 256) / Constants.OBJECT_MOVEMENT_SPEED;
 
         // create the game viewport
