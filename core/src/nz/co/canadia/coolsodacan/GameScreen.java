@@ -12,7 +12,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FillViewport;
@@ -29,10 +28,14 @@ public class GameScreen implements Screen, InputProcessor {
     private final Viewport viewport;
     private final Stage bannerStage;
     private final Array<GameObject> gameObjectArray;
+    private final TextureAtlas atlas;
+    private float timeElapsed;
+    private float nextGrass;
 
     GameScreen(CoolSodaCan game) {
         Gdx.input.setCursorCatched(true);
         this.game = game;
+        timeElapsed = 0;
 
         // Load assets
         game.manager.load("graphics/graphics.atlas", TextureAtlas.class);
@@ -43,7 +46,7 @@ public class GameScreen implements Screen, InputProcessor {
         game.manager.load("banner/banner_right.jpg", Texture.class, param);
         game.manager.finishLoading();
 
-        TextureAtlas atlas = game.manager.get("graphics/graphics.atlas", TextureAtlas.class);
+        atlas = game.manager.get("graphics/graphics.atlas", TextureAtlas.class);
 
         // create player object
         player = new Player(game.getGameHeight(), atlas);
@@ -54,6 +57,8 @@ public class GameScreen implements Screen, InputProcessor {
         for (int i = 0; i < nGrass; i++) {
             gameObjectArray.add(new Grass(MathUtils.random(0, Constants.GAME_HEIGHT), atlas));
         }
+        gameObjectArray.sort();
+        nextGrass = MathUtils.randomTriangular(0, 256) / Constants.OBJECT_MOVEMENT_SPEED;
 
         // create the game viewport
         OrthographicCamera camera = new OrthographicCamera();
@@ -77,6 +82,11 @@ public class GameScreen implements Screen, InputProcessor {
         Gdx.input.setInputProcessor(this);
     }
 
+    private void addGrass() {
+        gameObjectArray.add(new Grass(Constants.GAME_HEIGHT, atlas));
+        nextGrass = timeElapsed + MathUtils.randomTriangular(0, 256) / Constants.OBJECT_MOVEMENT_SPEED;
+    }
+
     @Override
     public void show() {
 
@@ -84,8 +94,22 @@ public class GameScreen implements Screen, InputProcessor {
 
     @Override
     public void render(float delta) {
+        timeElapsed += delta;
+
         ScreenUtils.clear(Constants.BACKGROUND_COLOUR);
         viewport.getCamera().update();
+
+        // Remove old objects
+        for (int i = 0; i < gameObjectArray.size; i++) {
+            if (gameObjectArray.get(i).getTopY() < 0) {
+                gameObjectArray.removeIndex(i);
+            }
+        }
+
+        // Add new objects to top of screen
+        if (timeElapsed > nextGrass) {
+            addGrass();
+        }
 
         // update objects
         for (GameObject g : gameObjectArray) {

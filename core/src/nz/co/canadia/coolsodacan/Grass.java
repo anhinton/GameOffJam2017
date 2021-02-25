@@ -6,7 +6,10 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
-public class Grass implements GameObject {
+import java.util.Comparator;
+
+@SuppressWarnings("NullableProblems")
+public class Grass implements Comparable<GameObject>, Comparator<GameObject>, GameObject {
     private final Sprite sprite;
 
     Grass(int y, TextureAtlas atlas) {
@@ -27,5 +30,32 @@ public class Grass implements GameObject {
 
     public void draw(SpriteBatch batch) {
         sprite.draw(batch);
+    }
+
+    @Override
+    public float getY() {
+        return sprite.getY();
+    }
+
+    @Override
+    public float getTopY() {
+         return getY() + sprite.getHeight();
+    }
+
+    @Override
+    public int compare(GameObject o1, GameObject o2) {
+        float diff = o1.getY() - o2.getY();
+        if (diff == 0) {
+            return 0;
+        } else if (diff > 0) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+    @Override
+    public int compareTo(GameObject o) {
+        return compare(this, o);
     }
 }

@@ -9,6 +9,10 @@
       - "Randomly" distributed
       - Game scrolls over time
       - New trees "randomly" added to the top
+      
+  + The higher on the screen an object is, the "further back" from the camera it is
+      - ~~Sort gameObjectArray by Y value~~
+      - Draw objects in gameObjectArray from highest to lowest Y value
 
   + Create animated small can for throwing
       - Each colour of big can gets its own small can
