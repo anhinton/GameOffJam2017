@@ -13,8 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 /**
@@ -55,7 +55,7 @@ public class GameScreen implements Screen, InputProcessor {
         gameObjectArray = new Array<>();
         int nGrass = MathUtils.round(MathUtils.randomTriangular(5, 20));
         for (int i = 0; i < nGrass; i++) {
-            gameObjectArray.add(new Grass(MathUtils.random(0, Constants.GAME_HEIGHT), atlas));
+            gameObjectArray.add(new Grass(MathUtils.random(0, game.getGameHeight()), atlas));
         }
         gameObjectArray.sort();
         nextGrass = MathUtils.randomTriangular(0, 256) / Constants.OBJECT_MOVEMENT_SPEED;
@@ -63,7 +63,7 @@ public class GameScreen implements Screen, InputProcessor {
         // create the game viewport
         OrthographicCamera camera = new OrthographicCamera();
         camera.setToOrtho(false, Constants.GAME_WIDTH, game.getGameHeight());
-        viewport = new ExtendViewport(Constants.GAME_WIDTH,
+        viewport = new FitViewport(Constants.GAME_WIDTH,
                 game.getGameHeight(), camera);
 
         // Create the side banners.
@@ -83,7 +83,7 @@ public class GameScreen implements Screen, InputProcessor {
     }
 
     private void addGrass() {
-        gameObjectArray.add(new Grass(Constants.GAME_HEIGHT, atlas));
+        gameObjectArray.add(new Grass(game.getGameHeight(), atlas));
         nextGrass = timeElapsed + MathUtils.randomTriangular(0, 256) / Constants.OBJECT_MOVEMENT_SPEED;
     }
 
