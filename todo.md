@@ -44,6 +44,9 @@
           - Music volume
           - Sound volume
           - Credits
+          
+  + **BUG**: There is a 1 (?) pixel gap between the side banners and the game area in GameScreen
+      - Do I care enough to fix?
 
 ## Done
   
