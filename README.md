@@ -36,3 +36,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Unless declared otherwise below the assets in `android/assets` are licensed 
 under a [Creative Commons Attribution-ShareAlike 4.0 International 
 License](http://creativecommons.org/licenses/by-sa/4.0/).
+
+`graphics/horse02`
+"[Mangalarga Marchador.jpg](https://commons.wikimedia.org/wiki/File:Mangalarga_Marchador.jpg)"
+by Fábio Vidigal is licensed under
+[CC BY-SA](https://creativecommons.org/licenses/by-sa/2.5/deed.en).
