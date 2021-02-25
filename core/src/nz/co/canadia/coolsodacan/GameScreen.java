@@ -66,6 +66,12 @@ public class GameScreen implements Screen, InputProcessor {
             gameObjectArray.add(new Plant(MathUtils.random(0, game.getGameHeight()), atlas));
         }
         nextPlant = MathUtils.randomTriangular(0, 640) / Constants.OBJECT_MOVEMENT_SPEED;
+        // Create animals
+        int nAnimal = MathUtils.round(MathUtils.randomTriangular(3, 6));
+        for (int i = 0; i < nAnimal; i++) {
+            gameObjectArray.add(new Animal(MathUtils.random(0, game.getGameHeight()), atlas));
+        }
+//        gameObjectArray.add(new Animal(MathUtils.random(0, game.getGameHeight()), atlas));
 
         // Sort gameObjectArray so we can render in reverse Y order
         gameObjectArray.sort();
