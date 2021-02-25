@@ -58,7 +58,6 @@ public class GameScreen implements Screen, InputProcessor {
             gameObjectArray.add(new Grass(MathUtils.random(0, Constants.GAME_HEIGHT), atlas));
         }
         gameObjectArray.sort();
-        gameObjectArray.reverse();
         nextGrass = MathUtils.randomTriangular(0, 256) / Constants.OBJECT_MOVEMENT_SPEED;
 
         // create the game viewport
@@ -122,8 +121,8 @@ public class GameScreen implements Screen, InputProcessor {
         viewport.apply();
         game.batch.setProjectionMatrix(viewport.getCamera().combined);
         game.batch.begin();
-        for (GameObject g : gameObjectArray) {
-            g.draw(game.batch);
+        for (int i = gameObjectArray.size - 1; i >= 0; i--) {
+            gameObjectArray.get(i).draw(game.batch);
         }
         player.draw(game.batch);
         game.batch.end();
