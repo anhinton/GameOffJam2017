@@ -9,16 +9,16 @@ import com.badlogic.gdx.utils.Array;
 import java.util.Comparator;
 
 @SuppressWarnings("NullableProblems")
-public class Grass implements Comparable<GameObject>, Comparator<GameObject>, GameObject {
+public class Plant implements GameObject, Comparable<GameObject>, Comparator<GameObject> {
     private final Sprite sprite;
 
-    Grass(int y, TextureAtlas atlas) {
-        Array<String> grassNameArray = new Array<>(4);
-        grassNameArray.add("grass01");
-        grassNameArray.add("grass02");
-        grassNameArray.add("grass03");
-        grassNameArray.add("grass04");
-        sprite = atlas.createSprite(grassNameArray.random());
+    Plant(int y, TextureAtlas atlas) {
+        Array<String> plantNameArray = new Array<>(4);
+        plantNameArray.add("tree01");
+        plantNameArray.add("tree02");
+        plantNameArray.add("fern01");
+        plantNameArray.add("flower01");
+        sprite = atlas.createSprite(plantNameArray.random());
         sprite.setCenterX(MathUtils.random(0, Constants.GAME_WIDTH));
         sprite.setY(y);
     }

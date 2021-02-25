@@ -31,6 +31,7 @@ public class GameScreen implements Screen, InputProcessor {
     private final TextureAtlas atlas;
     private float timeElapsed;
     private float nextGrass;
+    private float nextPlant;
 
     GameScreen(CoolSodaCan game) {
         Gdx.input.setCursorCatched(true);
@@ -53,12 +54,21 @@ public class GameScreen implements Screen, InputProcessor {
 
         // create game objects
         gameObjectArray = new Array<>();
+        // Create grass
         int nGrass = MathUtils.round(MathUtils.randomTriangular(5, 20));
         for (int i = 0; i < nGrass; i++) {
             gameObjectArray.add(new Grass(MathUtils.random(0, game.getGameHeight()), atlas));
         }
-        gameObjectArray.sort();
         nextGrass = MathUtils.randomTriangular(0, 256) / Constants.OBJECT_MOVEMENT_SPEED;
+        // Create plants
+        int nPlant = MathUtils.round(MathUtils.randomTriangular(2, 5));
+        for (int i = 0; i < nPlant; i++) {
+            gameObjectArray.add(new Plant(MathUtils.random(0, game.getGameHeight()), atlas));
+        }
+        nextPlant = MathUtils.randomTriangular(0, 640) / Constants.OBJECT_MOVEMENT_SPEED;
+
+        // Sort gameObjectArray so we can render in reverse Y order
+        gameObjectArray.sort();
 
         // create the game viewport
         OrthographicCamera camera = new OrthographicCamera();
@@ -87,6 +97,11 @@ public class GameScreen implements Screen, InputProcessor {
         nextGrass = timeElapsed + MathUtils.randomTriangular(0, 256) / Constants.OBJECT_MOVEMENT_SPEED;
     }
 
+    private void addPlant() {
+        gameObjectArray.add(new Plant(game.getGameHeight(), atlas));
+        nextPlant = timeElapsed + MathUtils.randomTriangular(0, 640) / Constants.OBJECT_MOVEMENT_SPEED;
+    }
+
     @Override
     public void show() {
 
@@ -109,6 +124,9 @@ public class GameScreen implements Screen, InputProcessor {
         // Add new objects to top of screen
         if (timeElapsed > nextGrass) {
             addGrass();
+        }
+        if (timeElapsed > nextPlant) {
+            addPlant();
         }
 
         // update objects

@@ -1,9 +1,6 @@
 # todo.md
-  
-  + Add trees to game
-      - "Randomly" distributed
-      - Game scrolls over time
-      - New trees "randomly" added to the top
+      
+  + Change grass colour to differentiate from plants
 
   + Create animated small can for throwing
       - Each colour of big can gets its own small can
@@ -24,6 +21,8 @@
       
   + Create destroyed tree sprite
       - After you hit a tree with X cans
+      
+  + Player can gets stuck on plants/animals
       
   + Title screen
       - New game
@@ -49,6 +48,11 @@
       - Do I care enough to fix?
 
 ## Done
+  
+  + ~~Add trees to game~~
+      - ~~"Randomly" distributed~~
+      - ~~Game scrolls over time~~
+      - ~~New trees "randomly" added to the top~~
   
   + ~~Add grass to game~~
       - ~~"Randomly" distributed~~
