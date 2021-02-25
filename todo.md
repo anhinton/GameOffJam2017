@@ -1,9 +1,14 @@
 # todo.md
   
-  + Add grass and trees to game
+  + Add grass to game
+      - ~~"Randomly" distributed~~
+      - ~~Game scrolls over time~~
+      - New grass "randomly" added to the top
+  
+  + Add trees to game
       - "Randomly" distributed
       - Game scrolls over time
-      - New grass/trees "randomly" added to the top
+      - New trees "randomly" added to the top
 
   + Create animated small can for throwing
       - Each colour of big can gets its own small can

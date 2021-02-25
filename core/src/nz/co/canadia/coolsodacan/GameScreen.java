@@ -8,8 +8,11 @@ import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FillViewport;
@@ -25,6 +28,7 @@ public class GameScreen implements Screen, InputProcessor {
     private final Player player;
     private final Viewport viewport;
     private final Stage bannerStage;
+    private final Array<GameObject> gameObjectArray;
 
     GameScreen(CoolSodaCan game) {
         Gdx.input.setCursorCatched(true);
@@ -43,6 +47,13 @@ public class GameScreen implements Screen, InputProcessor {
 
         // create player object
         player = new Player(game.getGameHeight(), atlas);
+
+        // create game objects
+        gameObjectArray = new Array<>();
+        int nGrass = MathUtils.round(MathUtils.randomTriangular(5, 20));
+        for (int i = 0; i < nGrass; i++) {
+            gameObjectArray.add(new Grass(MathUtils.random(0, Constants.GAME_HEIGHT), atlas));
+        }
 
         // create the game viewport
         OrthographicCamera camera = new OrthographicCamera();
@@ -77,19 +88,24 @@ public class GameScreen implements Screen, InputProcessor {
         viewport.getCamera().update();
 
         // update objects
+        for (GameObject g : gameObjectArray) {
+            g.update(delta);
+        }
         player.update();
-
-        // Draw side banners
-        bannerStage.getViewport().apply();
-        bannerStage.draw();
 
         // draw sprites
         viewport.apply();
         game.batch.setProjectionMatrix(viewport.getCamera().combined);
         game.batch.begin();
+        for (GameObject g : gameObjectArray) {
+            g.draw(game.batch);
+        }
         player.draw(game.batch);
         game.batch.end();
 
+        // Draw side banners
+        bannerStage.getViewport().apply();
+        bannerStage.draw();
     }
 
     @Override

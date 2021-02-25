@@ -26,4 +26,6 @@ public class Constants {
 
     public static final float PLAYER_SPEED = 640f;
     static final float PLAYER_MOVEMENT_THRESHOLD = 10f;
+
+    public static final float OBJECT_MOVEMENT_SPEED = 160f;
 }
