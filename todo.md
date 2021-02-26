@@ -1,4 +1,6 @@
 # todo.md
+
+  + Set grass/plant/animal spawn randomisation using Constants
       
   + Create animal objects
       - ~~Coco, Horse1, Horse2~~

@@ -55,18 +55,21 @@ public class GameScreen implements Screen, InputProcessor {
 
         // create game objects
         gameObjectArray = new Array<>();
+
         // Create grass
         int nGrass = MathUtils.round(MathUtils.randomTriangular(5, 20));
         for (int i = 0; i < nGrass; i++) {
             gameObjectArray.add(new Grass(MathUtils.random(0, game.getGameHeight()), atlas));
         }
         nextGrass = MathUtils.randomTriangular(0, 256) / Constants.WORLD_MOVEMENT_SPEED;
+
         // Create plants
         int nPlant = MathUtils.round(MathUtils.randomTriangular(2, 5));
         for (int i = 0; i < nPlant; i++) {
             gameObjectArray.add(new Plant(MathUtils.random(0, game.getGameHeight()), atlas));
         }
         nextPlant = MathUtils.randomTriangular(0, 640) / Constants.WORLD_MOVEMENT_SPEED;
+
         // Create animals
         int nAnimal = MathUtils.round(MathUtils.randomTriangular(3, 6));
         for (int i = 0; i < nAnimal; i++) {
