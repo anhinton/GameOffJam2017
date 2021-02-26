@@ -1,5 +1,7 @@
 # todo.md
 
+  + Try out the different soda colours to see if this game is at all legible
+
   + Set grass/plant/animal spawn randomisation using Constants
       
   + Create animal objects
@@ -25,6 +27,9 @@
       - After you hit a tree with X cans
       
   + Player can gets stuck on plants/animals
+  
+  + Re-evaluate how much Y-offset there is from touch point on mobile
+      - Currently it feels like it might be too much
   
   + Consider a more composed method for distributing plants/animals
       - On a grid?
@@ -54,6 +59,7 @@
           
   + **BUG**: There is a 1 (?) pixel gap between the side banners and the game area in GameScreen
       - Do I care enough to fix?
+      - The easy fix is probably just going back to and ExtendViewport
 
 ## Done
       
