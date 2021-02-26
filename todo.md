@@ -1,7 +1,7 @@
 # todo.md
       
   + Create animal objects
-      - ~~Coco~~, Horse1, Horse2
+      - ~~Coco, Horse1, Horse2~~
       - States:
           - Normal
           - Sated (smiling)

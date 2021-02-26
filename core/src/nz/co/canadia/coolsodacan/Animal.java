@@ -25,7 +25,7 @@ public class Animal implements GameObject, Comparable<GameObject>, Comparator<Ga
 
     @Override
     public void update(float delta) {
-        sprite.setY(sprite.getY() - Constants.OBJECT_MOVEMENT_SPEED * delta);
+        sprite.setY(sprite.getY() - Constants.WORLD_MOVEMENT_SPEED * delta);
     }
 
     public void draw(SpriteBatch batch) {

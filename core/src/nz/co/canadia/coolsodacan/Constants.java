@@ -24,8 +24,9 @@ public class Constants {
     public static final int HTML_WIDTH = 1280;
     public static final int HTML_HEIGHT = 720;
 
-    public static final float PLAYER_SPEED = 640f;
-    static final float PLAYER_MOVEMENT_THRESHOLD = 10f;
-
-    public static final float OBJECT_MOVEMENT_SPEED = 160f;
+    // Game constants
+    public static final float PLAYER_SPEED = 2560f;
+    public static final float WORLD_MOVEMENT_SPEED = 160f;
+    public static final float CURSOR_START_X = 1 / 2f;
+    public static final float CURSOR_START_Y = 1 / 2f;
 }

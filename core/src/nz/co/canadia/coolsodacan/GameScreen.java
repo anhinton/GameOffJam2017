@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -34,7 +35,6 @@ public class GameScreen implements Screen, InputProcessor {
     private float nextPlant;
 
     GameScreen(CoolSodaCan game) {
-        Gdx.input.setCursorCatched(true);
         this.game = game;
         timeElapsed = 0;
 
@@ -59,13 +59,13 @@ public class GameScreen implements Screen, InputProcessor {
         for (int i = 0; i < nGrass; i++) {
             gameObjectArray.add(new Grass(MathUtils.random(0, game.getGameHeight()), atlas));
         }
-        nextGrass = MathUtils.randomTriangular(0, 256) / Constants.OBJECT_MOVEMENT_SPEED;
+        nextGrass = MathUtils.randomTriangular(0, 256) / Constants.WORLD_MOVEMENT_SPEED;
         // Create plants
         int nPlant = MathUtils.round(MathUtils.randomTriangular(2, 5));
         for (int i = 0; i < nPlant; i++) {
             gameObjectArray.add(new Plant(MathUtils.random(0, game.getGameHeight()), atlas));
         }
-        nextPlant = MathUtils.randomTriangular(0, 640) / Constants.OBJECT_MOVEMENT_SPEED;
+        nextPlant = MathUtils.randomTriangular(0, 640) / Constants.WORLD_MOVEMENT_SPEED;
         // Create animals
         int nAnimal = MathUtils.round(MathUtils.randomTriangular(3, 6));
         for (int i = 0; i < nAnimal; i++) {
@@ -96,16 +96,21 @@ public class GameScreen implements Screen, InputProcessor {
         bannerStage.addActor(bannerRightImage);
 
         Gdx.input.setInputProcessor(this);
+
+        Gdx.input.setCursorCatched(true);
+        Gdx.input.setCursorPosition(
+                MathUtils.round(Gdx.graphics.getBackBufferWidth() * Constants.CURSOR_START_X),
+                MathUtils.round(Gdx.graphics.getBackBufferHeight() * Constants.CURSOR_START_Y));
     }
 
     private void addGrass() {
         gameObjectArray.add(new Grass(game.getGameHeight(), atlas));
-        nextGrass = timeElapsed + MathUtils.randomTriangular(0, 256) / Constants.OBJECT_MOVEMENT_SPEED;
+        nextGrass = timeElapsed + MathUtils.randomTriangular(0, 256) / Constants.WORLD_MOVEMENT_SPEED;
     }
 
     private void addPlant() {
         gameObjectArray.add(new Plant(game.getGameHeight(), atlas));
-        nextPlant = timeElapsed + MathUtils.randomTriangular(0, 640) / Constants.OBJECT_MOVEMENT_SPEED;
+        nextPlant = timeElapsed + MathUtils.randomTriangular(0, 640) / Constants.WORLD_MOVEMENT_SPEED;
     }
 
     @Override
@@ -139,7 +144,7 @@ public class GameScreen implements Screen, InputProcessor {
         for (GameObject g : gameObjectArray) {
             g.update(delta);
         }
-        player.update();
+        player.update(delta);
 
         // draw sprites
         viewport.apply();

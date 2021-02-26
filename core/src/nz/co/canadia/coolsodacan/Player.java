@@ -19,14 +19,16 @@ class Player {
 
     Player(int gameHeight, TextureAtlas atlas) {
         this.gameHeight = gameHeight;
-        targetXY = new Vector2(Constants.GAME_WIDTH / 2f, 0);
+        targetXY = new Vector2(
+                Constants.GAME_WIDTH * Constants.CURSOR_START_X,
+                gameHeight * Constants.CURSOR_START_Y);
         sprite = atlas.createSprite("blue_soda_small");
         sprite.setPosition(targetXY.x - sprite.getWidth() / 2, targetXY.y);
         sprite.setSize(sprite.getWidth(), sprite.getHeight());
     }
 
-    void update() {
-        move();
+    void update(float delta) {
+        move(delta);
 //        Gdx.app.log("Player", "X: " + String.valueOf(sprite.getX()) + " Y: " + String.valueOf(sprite.getY()));
         clamp();
     }
@@ -50,21 +52,22 @@ class Player {
         }
     }
 
-    private void move() {
+    private void move(float delta) {
         // calculate change in X and Y positions
         float deltaX = targetXY.x - sprite.getX() - sprite.getWidth() / 2;
         float deltaY = targetXY.y - sprite.getY();
         float length = (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-        if (length > Constants.PLAYER_MOVEMENT_THRESHOLD) {
-            // if the distance to move is large enough move towards the target
-            float changeX = deltaX / length;
-            float changeY = deltaY / length;
-            sprite.setX(sprite.getX() + changeX * Constants.PLAYER_SPEED * Gdx.graphics.getDeltaTime());
-            sprite.setY(sprite.getY() + changeY * Constants.PLAYER_SPEED * Gdx.graphics.getDeltaTime());
+
+        float velocity = Constants.PLAYER_SPEED * delta;
+
+        if (length > velocity) {
+            float movementX = deltaX / length * velocity;
+            float movementY = deltaY / length * velocity;
+            sprite.setX(sprite.getX() + movementX);
+            sprite.setY(sprite.getY() + movementY);
         } else {
-            // if it's a small distance just go straight there
-            sprite.setX(targetXY.x - sprite.getWidth() / 2);
-            sprite.setY(targetXY.y);
+            sprite.setX(sprite.getX() + deltaX);
+            sprite.setY(sprite.getY() + deltaY);
         }
     }
 
