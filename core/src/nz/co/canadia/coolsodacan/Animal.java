@@ -20,7 +20,7 @@ public class Animal implements GameObject, Comparable<GameObject>, Comparator<Ga
         animalNameArray.add("horse02");
         sprite = atlas.createSprite(animalNameArray.random());
         sprite.flip(MathUtils.randomBoolean(), false);
-        sprite.setCenterX(MathUtils.random(0, Constants.GAME_WIDTH));
+        sprite.setCenterX(MathUtils.random(0 + sprite.getWidth() / 2, Constants.GAME_WIDTH - sprite.getWidth() / 2));
         sprite.setY(y);
         rot = MathUtils.random(0, 360f);
         wiggle(0);

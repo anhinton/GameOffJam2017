@@ -7,6 +7,7 @@
           - Sated (smiling)
           - Super-sated (has exploded, still smiling, black silhouette)
       - ~~All animals: wiggle~~
+          - Use range of values to randomise wiggle for each animal
           - Define hitbox before wiggle starts
       - Change state when hit by can
       
