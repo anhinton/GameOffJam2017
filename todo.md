@@ -6,12 +6,9 @@
           - Normal
           - Sated (smiling)
           - Super-sated (has exploded, still smiling, black silhouette)
+      - ~~All animals: wiggle~~
+          - Define hitbox before wiggle starts
       - Change state when hit by can
-      
-  + Add animal sprites to the game
-      - ~~Like grass/trees but more exciting!~~
-      - ~~Game scrolls over time~~
-      - New animals "randomly" added to the top
       
   + Change grass colour to differentiate from plants
 
@@ -56,6 +53,11 @@
       - Do I care enough to fix?
 
 ## Done
+      
+  + ~~Add animal sprites to the game~~
+      - ~~Like grass/trees but more exciting!~~
+      - ~~Game scrolls over time~~
+      - ~~New animals "randomly" added to the top~~
   
   + ~~Add trees to game~~
       - ~~"Randomly" distributed~~

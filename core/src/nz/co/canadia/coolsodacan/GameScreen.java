@@ -33,6 +33,7 @@ public class GameScreen implements Screen, InputProcessor {
     private float timeElapsed;
     private float nextGrass;
     private float nextPlant;
+    private float nextAnimal;
 
     GameScreen(CoolSodaCan game) {
         this.game = game;
@@ -71,7 +72,7 @@ public class GameScreen implements Screen, InputProcessor {
         for (int i = 0; i < nAnimal; i++) {
             gameObjectArray.add(new Animal(MathUtils.random(0, game.getGameHeight()), atlas));
         }
-//        gameObjectArray.add(new Animal(MathUtils.random(0, game.getGameHeight()), atlas));
+        nextAnimal = MathUtils.randomTriangular(0, 420) / Constants.WORLD_MOVEMENT_SPEED;
 
         // Sort gameObjectArray so we can render in reverse Y order
         gameObjectArray.sort();
@@ -101,6 +102,11 @@ public class GameScreen implements Screen, InputProcessor {
         Gdx.input.setCursorPosition(
                 MathUtils.round(Gdx.graphics.getBackBufferWidth() * Constants.CURSOR_START_X),
                 MathUtils.round(Gdx.graphics.getBackBufferHeight() * Constants.CURSOR_START_Y));
+    }
+
+    private void addAnimal() {
+        gameObjectArray.add(new Animal(game.getGameHeight(), atlas));
+        nextAnimal = timeElapsed+ MathUtils.randomTriangular(0, 420) / Constants.WORLD_MOVEMENT_SPEED;
     }
 
     private void addGrass() {
@@ -133,6 +139,9 @@ public class GameScreen implements Screen, InputProcessor {
         }
 
         // Add new objects to top of screen
+        if (timeElapsed > nextAnimal) {
+            addAnimal();
+        }
         if (timeElapsed > nextGrass) {
             addGrass();
         }

@@ -29,4 +29,13 @@ public class Constants {
     public static final float WORLD_MOVEMENT_SPEED = 160f;
     public static final float CURSOR_START_X = 1 / 2f;
     public static final float CURSOR_START_Y = 1 / 2f;
+
+    // Spawn constants
+    public static final int MAX_GRASS_DISTANCE = 256;
+    public static final int MAX_PLANT_DISTANCE = 640;
+    public static final int MAX_ANIMAL_DISTANCE = 420;
+
+    // Animal constants
+    public static final float DEGREES_PER_SECOND = 10.0f;
+    public static final float SHAKE_AMPLITUDE_IN_DEGREES = 5.0f;
 }

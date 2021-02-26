@@ -11,6 +11,7 @@ import java.util.Comparator;
 @SuppressWarnings("NullableProblems")
 public class Animal implements GameObject, Comparable<GameObject>, Comparator<GameObject> {
     private final Sprite sprite;
+    private float rot;
 
     Animal(int y, TextureAtlas atlas) {
         Array<String> animalNameArray = new Array<>();
@@ -21,10 +22,20 @@ public class Animal implements GameObject, Comparable<GameObject>, Comparator<Ga
         sprite.flip(MathUtils.randomBoolean(), false);
         sprite.setCenterX(MathUtils.random(0, Constants.GAME_WIDTH));
         sprite.setY(y);
+        rot = MathUtils.random(0, 360f);
+        wiggle(0);
+    }
+
+    // Wiggle!
+    void wiggle(float delta) {
+        rot = (rot + delta * Constants.DEGREES_PER_SECOND) % 360;
+        float shake = MathUtils.sin(rot) * Constants.SHAKE_AMPLITUDE_IN_DEGREES;
+        sprite.setRotation(shake);
     }
 
     @Override
     public void update(float delta) {
+        wiggle(delta);
         sprite.setY(sprite.getY() - Constants.WORLD_MOVEMENT_SPEED * delta);
     }
 
