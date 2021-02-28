@@ -1,6 +1,4 @@
 # todo.md
-
-  + Set grass/plant/animal spawn randomisation using Constants
       
   + Create animal objects
       - ~~Coco, Horse1, Horse2~~
@@ -60,6 +58,8 @@
       - The easy fix is probably just going back to and ExtendViewport
 
 ## Done
+
+  + ~~Set grass/plant/animal spawn randomisation using Constants~~
 
   + ~~Try out the different soda colours to see if this game is at all legible~~
       - ~~Add drop shadow to small cans to help stand out~~

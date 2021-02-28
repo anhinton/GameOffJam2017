@@ -31,9 +31,15 @@ public class Constants {
     public static final float CURSOR_START_Y = 1 / 2f;
 
     // Spawn constants
-    public static final int MAX_GRASS_DISTANCE = 256;
-    public static final int MAX_PLANT_DISTANCE = 640;
-    public static final int MAX_ANIMAL_DISTANCE = 420;
+    public static final int MIN_GRASS_START = 5;
+    public static final int MAX_GRASS_START = 20;
+    public static final int MAX_GRASS_DISTANCE = MathUtils.round((float) GAME_HEIGHT / MIN_GRASS_START);
+    public static final int MIN_PLANT_START = 2;
+    public static final int MAX_PLANT_START = 5;
+    public static final int MAX_PLANT_DISTANCE = MathUtils.round((float) GAME_HEIGHT / MIN_PLANT_START);
+    public static final int MIN_ANIMAL_START = 3;
+    public static final int MAX_ANIMAL_START = 6;
+    public static final int MAX_ANIMAL_DISTANCE = MathUtils.round((float) GAME_HEIGHT / MIN_ANIMAL_START);
 
     // Animal constants
     public static final float DEGREES_PER_SECOND = 10.0f;

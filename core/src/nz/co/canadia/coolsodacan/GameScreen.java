@@ -60,25 +60,28 @@ public class GameScreen implements Screen, InputProcessor {
         gameObjectArray = new Array<>();
 
         // Create grass
-        int nGrass = MathUtils.round(MathUtils.randomTriangular(5, 20));
+        int nGrass = MathUtils.round(MathUtils.randomTriangular(
+                Constants.MIN_GRASS_START, Constants.MAX_GRASS_START));
         for (int i = 0; i < nGrass; i++) {
             gameObjectArray.add(new Grass(MathUtils.random(0, game.getGameHeight()), atlas));
         }
-        nextGrass = MathUtils.randomTriangular(0, 256) / Constants.WORLD_MOVEMENT_SPEED;
+        nextGrass = MathUtils.randomTriangular(0, Constants.MAX_GRASS_DISTANCE) / Constants.WORLD_MOVEMENT_SPEED;
 
         // Create plants
-        int nPlant = MathUtils.round(MathUtils.randomTriangular(2, 5));
+        int nPlant = MathUtils.round(MathUtils.randomTriangular(
+                Constants.MIN_PLANT_START, Constants.MAX_PLANT_START));
         for (int i = 0; i < nPlant; i++) {
             gameObjectArray.add(new Plant(MathUtils.random(0, game.getGameHeight()), atlas));
         }
-        nextPlant = MathUtils.randomTriangular(0, 640) / Constants.WORLD_MOVEMENT_SPEED;
+        nextPlant = MathUtils.randomTriangular(0, Constants.MAX_PLANT_DISTANCE) / Constants.WORLD_MOVEMENT_SPEED;
 
         // Create animals
-        int nAnimal = MathUtils.round(MathUtils.randomTriangular(3, 6));
+        int nAnimal = MathUtils.round(MathUtils.randomTriangular(
+                Constants.MIN_ANIMAL_START, Constants.MAX_ANIMAL_START));
         for (int i = 0; i < nAnimal; i++) {
             gameObjectArray.add(new Animal(MathUtils.random(0, game.getGameHeight()), atlas));
         }
-        nextAnimal = MathUtils.randomTriangular(0, 420) / Constants.WORLD_MOVEMENT_SPEED;
+        nextAnimal = MathUtils.randomTriangular(0, Constants.MAX_ANIMAL_DISTANCE) / Constants.WORLD_MOVEMENT_SPEED;
 
         // Sort gameObjectArray so we can render in reverse Y order
         gameObjectArray.sort();
@@ -112,17 +115,17 @@ public class GameScreen implements Screen, InputProcessor {
 
     private void addAnimal() {
         gameObjectArray.add(new Animal(game.getGameHeight(), atlas));
-        nextAnimal = timeElapsed+ MathUtils.randomTriangular(0, 420) / Constants.WORLD_MOVEMENT_SPEED;
+        nextAnimal = timeElapsed+ MathUtils.randomTriangular(0, Constants.MAX_ANIMAL_DISTANCE) / Constants.WORLD_MOVEMENT_SPEED;
     }
 
     private void addGrass() {
         gameObjectArray.add(new Grass(game.getGameHeight(), atlas));
-        nextGrass = timeElapsed + MathUtils.randomTriangular(0, 256) / Constants.WORLD_MOVEMENT_SPEED;
+        nextGrass = timeElapsed + MathUtils.randomTriangular(0, Constants.MAX_GRASS_DISTANCE) / Constants.WORLD_MOVEMENT_SPEED;
     }
 
     private void addPlant() {
         gameObjectArray.add(new Plant(game.getGameHeight(), atlas));
-        nextPlant = timeElapsed + MathUtils.randomTriangular(0, 640) / Constants.WORLD_MOVEMENT_SPEED;
+        nextPlant = timeElapsed + MathUtils.randomTriangular(0, Constants.MAX_PLANT_DISTANCE) / Constants.WORLD_MOVEMENT_SPEED;
     }
 
     @Override
