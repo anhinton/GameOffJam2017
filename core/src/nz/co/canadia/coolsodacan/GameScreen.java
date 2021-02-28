@@ -7,7 +7,9 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -29,6 +31,7 @@ public class GameScreen implements Screen, InputProcessor {
     private final Stage bannerStage;
     private final Array<GameObject> gameObjectArray;
     private final TextureAtlas atlas;
+    private final Animation<TextureRegion> canAnimation;
     private float timeElapsed;
     private float nextGrass;
     private float nextPlant;
@@ -48,6 +51,8 @@ public class GameScreen implements Screen, InputProcessor {
         game.manager.finishLoading();
 
         atlas = game.manager.get("graphics/graphics.atlas", TextureAtlas.class);
+
+        canAnimation = new Animation<TextureRegion>(0.033f, atlas.findRegions("blue_anim"), Animation.PlayMode.LOOP);
 
         // create player object
         player = new Player(game.getGameHeight(), atlas, "blue_soda_small");
@@ -164,6 +169,8 @@ public class GameScreen implements Screen, InputProcessor {
         }
         player.update(delta);
 
+        TextureRegion currentFrame = canAnimation.getKeyFrame(timeElapsed, true);
+
         // draw sprites
         viewport.apply();
         game.batch.setProjectionMatrix(viewport.getCamera().combined);
@@ -172,6 +179,9 @@ public class GameScreen implements Screen, InputProcessor {
             gameObjectArray.get(i).draw(game.batch);
         }
         player.draw(game.batch);
+
+        game.batch.draw(currentFrame, 100, 100);
+
         game.batch.end();
 
         // Draw side banners

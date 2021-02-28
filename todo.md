@@ -2,6 +2,11 @@
 
   + Create animated small can for throwing
       - Each colour of big can gets its own small can
+      - ~~Blue can~~
+      - Orange can
+      - Purple can
+      - Silver can
+      - Yellow can
       
   + Create animal objects
       - ~~Coco, Horse1, Horse2~~

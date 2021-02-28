@@ -4,114 +4,170 @@ size: 1024,512
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+blue_anim
+  rotate: false
+  xy: 989, 461
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 1
+blue_anim
+  rotate: false
+  xy: 2, 2
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 2
+blue_anim
+  rotate: false
+  xy: 806, 329
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 3
+blue_anim
+  rotate: false
+  xy: 954, 329
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 4
+blue_anim
+  rotate: false
+  xy: 293, 266
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 5
+blue_anim
+  rotate: false
+  xy: 530, 131
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 6
+blue_anim
+  rotate: false
+  xy: 989, 417
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 7
+blue_anim
+  rotate: false
+  xy: 34, 2
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 8
 blue_soda_small
   rotate: false
-  xy: 678, 145
+  xy: 678, 166
   size: 90, 141
   orig: 90, 141
   offset: 0, 0
   index: -1
 coco
   rotate: false
-  xy: 806, 352
+  xy: 806, 373
   size: 181, 130
   orig: 181, 130
   offset: 0, 0
   index: -1
 fern01
   rotate: false
-  xy: 2, 289
+  xy: 2, 310
   size: 335, 193
   orig: 335, 193
   offset: 0, 0
   index: -1
 flower01
   rotate: false
-  xy: 678, 288
+  xy: 678, 309
   size: 126, 194
   orig: 126, 194
   offset: 0, 0
   index: -1
 grass01
   rotate: false
-  xy: 360, 56
+  xy: 360, 77
   size: 88, 107
   orig: 88, 107
   offset: 0, 0
   index: -1
 grass02
   rotate: false
-  xy: 862, 114
+  xy: 862, 135
   size: 99, 95
   orig: 99, 95
   offset: 0, 0
   index: -1
 grass03
   rotate: false
-  xy: 450, 44
+  xy: 450, 65
   size: 78, 108
   orig: 78, 108
   offset: 0, 0
   index: -1
 grass04
   rotate: false
-  xy: 280, 33
+  xy: 280, 54
   size: 78, 111
   orig: 78, 111
   offset: 0, 0
   index: -1
 horse01
   rotate: false
-  xy: 2, 157
+  xy: 2, 178
   size: 197, 130
   orig: 197, 130
   offset: 0, 0
   index: -1
 horse02
   rotate: false
-  xy: 2, 25
+  xy: 2, 46
   size: 184, 130
   orig: 184, 130
   offset: 0, 0
   index: -1
 orange_soda_small
   rotate: false
-  xy: 201, 146
+  xy: 201, 167
   size: 90, 141
   orig: 90, 141
   offset: 0, 0
   index: -1
 purple_soda_small
   rotate: false
-  xy: 188, 2
+  xy: 188, 23
   size: 90, 142
   orig: 90, 142
   offset: 0, 0
   index: -1
 silver_soda_small
   rotate: false
-  xy: 770, 147
+  xy: 770, 168
   size: 90, 139
   orig: 90, 139
   offset: 0, 0
   index: -1
 tree01
   rotate: false
-  xy: 339, 165
+  xy: 339, 186
   size: 186, 317
   orig: 186, 317
   offset: 0, 0
   index: -1
 tree02
   rotate: false
-  xy: 527, 154
+  xy: 527, 175
   size: 149, 328
   orig: 149, 328
   offset: 0, 0
   index: -1
 yellow_soda_small
   rotate: false
-  xy: 862, 211
+  xy: 862, 232
   size: 90, 139
   orig: 90, 139
   offset: 0, 0
