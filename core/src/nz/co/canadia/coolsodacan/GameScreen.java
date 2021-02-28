@@ -5,7 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
-import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -51,7 +50,11 @@ public class GameScreen implements Screen, InputProcessor {
         atlas = game.manager.get("graphics/graphics.atlas", TextureAtlas.class);
 
         // create player object
-        player = new Player(game.getGameHeight(), atlas);
+        player = new Player(game.getGameHeight(), atlas, "blue_soda_small");
+//        player = new Player(game.getGameHeight(), atlas, "orange_soda_small");
+//        player = new Player(game.getGameHeight(), atlas, "purple_soda_small");
+//        player = new Player(game.getGameHeight(), atlas, "silver_soda_small");
+//        player = new Player(game.getGameHeight(), atlas, "yellow_soda_small");
 
         // create game objects
         gameObjectArray = new Array<>();

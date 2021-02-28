@@ -17,12 +17,12 @@ class Player {
     private final int gameHeight;
     private Vector2 targetXY;
 
-    Player(int gameHeight, TextureAtlas atlas) {
+    Player(int gameHeight, TextureAtlas atlas, String name) {
         this.gameHeight = gameHeight;
         targetXY = new Vector2(
                 Constants.GAME_WIDTH * Constants.CURSOR_START_X,
                 gameHeight * Constants.CURSOR_START_Y);
-        sprite = atlas.createSprite("blue_soda_small");
+        sprite = atlas.createSprite(name);
         sprite.setPosition(targetXY.x - sprite.getWidth() / 2, targetXY.y);
         sprite.setSize(sprite.getWidth(), sprite.getHeight());
     }
