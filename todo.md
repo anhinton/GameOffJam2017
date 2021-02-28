@@ -1,4 +1,7 @@
 # todo.md
+
+  + Create animated small can for throwing
+      - Each colour of big can gets its own small can
       
   + Create animal objects
       - ~~Coco, Horse1, Horse2~~
@@ -10,11 +13,6 @@
           - Use range of values to randomise wiggle for each animal
           - Define hitbox before wiggle starts
       - Change state when hit by can
-      
-  + Change grass colour to differentiate from plants
-
-  + Create animated small can for throwing
-      - Each colour of big can gets its own small can
           
   + Create explosion animation
       - Used for trees and animals
@@ -58,6 +56,8 @@
       - The easy fix is probably just going back to and ExtendViewport
 
 ## Done
+      
+  + ~~Change grass colour to differentiate from plants~~
 
   + ~~Set grass/plant/animal spawn randomisation using Constants~~
 
