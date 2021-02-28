@@ -1,7 +1,5 @@
 # todo.md
 
-  + Try out the different soda colours to see if this game is at all legible
-
   + Set grass/plant/animal spawn randomisation using Constants
       
   + Create animal objects
@@ -62,6 +60,9 @@
       - The easy fix is probably just going back to and ExtendViewport
 
 ## Done
+
+  + ~~Try out the different soda colours to see if this game is at all legible~~
+      - ~~Add drop shadow to small cans to help stand out~~
       
   + ~~Add animal sprites to the game~~
       - ~~Like grass/trees but more exciting!~~

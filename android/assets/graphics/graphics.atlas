@@ -6,113 +6,113 @@ filter: Linear,Linear
 repeat: none
 blue_soda_small
   rotate: false
-  xy: 760, 132
-  size: 80, 131
-  orig: 80, 131
+  xy: 678, 142
+  size: 90, 141
+  orig: 90, 141
   offset: 0, 0
   index: -1
 coco
   rotate: false
-  xy: 806, 329
+  xy: 806, 349
   size: 181, 130
   orig: 181, 130
   offset: 0, 0
   index: -1
 fern01
   rotate: false
-  xy: 2, 266
+  xy: 2, 286
   size: 335, 193
   orig: 335, 193
   offset: 0, 0
   index: -1
 flower01
   rotate: false
-  xy: 678, 265
+  xy: 678, 285
   size: 126, 194
   orig: 126, 194
   offset: 0, 0
   index: -1
 grass01
   rotate: false
-  xy: 201, 143
+  xy: 188, 20
   size: 91, 121
   orig: 91, 121
   offset: 0, 0
   index: -1
 grass02
   rotate: false
-  xy: 842, 110
+  xy: 862, 122
   size: 93, 84
   orig: 93, 84
   offset: 0, 0
   index: -1
 grass03
   rotate: false
-  xy: 270, 35
+  xy: 373, 55
   size: 102, 105
   orig: 102, 105
   offset: 0, 0
   index: -1
 grass04
   rotate: false
-  xy: 937, 103
+  xy: 477, 56
   size: 70, 93
   orig: 70, 93
   offset: 0, 0
   index: -1
 horse01
   rotate: false
-  xy: 2, 134
+  xy: 2, 154
   size: 197, 130
   orig: 197, 130
   offset: 0, 0
   index: -1
 horse02
   rotate: false
-  xy: 2, 2
+  xy: 2, 22
   size: 184, 130
   orig: 184, 130
   offset: 0, 0
   index: -1
 orange_soda_small
   rotate: false
-  xy: 842, 196
-  size: 80, 131
-  orig: 80, 131
+  xy: 201, 143
+  size: 90, 141
+  orig: 90, 141
   offset: 0, 0
   index: -1
 purple_soda_small
   rotate: false
-  xy: 678, 131
-  size: 80, 132
-  orig: 80, 132
+  xy: 770, 141
+  size: 90, 142
+  orig: 90, 142
   offset: 0, 0
   index: -1
 silver_soda_small
   rotate: false
-  xy: 924, 198
-  size: 80, 129
-  orig: 80, 129
+  xy: 862, 208
+  size: 90, 139
+  orig: 90, 139
   offset: 0, 0
   index: -1
 tree01
   rotate: false
-  xy: 339, 142
+  xy: 339, 162
   size: 186, 317
   orig: 186, 317
   offset: 0, 0
   index: -1
 tree02
   rotate: false
-  xy: 527, 131
+  xy: 527, 151
   size: 149, 328
   orig: 149, 328
   offset: 0, 0
   index: -1
 yellow_soda_small
   rotate: false
-  xy: 188, 3
-  size: 80, 129
-  orig: 80, 129
+  xy: 281, 2
+  size: 90, 139
+  orig: 90, 139
   offset: 0, 0
   index: -1
