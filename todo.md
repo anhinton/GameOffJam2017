@@ -30,6 +30,7 @@
   
   + Re-evaluate how much Y-offset there is from touch point on mobile
       - Currently it feels like it might be too much
+      - Now setting Player x/y to centre of sprite. Has this made a difference?
   
   + Consider a more composed method for distributing plants/animals
       - On a grid?
