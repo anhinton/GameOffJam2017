@@ -13,6 +13,10 @@
           - ~~Only add new can when "firing"~~
       - Create getHitBox() function
           - GameScreen uses to check against GameObjects
+          
+  + Create FriendObject interface
+      - Implemented by Animal and Plant classes
+      - Provides getHitBox() function
       
   + Create animal objects
       - ~~Coco, Horse1, Horse2~~
