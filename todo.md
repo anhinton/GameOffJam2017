@@ -12,11 +12,13 @@
           - ~~New can added to GameScreen only after a time has elapsed~~
           - ~~Only add new can when "firing"~~
       - Create getHitBox() function
-          - GameScreen uses to check against GameObjects
+      - GameScreen uses getHitBox() to check against GameObjects
+      - Does something when hits? Explodes?
           
-  + Create FriendObject interface
-      - Implemented by Animal and Plant classes
-      - Provides getHitBox() function
+  + Create Hittable interface
+      - ~~Implemented by Animal and Plant classes~~
+      - ~~Provides getHitBox() function~~
+      - Provides hit() function
       
   + Create animal objects
       - ~~Coco, Horse1, Horse2~~
@@ -25,8 +27,7 @@
           - Sated (smiling)
           - Super-sated (has exploded, still smiling, black silhouette)
       - ~~All animals: wiggle~~
-          - Use range of values to randomise wiggle for each animal
-          - Define hitbox before wiggle starts
+          - ~~Define hitbox before wiggle starts~~
       - Change state when hit by can
           
   + Create explosion animation

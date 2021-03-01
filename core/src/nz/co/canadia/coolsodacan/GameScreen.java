@@ -29,8 +29,9 @@ public class GameScreen implements Screen, InputProcessor {
     private final Player player;
     private final Viewport viewport;
     private final Stage bannerStage;
-    private final Array<GameObject> gameObjectArray;
     private final TextureAtlas atlas;
+    private final Array<GameObject> gameObjectArray;
+    private final Array<Hittable> hittableArray;
     private final Array<AnimatedCan> animatedCanArray;
     private float nextAnimatedCan;
     private float timeElapsed;
@@ -64,6 +65,7 @@ public class GameScreen implements Screen, InputProcessor {
 
         // create game objects
         gameObjectArray = new Array<>();
+        hittableArray = new Array<>();
 
         // Create grass
         int nGrass = MathUtils.round(MathUtils.randomTriangular(
@@ -77,7 +79,9 @@ public class GameScreen implements Screen, InputProcessor {
         int nPlant = MathUtils.round(MathUtils.randomTriangular(
                 Constants.MIN_PLANT_START, Constants.MAX_PLANT_START));
         for (int i = 0; i < nPlant; i++) {
-            gameObjectArray.add(new Plant(MathUtils.random(0, game.getGameHeight()), atlas));
+            Plant plant = new Plant(MathUtils.random(0, game.getGameHeight()), atlas);
+            gameObjectArray.add(plant);
+            hittableArray.add(plant);
         }
         nextPlant = MathUtils.randomTriangular(0, Constants.MAX_PLANT_DISTANCE) / Constants.WORLD_MOVEMENT_SPEED;
 
@@ -85,7 +89,9 @@ public class GameScreen implements Screen, InputProcessor {
         int nAnimal = MathUtils.round(MathUtils.randomTriangular(
                 Constants.MIN_ANIMAL_START, Constants.MAX_ANIMAL_START));
         for (int i = 0; i < nAnimal; i++) {
-            gameObjectArray.add(new Animal(MathUtils.random(0, game.getGameHeight()), atlas));
+            Animal animal = new Animal(MathUtils.random(0, game.getGameHeight()), atlas);
+            gameObjectArray.add(animal);
+            hittableArray.add(animal);
         }
         nextAnimal = MathUtils.randomTriangular(0, Constants.MAX_ANIMAL_DISTANCE) / Constants.WORLD_MOVEMENT_SPEED;
 
@@ -129,7 +135,9 @@ public class GameScreen implements Screen, InputProcessor {
     }
 
     private void addAnimal() {
-        gameObjectArray.add(new Animal(game.getGameHeight(), atlas));
+        Animal animal = new Animal(game.getGameHeight(), atlas);
+        gameObjectArray.add(animal);
+        hittableArray.add(animal);
         nextAnimal = timeElapsed + MathUtils.randomTriangular(0, Constants.MAX_ANIMAL_DISTANCE) / Constants.WORLD_MOVEMENT_SPEED;
     }
 
@@ -139,7 +147,9 @@ public class GameScreen implements Screen, InputProcessor {
     }
 
     private void addPlant() {
-        gameObjectArray.add(new Plant(game.getGameHeight(), atlas));
+        Plant plant = new Plant(game.getGameHeight(), atlas);
+        gameObjectArray.add(plant);
+        hittableArray.add(plant);
         nextPlant = timeElapsed + MathUtils.randomTriangular(0, Constants.MAX_PLANT_DISTANCE) / Constants.WORLD_MOVEMENT_SPEED;
     }
 
@@ -216,6 +226,10 @@ public class GameScreen implements Screen, InputProcessor {
         game.shapeRenderer.setColor(Color.RED);
         for (AnimatedCan ac : animatedCanArray) {
             game.shapeRenderer.rect(ac.getHitBox().x, ac.getHitBox().y, ac.getHitBox().width, ac.getHitBox().height);
+        }
+        game.shapeRenderer.setColor(Color.BLUE);
+        for (Hittable h : hittableArray) {
+            game.shapeRenderer.rect(h.getHitBox().x, h.getHitBox().y, h.getHitBox().width, h.getHitBox().height);
         }
         game.shapeRenderer.end();
 

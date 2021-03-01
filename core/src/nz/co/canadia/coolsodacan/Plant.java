@@ -4,12 +4,13 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.Comparator;
 
 @SuppressWarnings("NullableProblems")
-public class Plant implements GameObject, Comparable<GameObject>, Comparator<GameObject> {
+public class Plant implements GameObject, Hittable, Comparable<GameObject>, Comparator<GameObject> {
     private final Sprite sprite;
 
     Plant(int y, TextureAtlas atlas) {
@@ -58,5 +59,14 @@ public class Plant implements GameObject, Comparable<GameObject>, Comparator<Gam
     @Override
     public int compareTo(GameObject o) {
         return compare(this, o);
+    }
+
+    @Override
+    public Rectangle getHitBox() {
+        return new Rectangle(
+                sprite.getX(),
+                sprite.getY() + sprite.getHeight() / 2,
+                sprite.getWidth(),
+                sprite.getHeight() / 2);
     }
 }
