@@ -35,10 +35,12 @@ public class GameScreen implements Screen, InputProcessor {
     private float nextGrass;
     private float nextPlant;
     private float nextAnimal;
+    private boolean playerIsFiring;
 
     GameScreen(CoolSodaCan game) {
         this.game = game;
         timeElapsed = 0;
+        playerIsFiring = false;
 
         // Load assets
         game.manager.load("graphics/graphics.atlas", TextureAtlas.class);
@@ -52,8 +54,8 @@ public class GameScreen implements Screen, InputProcessor {
         atlas = game.manager.get("graphics/graphics.atlas", TextureAtlas.class);
 
         // create player object
-        player = new Player(game.getGameHeight(), atlas, "blue_soda_small");
-//        player = new Player(game.getGameHeight(), atlas, "orange_soda_small");
+//        player = new Player(game.getGameHeight(), atlas, "blue_soda_small");
+        player = new Player(game.getGameHeight(), atlas, "orange_soda_small");
 //        player = new Player(game.getGameHeight(), atlas, "purple_soda_small");
 //        player = new Player(game.getGameHeight(), atlas, "silver_soda_small");
 //        player = new Player(game.getGameHeight(), atlas, "yellow_soda_small");
@@ -169,9 +171,11 @@ public class GameScreen implements Screen, InputProcessor {
             addPlant();
         }
 
-        // Add new cans if I'm supposed to
-        if (timeElapsed > nextAnimatedCan) {
-            throwCan();
+        // Add new cans if player firing
+        if (playerIsFiring) {
+            if (timeElapsed > nextAnimatedCan) {
+                throwCan();
+            }
         }
 
         // update objects
@@ -264,12 +268,14 @@ public class GameScreen implements Screen, InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        if (!playerIsFiring) playerIsFiring = true;
         player.setTargetXY(screenX, screenY, viewport);
         return true;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        playerIsFiring = false;
         return false;
     }
 
