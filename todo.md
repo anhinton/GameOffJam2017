@@ -7,7 +7,10 @@
           - ~~Purple can~~
           - ~~Silver can~~
           - ~~Yellow can~~
-      - AnimatedCan object that does things
+      - ~~AnimatedCan object that does things~~
+          - ~~Update y position based on delta~~
+          - ~~New can added to GameScreen only after a time has elapsed~~
+          - Only add new can when "firing"
       
   + Create animal objects
       - ~~Coco, Horse1, Horse2~~

@@ -7,9 +7,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -31,7 +29,8 @@ public class GameScreen implements Screen, InputProcessor {
     private final Stage bannerStage;
     private final Array<GameObject> gameObjectArray;
     private final TextureAtlas atlas;
-    private final Animation<TextureRegion> canAnimation;
+    private final Array<AnimatedCan> animatedCanArray;
+    private float nextAnimatedCan;
     private float timeElapsed;
     private float nextGrass;
     private float nextPlant;
@@ -51,8 +50,6 @@ public class GameScreen implements Screen, InputProcessor {
         game.manager.finishLoading();
 
         atlas = game.manager.get("graphics/graphics.atlas", TextureAtlas.class);
-
-        canAnimation = new Animation<TextureRegion>(Constants.CAN_FRAME_DURATION, atlas.findRegions("yellow_anim"), Animation.PlayMode.LOOP);
 
         // create player object
         player = new Player(game.getGameHeight(), atlas, "blue_soda_small");
@@ -91,6 +88,10 @@ public class GameScreen implements Screen, InputProcessor {
         // Sort gameObjectArray so we can render in reverse Y order
         gameObjectArray.sort();
 
+        // Create AnimatedCan array
+        animatedCanArray = new Array<>();
+        nextAnimatedCan = 0;
+
         // create the game viewport
         OrthographicCamera camera = new OrthographicCamera();
         camera.setToOrtho(false, Constants.GAME_WIDTH, game.getGameHeight());
@@ -118,9 +119,14 @@ public class GameScreen implements Screen, InputProcessor {
                 MathUtils.round(Gdx.graphics.getBackBufferHeight() * Constants.CURSOR_START_Y));
     }
 
+    private void throwCan() {
+        animatedCanArray.add(new AnimatedCan(player, atlas));
+        nextAnimatedCan = timeElapsed + Constants.ANIMATED_CAN_DISTANCE / Constants.ANIMATED_CAN_SPEED;
+    }
+
     private void addAnimal() {
         gameObjectArray.add(new Animal(game.getGameHeight(), atlas));
-        nextAnimal = timeElapsed+ MathUtils.randomTriangular(0, Constants.MAX_ANIMAL_DISTANCE) / Constants.WORLD_MOVEMENT_SPEED;
+        nextAnimal = timeElapsed + MathUtils.randomTriangular(0, Constants.MAX_ANIMAL_DISTANCE) / Constants.WORLD_MOVEMENT_SPEED;
     }
 
     private void addGrass() {
@@ -163,25 +169,34 @@ public class GameScreen implements Screen, InputProcessor {
             addPlant();
         }
 
+        // Add new cans if I'm supposed to
+        if (timeElapsed > nextAnimatedCan) {
+            throwCan();
+        }
+
         // update objects
         for (GameObject g : gameObjectArray) {
             g.update(delta);
         }
+        for (AnimatedCan ac : animatedCanArray) {
+            ac.update(delta);
+        }
         player.update(delta);
-
-        TextureRegion currentFrame = canAnimation.getKeyFrame(timeElapsed, true);
 
         // draw sprites
         viewport.apply();
         game.batch.setProjectionMatrix(viewport.getCamera().combined);
         game.batch.begin();
+        // Game objects
         for (int i = gameObjectArray.size - 1; i >= 0; i--) {
             gameObjectArray.get(i).draw(game.batch);
         }
+        // Animated Cans
+        for (AnimatedCan ac : animatedCanArray) {
+            ac.draw(game.batch, timeElapsed);
+        }
+        // Player
         player.draw(game.batch);
-
-        game.batch.draw(currentFrame, 100, 100);
-
         game.batch.end();
 
         // Draw side banners

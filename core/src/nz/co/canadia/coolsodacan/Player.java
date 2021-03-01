@@ -2,9 +2,11 @@ package nz.co.canadia.coolsodacan;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -15,16 +17,22 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 class Player {
     private final Sprite sprite;
     private final int gameHeight;
+    private final String name;
     private Vector2 targetXY;
 
     Player(int gameHeight, TextureAtlas atlas, String name) {
         this.gameHeight = gameHeight;
+        this.name = name;
         targetXY = new Vector2(
                 Constants.GAME_WIDTH * Constants.CURSOR_START_X,
                 gameHeight * Constants.CURSOR_START_Y);
         sprite = atlas.createSprite(name);
-        sprite.setPosition(targetXY.x - sprite.getWidth() / 2, targetXY.y);
+        sprite.setCenter(targetXY.x, targetXY.y);
         sprite.setSize(sprite.getWidth(), sprite.getHeight());
+    }
+
+    public String getName() {
+        return name;
     }
 
     void update(float delta) {
@@ -55,7 +63,7 @@ class Player {
     private void move(float delta) {
         // calculate change in X and Y positions
         float deltaX = targetXY.x - sprite.getX() - sprite.getWidth() / 2;
-        float deltaY = targetXY.y - sprite.getY();
+        float deltaY = targetXY.y - sprite.getY() - sprite.getHeight() / 2;
         float length = (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
         float velocity = Constants.PLAYER_SPEED * delta;
@@ -76,5 +84,13 @@ class Player {
         if (Gdx.app.getType() == Application.ApplicationType.Android | Gdx.app.getType() == Application.ApplicationType.iOS) {
             targetXY.y += sprite.getHeight();
         }
+    }
+
+    public float getAnimationX() {
+        return sprite.getX() + sprite.getWidth() * Constants.PLAY_CENTRE_OFFSET;
+    }
+
+    public float getAnimationY() {
+        return sprite.getY() + sprite.getHeight();
     }
 }
