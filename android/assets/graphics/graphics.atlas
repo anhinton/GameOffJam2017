@@ -6,168 +6,392 @@ filter: Linear,Linear
 repeat: none
 blue_anim
   rotate: false
-  xy: 989, 461
+  xy: 954, 285
   size: 30, 42
   orig: 30, 42
   offset: 0, 0
   index: 1
 blue_anim
   rotate: false
-  xy: 2, 2
+  xy: 293, 222
   size: 30, 42
   orig: 30, 42
   offset: 0, 0
   index: 2
 blue_anim
   rotate: false
-  xy: 806, 329
+  xy: 562, 132
   size: 30, 42
   orig: 30, 42
   offset: 0, 0
   index: 3
 blue_anim
   rotate: false
-  xy: 954, 329
+  xy: 530, 87
   size: 30, 42
   orig: 30, 42
   offset: 0, 0
   index: 4
 blue_anim
   rotate: false
-  xy: 293, 266
+  xy: 66, 3
   size: 30, 42
   orig: 30, 42
   offset: 0, 0
   index: 5
 blue_anim
   rotate: false
-  xy: 530, 131
+  xy: 954, 241
   size: 30, 42
   orig: 30, 42
   offset: 0, 0
   index: 6
 blue_anim
   rotate: false
-  xy: 989, 417
+  xy: 293, 178
   size: 30, 42
   orig: 30, 42
   offset: 0, 0
   index: 7
 blue_anim
   rotate: false
-  xy: 34, 2
+  xy: 594, 132
   size: 30, 42
   orig: 30, 42
   offset: 0, 0
   index: 8
 blue_soda_small
   rotate: false
-  xy: 678, 166
+  xy: 678, 167
   size: 90, 141
   orig: 90, 141
   offset: 0, 0
   index: -1
 coco
   rotate: false
-  xy: 806, 373
+  xy: 806, 374
   size: 181, 130
   orig: 181, 130
   offset: 0, 0
   index: -1
 fern01
   rotate: false
-  xy: 2, 310
+  xy: 2, 311
   size: 335, 193
   orig: 335, 193
   offset: 0, 0
   index: -1
 flower01
   rotate: false
-  xy: 678, 309
+  xy: 678, 310
   size: 126, 194
   orig: 126, 194
   offset: 0, 0
   index: -1
 grass01
   rotate: false
-  xy: 360, 77
+  xy: 360, 78
   size: 88, 107
   orig: 88, 107
   offset: 0, 0
   index: -1
 grass02
   rotate: false
-  xy: 862, 135
+  xy: 862, 136
   size: 99, 95
   orig: 99, 95
   offset: 0, 0
   index: -1
 grass03
   rotate: false
-  xy: 450, 65
+  xy: 450, 66
   size: 78, 108
   orig: 78, 108
   offset: 0, 0
   index: -1
 grass04
   rotate: false
-  xy: 280, 54
+  xy: 280, 55
   size: 78, 111
   orig: 78, 111
   offset: 0, 0
   index: -1
 horse01
   rotate: false
-  xy: 2, 178
+  xy: 2, 179
   size: 197, 130
   orig: 197, 130
   offset: 0, 0
   index: -1
 horse02
   rotate: false
-  xy: 2, 46
+  xy: 2, 47
   size: 184, 130
   orig: 184, 130
   offset: 0, 0
   index: -1
+orange_anim
+  rotate: false
+  xy: 989, 461
+  size: 30, 43
+  orig: 30, 43
+  offset: 0, 0
+  index: 1
+orange_anim
+  rotate: false
+  xy: 2, 2
+  size: 30, 43
+  orig: 30, 43
+  offset: 0, 0
+  index: 2
+orange_anim
+  rotate: false
+  xy: 806, 329
+  size: 30, 43
+  orig: 30, 43
+  offset: 0, 0
+  index: 3
+orange_anim
+  rotate: false
+  xy: 954, 329
+  size: 30, 43
+  orig: 30, 43
+  offset: 0, 0
+  index: 4
+orange_anim
+  rotate: false
+  xy: 293, 266
+  size: 30, 43
+  orig: 30, 43
+  offset: 0, 0
+  index: 5
+orange_anim
+  rotate: false
+  xy: 530, 131
+  size: 30, 43
+  orig: 30, 43
+  offset: 0, 0
+  index: 6
+orange_anim
+  rotate: false
+  xy: 989, 416
+  size: 30, 43
+  orig: 30, 43
+  offset: 0, 0
+  index: 7
+orange_anim
+  rotate: false
+  xy: 34, 2
+  size: 30, 43
+  orig: 30, 43
+  offset: 0, 0
+  index: 8
 orange_soda_small
   rotate: false
-  xy: 201, 167
+  xy: 201, 168
   size: 90, 141
   orig: 90, 141
   offset: 0, 0
   index: -1
+purple_anim
+  rotate: false
+  xy: 562, 88
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 1
+purple_anim
+  rotate: false
+  xy: 98, 3
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 2
+purple_anim
+  rotate: false
+  xy: 626, 132
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 3
+purple_anim
+  rotate: false
+  xy: 594, 88
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 4
+purple_anim
+  rotate: false
+  xy: 130, 3
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 5
+purple_anim
+  rotate: false
+  xy: 626, 88
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 6
+purple_anim
+  rotate: false
+  xy: 989, 372
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 7
+purple_anim
+  rotate: false
+  xy: 986, 328
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 8
 purple_soda_small
   rotate: false
-  xy: 188, 23
+  xy: 188, 24
   size: 90, 142
   orig: 90, 142
   offset: 0, 0
   index: -1
+silver_anim
+  rotate: false
+  xy: 986, 284
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 1
+silver_anim
+  rotate: false
+  xy: 986, 240
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 2
+silver_anim
+  rotate: false
+  xy: 280, 11
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 3
+silver_anim
+  rotate: false
+  xy: 312, 11
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 4
+silver_anim
+  rotate: false
+  xy: 344, 11
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 5
+silver_anim
+  rotate: false
+  xy: 658, 123
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 6
+silver_anim
+  rotate: false
+  xy: 690, 123
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 7
+silver_anim
+  rotate: false
+  xy: 722, 123
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 8
 silver_soda_small
   rotate: false
-  xy: 770, 168
+  xy: 770, 169
   size: 90, 139
   orig: 90, 139
   offset: 0, 0
   index: -1
 tree01
   rotate: false
-  xy: 339, 186
+  xy: 339, 187
   size: 186, 317
   orig: 186, 317
   offset: 0, 0
   index: -1
 tree02
   rotate: false
-  xy: 527, 175
+  xy: 527, 176
   size: 149, 328
   orig: 149, 328
   offset: 0, 0
   index: -1
+yellow_anim
+  rotate: false
+  xy: 658, 79
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 1
+yellow_anim
+  rotate: false
+  xy: 690, 79
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 2
+yellow_anim
+  rotate: false
+  xy: 722, 79
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 3
+yellow_anim
+  rotate: false
+  xy: 754, 123
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 4
+yellow_anim
+  rotate: false
+  xy: 754, 79
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 5
+yellow_anim
+  rotate: false
+  xy: 786, 125
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 6
+yellow_anim
+  rotate: false
+  xy: 818, 125
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 7
+yellow_anim
+  rotate: false
+  xy: 786, 81
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: 8
 yellow_soda_small
   rotate: false
-  xy: 862, 232
+  xy: 862, 233
   size: 90, 139
   orig: 90, 139
   offset: 0, 0

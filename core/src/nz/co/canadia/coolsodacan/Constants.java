@@ -44,4 +44,7 @@ public class Constants {
     // Animal constants
     public static final float DEGREES_PER_SECOND = 10.0f;
     public static final float SHAKE_AMPLITUDE_IN_DEGREES = 5.0f;
+
+    // Animation constants
+    public static final float CAN_FRAME_DURATION = 0.066f;
 }

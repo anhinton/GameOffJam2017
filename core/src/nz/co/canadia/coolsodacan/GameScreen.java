@@ -52,7 +52,7 @@ public class GameScreen implements Screen, InputProcessor {
 
         atlas = game.manager.get("graphics/graphics.atlas", TextureAtlas.class);
 
-        canAnimation = new Animation<TextureRegion>(0.033f, atlas.findRegions("blue_anim"), Animation.PlayMode.LOOP);
+        canAnimation = new Animation<TextureRegion>(Constants.CAN_FRAME_DURATION, atlas.findRegions("yellow_anim"), Animation.PlayMode.LOOP);
 
         // create player object
         player = new Player(game.getGameHeight(), atlas, "blue_soda_small");
