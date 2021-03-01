@@ -60,6 +60,11 @@
   + **BUG**: There is a 1 (?) pixel gap between the side banners and the game area in GameScreen
       - Do I care enough to fix?
       - The easy fix is probably just going back to and ExtendViewport
+      
+  + **BUG**:  Launching from app menu of Moto G test device shows a black bar where bottom
+    system bar would display. Doesn't seem to when "running" game from Android Studio
+      - Problem doesn't seem to happen on AVD device so maybe I'll see if this goes away once I
+        implement a loading screens, menu screens, etc
 
 ## Done
       
