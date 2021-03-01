@@ -9,8 +9,9 @@ import com.badlogic.gdx.math.MathUtils;
 
 public class CoolSodaCan extends Game {
 	SpriteBatch batch;
+	ShapeRenderer shapeRenderer;
 	private int gameHeight;
-	public AssetManager manager;
+	AssetManager manager;
 
 	@Override
 	public void create () {
@@ -25,6 +26,8 @@ public class CoolSodaCan extends Game {
 		manager = new AssetManager();
 
 		batch = new SpriteBatch();
+		// DEBUG hitboxes
+		shapeRenderer = new ShapeRenderer();
 		this.setScreen(new GameScreen(this));
 	}
 

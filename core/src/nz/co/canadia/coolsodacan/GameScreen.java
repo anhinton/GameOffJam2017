@@ -5,9 +5,11 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -207,6 +209,15 @@ public class GameScreen implements Screen, InputProcessor {
         // Player
         player.draw(game.batch);
         game.batch.end();
+
+        // DEBUG hitboxes
+        game.shapeRenderer.setProjectionMatrix(viewport.getCamera().combined);
+        game.shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        game.shapeRenderer.setColor(Color.RED);
+        for (AnimatedCan ac : animatedCanArray) {
+            game.shapeRenderer.rect(ac.getHitBox().x, ac.getHitBox().y, ac.getHitBox().width, ac.getHitBox().height);
+        }
+        game.shapeRenderer.end();
 
         // Draw side banners
         bannerStage.getViewport().apply();
