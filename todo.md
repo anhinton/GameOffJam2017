@@ -11,6 +11,8 @@
           - ~~Update y position based on delta~~
           - ~~New can added to GameScreen only after a time has elapsed~~
           - ~~Only add new can when "firing"~~
+      - Create getHitBox() function
+          - GameScreen uses to check against GameObjects
       
   + Create animal objects
       - ~~Coco, Horse1, Horse2~~

@@ -159,6 +159,11 @@ public class GameScreen implements Screen, InputProcessor {
                 gameObjectArray.removeIndex(i);
             }
         }
+        for (int i = 0; i < animatedCanArray.size; i++) {
+            if (animatedCanArray.get(i).getY() > game.getGameHeight()) {
+                animatedCanArray.removeIndex(i);
+            }
+        }
 
         // Add new objects to top of screen
         if (timeElapsed > nextAnimal) {

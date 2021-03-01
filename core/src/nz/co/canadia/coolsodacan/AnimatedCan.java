@@ -48,4 +48,8 @@ public class AnimatedCan {
         TextureRegion currentFrame = animation.getKeyFrame(timeElapsed, true);
         batch.draw(currentFrame, x, y);
     }
+
+    public float getY() {
+        return y;
+    }
 }
