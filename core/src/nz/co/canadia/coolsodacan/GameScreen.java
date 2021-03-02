@@ -195,6 +195,18 @@ public class GameScreen implements Screen, InputProcessor {
             }
         }
 
+        // Check for can/hittable collisions
+        for (AnimatedCan ac : animatedCanArray) {
+            if (ac.isActive()) {
+                for (Hittable h : hittableArray) {
+                    if (ac.getHitBox().overlaps(h.getHitBox()) & h.isHittable()) {
+                        h.hit();
+                        ac.hit();
+                    }
+                }
+            }
+        }
+
         // update objects
         for (GameObject g : gameObjectArray) {
             g.update(delta);
@@ -214,24 +226,24 @@ public class GameScreen implements Screen, InputProcessor {
         }
         // Animated Cans
         for (AnimatedCan ac : animatedCanArray) {
-            ac.draw(game.batch, timeElapsed);
+            ac.draw(game.batch);
         }
         // Player
         player.draw(game.batch);
         game.batch.end();
 
         // DEBUG hitboxes
-        game.shapeRenderer.setProjectionMatrix(viewport.getCamera().combined);
-        game.shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        game.shapeRenderer.setColor(Color.RED);
-        for (AnimatedCan ac : animatedCanArray) {
-            game.shapeRenderer.rect(ac.getHitBox().x, ac.getHitBox().y, ac.getHitBox().width, ac.getHitBox().height);
-        }
-        game.shapeRenderer.setColor(Color.BLUE);
-        for (Hittable h : hittableArray) {
-            game.shapeRenderer.rect(h.getHitBox().x, h.getHitBox().y, h.getHitBox().width, h.getHitBox().height);
-        }
-        game.shapeRenderer.end();
+//        game.shapeRenderer.setProjectionMatrix(viewport.getCamera().combined);
+//        game.shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+//        game.shapeRenderer.setColor(Color.RED);
+//        for (AnimatedCan ac : animatedCanArray) {
+//            game.shapeRenderer.rect(ac.getHitBox().x, ac.getHitBox().y, ac.getHitBox().width, ac.getHitBox().height);
+//        }
+//        game.shapeRenderer.setColor(Color.BLUE);
+//        for (Hittable h : hittableArray) {
+//            game.shapeRenderer.rect(h.getHitBox().x, h.getHitBox().y, h.getHitBox().width, h.getHitBox().height);
+//        }
+//        game.shapeRenderer.end();
 
         // Draw side banners
         bannerStage.getViewport().apply();

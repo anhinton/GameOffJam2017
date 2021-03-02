@@ -41,6 +41,10 @@ public class Constants {
     public static final int MAX_ANIMAL_START = 6;
     public static final int MAX_ANIMAL_DISTANCE = MathUtils.round((float) GAME_HEIGHT / MIN_ANIMAL_START);
 
+    // Hittable constants
+    public enum HittableState { NORMAL, HIT, SUPER_HIT }
+    public enum AnimatedCanState { ACTIVE, INACTIVE }
+
     // Animal constants
     public static final float DEGREES_PER_SECOND = 10.0f;
     public static final float SHAKE_AMPLITUDE_IN_DEGREES = 5.0f;

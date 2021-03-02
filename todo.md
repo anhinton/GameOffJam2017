@@ -32,6 +32,7 @@
           
   + Create explosion animation
       - Used for trees and animals
+      - Also a tiny one for cans
       
   + Create destroyed tree sprite
       - After you hit a tree with X cans

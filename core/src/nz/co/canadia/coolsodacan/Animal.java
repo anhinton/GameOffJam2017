@@ -79,4 +79,14 @@ public class Animal implements GameObject, Hittable, Comparable<GameObject>, Com
                 sprite.getWidth(),
                 sprite.getHeight() / 2);
     }
+
+    @Override
+    public void hit() {
+
+    }
+
+    @Override
+    public boolean isHittable() {
+        return false;
+    }
 }

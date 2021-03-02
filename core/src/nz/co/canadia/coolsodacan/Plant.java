@@ -1,5 +1,7 @@
 package nz.co.canadia.coolsodacan;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -12,26 +14,63 @@ import java.util.Comparator;
 @SuppressWarnings("NullableProblems")
 public class Plant implements GameObject, Hittable, Comparable<GameObject>, Comparator<GameObject> {
     private final Sprite sprite;
+    private final ParticleEffect explosion;
+    private Constants.HittableState hitState;
+    private int hitCount;
 
     Plant(int y, TextureAtlas atlas) {
+        hitCount = 0;
+        hitState = Constants.HittableState.NORMAL;
         Array<String> plantNameArray = new Array<>();
         plantNameArray.add("tree01");
         plantNameArray.add("tree02");
         plantNameArray.add("fern01");
         plantNameArray.add("flower01");
-        sprite = atlas.createSprite(plantNameArray.random());
+        String plantName = plantNameArray.random();
+        sprite = atlas.createSprite(plantName);
         sprite.flip(MathUtils.randomBoolean(), false);
         sprite.setCenterX(MathUtils.random(0, Constants.GAME_WIDTH));
         sprite.setY(y);
+
+        explosion = new ParticleEffect();
+        String effectFile;
+        try {
+            switch (plantName) {
+                case "tree01":
+                    effectFile = "particleEffects/tree01_explosion.p";
+                    break;
+                case "tree02":
+                    effectFile = "particleEffects/tree02_explosion.p";
+                    break;
+                case "fern01":
+                    effectFile = "particleEffects/tree01_explosion.p";
+                    break;
+                case "flower01":
+                    effectFile = "particleEffects/tree01_explosion.p";
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected plantName value: " + plantName);
+            }
+            explosion.load(Gdx.files.internal(effectFile), atlas);
+        } catch (IllegalStateException e) {
+            Gdx.app.error("Plant", "Unable to load particle effect file", e);
+        }
     }
 
     @Override
     public void update(float delta) {
         sprite.setY(sprite.getY() - Constants.WORLD_MOVEMENT_SPEED * delta);
+        explosion.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight() / 2);
+        explosion.update(delta);
     }
 
     public void draw(SpriteBatch batch) {
-        sprite.draw(batch);
+        if (hitState == Constants.HittableState.NORMAL) {
+            sprite.draw(batch);
+        } else {
+            explosion.setPosition(sprite.getX(), sprite.getY());
+            explosion.draw(batch);
+        }
     }
 
     @Override
@@ -68,5 +107,19 @@ public class Plant implements GameObject, Hittable, Comparable<GameObject>, Comp
                 sprite.getY() + sprite.getHeight() / 2,
                 sprite.getWidth(),
                 sprite.getHeight() / 2);
+    }
+
+    @Override
+    public void hit() {
+        hitCount += 1;
+        if (hitCount >= 3) {
+            hitState = Constants.HittableState.HIT;
+            explosion.start();
+        }
+    }
+
+    @Override
+    public boolean isHittable() {
+        return hitState == Constants.HittableState.NORMAL;
     }
 }
