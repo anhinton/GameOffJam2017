@@ -50,7 +50,7 @@ public class AnimatedCan {
         y = player.getAnimationY();
 
         explosion = new ParticleEffect();
-        explosion.load(Gdx.files.internal("particleEffects/can_explosion.p"), atlas);
+        explosion.load(Gdx.files.internal("particleEffects/explosion.p"), atlas);
     }
 
     void update(float delta) {

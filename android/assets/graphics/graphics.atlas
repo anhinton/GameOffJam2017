@@ -1,8 +1,8 @@
 
 graphics.png
-size: 1024,512
+size: 1024, 512
 format: RGBA8888
-filter: Linear,Linear
+filter: Linear, Linear
 repeat: none
 blue_anim
   rotate: false
@@ -193,6 +193,20 @@ orange_soda_small
   orig: 90, 141
   offset: 0, 0
   index: -1
+particle_circle
+  rotate: false
+  xy: 280, 21
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+particle_starburst
+  rotate: false
+  xy: 314, 21
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 purple_anim
   rotate: false
   xy: 562, 88
@@ -272,42 +286,42 @@ silver_anim
   index: 2
 silver_anim
   rotate: false
-  xy: 280, 11
+  xy: 658, 123
   size: 30, 42
   orig: 30, 42
   offset: 0, 0
   index: 3
 silver_anim
   rotate: false
-  xy: 312, 11
+  xy: 690, 123
   size: 30, 42
   orig: 30, 42
   offset: 0, 0
   index: 4
 silver_anim
   rotate: false
-  xy: 344, 11
+  xy: 722, 123
   size: 30, 42
   orig: 30, 42
   offset: 0, 0
   index: 5
 silver_anim
   rotate: false
-  xy: 658, 123
+  xy: 658, 79
   size: 30, 42
   orig: 30, 42
   offset: 0, 0
   index: 6
 silver_anim
   rotate: false
-  xy: 690, 123
+  xy: 690, 79
   size: 30, 42
   orig: 30, 42
   offset: 0, 0
   index: 7
 silver_anim
   rotate: false
-  xy: 722, 123
+  xy: 722, 79
   size: 30, 42
   orig: 30, 42
   offset: 0, 0
@@ -335,56 +349,56 @@ tree02
   index: -1
 yellow_anim
   rotate: false
-  xy: 658, 79
+  xy: 754, 123
   size: 30, 42
   orig: 30, 42
   offset: 0, 0
   index: 1
 yellow_anim
   rotate: false
-  xy: 690, 79
+  xy: 754, 79
   size: 30, 42
   orig: 30, 42
   offset: 0, 0
   index: 2
 yellow_anim
   rotate: false
-  xy: 722, 79
+  xy: 786, 125
   size: 30, 42
   orig: 30, 42
   offset: 0, 0
   index: 3
 yellow_anim
   rotate: false
-  xy: 754, 123
+  xy: 818, 125
   size: 30, 42
   orig: 30, 42
   offset: 0, 0
   index: 4
 yellow_anim
   rotate: false
-  xy: 754, 79
+  xy: 786, 81
   size: 30, 42
   orig: 30, 42
   offset: 0, 0
   index: 5
 yellow_anim
   rotate: false
-  xy: 786, 125
+  xy: 818, 81
   size: 30, 42
   orig: 30, 42
   offset: 0, 0
   index: 6
 yellow_anim
   rotate: false
-  xy: 818, 125
+  xy: 850, 92
   size: 30, 42
   orig: 30, 42
   offset: 0, 0
   index: 7
 yellow_anim
   rotate: false
-  xy: 786, 81
+  xy: 882, 92
   size: 30, 42
   orig: 30, 42
   offset: 0, 0

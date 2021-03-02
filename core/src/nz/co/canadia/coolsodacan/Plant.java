@@ -2,6 +2,7 @@ package nz.co.canadia.coolsodacan;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.badlogic.gdx.graphics.g2d.ParticleEmitter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -33,28 +34,12 @@ public class Plant implements GameObject, Hittable, Comparable<GameObject>, Comp
         sprite.setY(y);
 
         explosion = new ParticleEffect();
-        String effectFile;
-        try {
-            switch (plantName) {
-                case "tree01":
-                    effectFile = "particleEffects/tree01_explosion.p";
-                    break;
-                case "tree02":
-                    effectFile = "particleEffects/tree02_explosion.p";
-                    break;
-                case "fern01":
-                    effectFile = "particleEffects/tree01_explosion.p";
-                    break;
-                case "flower01":
-                    effectFile = "particleEffects/tree01_explosion.p";
-                    break;
-                default:
-                    throw new IllegalStateException("Unexpected plantName value: " + plantName);
-            }
-            explosion.load(Gdx.files.internal(effectFile), atlas);
-        } catch (IllegalStateException e) {
-            Gdx.app.error("Plant", "Unable to load particle effect file", e);
-        }
+        explosion.load(Gdx.files.internal("particleEffects/explosion.p"), atlas);
+        // Set explosion dimensions to sprite size
+        explosion.getEmitters().first().getSpawnWidth().setHigh(sprite.getWidth());
+        explosion.getEmitters().first().getSpawnHeight().setHigh(sprite.getHeight());
+        // Increase scale of particle to match sprite (THIS IS SO BAD)
+        explosion.getEmitters().first().getXScale().setHigh(Math.min(sprite.getWidth(), sprite.getHeight()));
     }
 
     @Override

@@ -5,11 +5,9 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -44,6 +42,7 @@ public class GameScreen implements Screen, InputProcessor {
         this.game = game;
         timeElapsed = 0;
         playerIsFiring = false;
+
 
         // Load assets
         game.manager.load("graphics/graphics.atlas", TextureAtlas.class);
