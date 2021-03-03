@@ -1,8 +1,5 @@
 # todo.md
       
-  + Create destroyed tree sprite
-      - After you hit a tree with 3 cans
-      
   + Implement scoring UI
       - Cans thrown
       - Cans delivered
@@ -37,6 +34,8 @@
   + Re-evaluate how much Y-offset there is from touch point on mobile
       - Currently it feels like it might be too much
       - Now setting Player x/y to centre of sprite. Has this made a difference?
+
+  + Do Animals need a smiling had-a-can state before exploding?
   
   + Consider a more composed method for distributing plants/animals
       - On a grid?
@@ -60,6 +59,9 @@
         implement a loading screens, menu screens, etc
 
 ## Done
+      
+  + ~~Create destroyed tree sprite~~
+      - ~~After you hit a tree with 3 cans~~
           
   + ~~Create Hittable interface~~
       - ~~Implemented by Animal and Plant classes~~

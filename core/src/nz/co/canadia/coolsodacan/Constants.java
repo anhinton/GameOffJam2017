@@ -70,6 +70,10 @@ public class Constants {
     public static final String FLOWER01_TEXTURE = "flower01";
     public static final String TREE01_TEXTURE = "tree01";
     public static final String TREE02_TEXTURE = "tree02";
+    public static final String FERN01_HIT_TEXTURE = "fern01_hit";
+    public static final String FLOWER01_HIT_TEXTURE = "flower01_hit";
+    public static final String TREE01_HIT_TEXTURE = "tree01_hit";
+    public static final String TREE02_HIT_TEXTURE = "tree02_hit";
 
     // Spawn constants
     public static final int MIN_GRASS_START = 5;
