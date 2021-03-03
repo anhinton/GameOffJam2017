@@ -1,34 +1,18 @@
 # todo.md
-          
-  + ~~Create Hittable interface~~
-      - ~~Implemented by Animal and Plant classes~~
-      - ~~Provides getHitBox() function~~
-      - ~~Provides hit() function~~
-      
-  + Create animal objects
-      - ~~Coco, Horse1, Horse2~~
-      - States:
-          - Normal
-          - Sated (smiling)
-          - Super-sated (has exploded, still smiling, black silhouette)
-      - ~~All animals: wiggle~~
-          - ~~Define hitbox before wiggle starts~~
-      - Change state when hit by can
       
   + Create destroyed tree sprite
-      - After you hit a tree with X cans
+      - After you hit a tree with 3 cans
       
-  + Player can gets stuck on plants/animals
-  
-  + Re-evaluate how much Y-offset there is from touch point on mobile
-      - Currently it feels like it might be too much
-      - Now setting Player x/y to centre of sprite. Has this made a difference?
-  
-  + Consider a more composed method for distributing plants/animals
-      - On a grid?
-      - Max number of items per grid square?
-      - Rules?
-      - Is this procgen?
+  + Implement scoring UI
+      - Cans thrown
+      - Cans delivered
+      - Score
+      - Time
+      - Save these on exit
+      
+  + Implement Exit UI from GameScreen
+      
+  + Create a tutorial at start of game
       
   + Title screen
       - New game
@@ -49,6 +33,22 @@
           - Music volume
           - Sound volume
           - Credits
+  
+  + Re-evaluate how much Y-offset there is from touch point on mobile
+      - Currently it feels like it might be too much
+      - Now setting Player x/y to centre of sprite. Has this made a difference?
+  
+  + Consider a more composed method for distributing plants/animals
+      - On a grid?
+      - Max number of items per grid square?
+      - Rules?
+      - Is this procgen?
+      
+  + Investigate using Pools for
+      - AnimatedCan
+      - Explosion
+      - Animal
+      - Plant
           
   + **BUG**: There is a 1 (?) pixel gap between the side banners and the game area in GameScreen
       - Do I care enough to fix?
@@ -60,6 +60,22 @@
         implement a loading screens, menu screens, etc
 
 ## Done
+          
+  + ~~Create Hittable interface~~
+      - ~~Implemented by Animal and Plant classes~~
+      - ~~Provides getHitBox() function~~
+      - ~~Provides hit() function~~
+      
+  + ~~Create animal objects~~
+      - ~~Coco, Horse1, Horse2~~
+      - ~~States:~~
+          - ~~Normal~~
+          - ~~Hit~~
+          - ~~Superhit (has exploded, black silhouette)~~
+      - ~~All animals: wiggle~~
+          - ~~Define hitbox before wiggle starts~~
+      - ~~Change state when hit by can~~
+          - ~~Superhit state!~~
           
   + ~~Create explosion animation~~
       - ~~Used for trees and animals~~
