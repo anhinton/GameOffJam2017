@@ -2,7 +2,6 @@ package nz.co.canadia.coolsodacan;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
-import com.badlogic.gdx.graphics.g2d.ParticleEmitter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -53,7 +52,6 @@ public class Plant implements GameObject, Hittable, Comparable<GameObject>, Comp
         if (hitState == Constants.HittableState.NORMAL) {
             sprite.draw(batch);
         } else {
-            explosion.setPosition(sprite.getX(), sprite.getY());
             explosion.draw(batch);
         }
     }

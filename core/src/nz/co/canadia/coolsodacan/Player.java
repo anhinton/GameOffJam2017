@@ -2,11 +2,9 @@ package nz.co.canadia.coolsodacan;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -17,21 +15,41 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 class Player {
     private final Sprite sprite;
     private final int gameHeight;
-    private final String name;
+    private final Constants.PlayerName name;
     private Vector2 targetXY;
 
-    Player(int gameHeight, TextureAtlas atlas, String name) {
+    Player(int gameHeight, TextureAtlas atlas, Constants.PlayerName name) {
         this.gameHeight = gameHeight;
         this.name = name;
         targetXY = new Vector2(
                 Constants.GAME_WIDTH * Constants.CURSOR_START_X,
                 gameHeight * Constants.CURSOR_START_Y);
-        sprite = atlas.createSprite(name);
+        String spriteName;
+        switch(name) {
+            case BLUE:
+                spriteName = Constants.BLUE_NAME;
+                break;
+            case ORANGE:
+                spriteName = Constants.ORANGE_NAME;
+                break;
+            case PURPLE:
+                spriteName = Constants.PURPLE_NAME;
+                break;
+            case SILVER:
+                spriteName = Constants.SILVER_NAME;
+                break;
+            case YELLOW:
+                spriteName = Constants.YELLOW_NAME;
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + name);
+        }
+        sprite = atlas.createSprite(spriteName);
         sprite.setCenter(targetXY.x, targetXY.y);
         sprite.setSize(sprite.getWidth(), sprite.getHeight());
     }
 
-    public String getName() {
+    public Constants.PlayerName getName() {
         return name;
     }
 

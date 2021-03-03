@@ -43,7 +43,6 @@ public class GameScreen implements Screen, InputProcessor {
         timeElapsed = 0;
         playerIsFiring = false;
 
-
         // Load assets
         game.manager.load("graphics/graphics.atlas", TextureAtlas.class);
         TextureLoader.TextureParameter param = new TextureLoader.TextureParameter();
@@ -56,11 +55,8 @@ public class GameScreen implements Screen, InputProcessor {
         atlas = game.manager.get("graphics/graphics.atlas", TextureAtlas.class);
 
         // create player object
-//        player = new Player(game.getGameHeight(), atlas, "blue_soda_small");
-        player = new Player(game.getGameHeight(), atlas, "orange_soda_small");
-//        player = new Player(game.getGameHeight(), atlas, "purple_soda_small");
-//        player = new Player(game.getGameHeight(), atlas, "silver_soda_small");
-//        player = new Player(game.getGameHeight(), atlas, "yellow_soda_small");
+        Constants.PlayerName playerName = Constants.PlayerName.values()[MathUtils.random(Constants.PlayerName.values().length - 1)];
+        player = new Player(game.getGameHeight(), atlas, playerName);
 
         // create game objects
         gameObjectArray = new Array<>();

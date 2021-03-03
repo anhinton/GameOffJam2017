@@ -1,6 +1,7 @@
 package nz.co.canadia.coolsodacan;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -22,21 +23,27 @@ public class AnimatedCan {
         timeElapsed = 0;
         canState = Constants.AnimatedCanState.ACTIVE;
         String animationName;
+        Color particleColor;
         switch(player.getName()) {
-            case "blue_soda_small":
-                animationName = "blue_anim";
+            case BLUE:
+                animationName = Constants.BLUE_ANIM_NAME;
+                particleColor = Constants.BLUE_EXPLOSION;
                 break;
-            case "orange_soda_small":
-                animationName = "orange_anim";
+            case ORANGE:
+                animationName = Constants.ORANGE_ANIM_NAME;
+                particleColor = Constants.ORANGE_EXPLOSION;
                 break;
-            case "purple_soda_small":
-                animationName = "purple_anim";
+            case PURPLE:
+                animationName = Constants.PURPLE_ANIM_NAME;
+                particleColor = Constants.PURPLE_EXPLOSION;
                 break;
-            case "silver_soda_small":
-                animationName = "silver_anim";
+            case SILVER:
+                animationName = Constants.SILVER_ANIM_NAME;
+                particleColor = Constants.SILVER_EXPLOSION;
                 break;
-            case "yellow_soda_small":
-                animationName = "yellow_anim";
+            case YELLOW:
+                animationName = Constants.YELLOW_ANIM_NAME;
+                particleColor = Constants.YELLOW_EXPLOSION;
                 break;
             default:
                 throw new IllegalStateException("Unexpected animationName value: " + player.getName());
@@ -51,6 +58,13 @@ public class AnimatedCan {
 
         explosion = new ParticleEffect();
         explosion.load(Gdx.files.internal("particleEffects/explosion.p"), atlas);
+        // Set tint of particle effect
+        float[] tint = new float[3];
+        tint[0] = particleColor.r;
+        tint[1] = particleColor.g;
+        tint[2] = particleColor.b;
+        explosion.getEmitters().first().getTint().setColors(tint);
+        explosion.setPosition(x, y);
     }
 
     void update(float delta) {
@@ -60,15 +74,15 @@ public class AnimatedCan {
         } else {
             y -= Constants.WORLD_MOVEMENT_SPEED * delta;
         }
+        currentFrame = animation.getKeyFrame(timeElapsed, true);
         explosion.update(delta);
+        explosion.setPosition(x, y);
     }
 
     void draw(SpriteBatch batch) {
         if (isActive()) {
-            currentFrame = animation.getKeyFrame(timeElapsed, true);
             batch.draw(currentFrame, x, y);
         } else {
-            explosion.setPosition(x, y);
             explosion.draw(batch);
         }
     }

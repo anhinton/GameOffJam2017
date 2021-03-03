@@ -30,6 +30,26 @@ public class Constants {
     public static final float CURSOR_START_X = 1 / 2f;
     public static final float CURSOR_START_Y = 1 / 2f;
 
+    // Player constants
+    public enum PlayerName { BLUE, ORANGE, PURPLE, SILVER, YELLOW }
+    public static final String BLUE_NAME = "blue_soda_small";
+    public static final String ORANGE_NAME = "orange_soda_small";
+    public static final String PURPLE_NAME = "purple_soda_small";
+    public static final String SILVER_NAME = "silver_soda_small";
+    public static final String YELLOW_NAME = "yellow_soda_small";
+    public static final String BLUE_ANIM_NAME = "blue_anim";
+    public static final String ORANGE_ANIM_NAME = "orange_anim";
+    public static final String PURPLE_ANIM_NAME = "purple_anim";
+    public static final String SILVER_ANIM_NAME = "silver_anim";
+    public static final String YELLOW_ANIM_NAME = "yellow_anim";
+
+    // Particle effect constants
+    public static final Color BLUE_EXPLOSION = new Color(0.165f, 0.427f, 0.925f, 1);
+    public static final Color SILVER_EXPLOSION = new Color(0.808f, 0.808f,0.745f, 1);
+    public static final Color ORANGE_EXPLOSION = new Color(0.965f, 0.482f,0.122f, 1);
+    public static final Color PURPLE_EXPLOSION = new Color(0.780f, 0, 0.6f, 1);
+    public static final Color YELLOW_EXPLOSION = new Color(0.965f, 0.949f, 0.121f, 1);
+
     // Spawn constants
     public static final int MIN_GRASS_START = 5;
     public static final int MAX_GRASS_START = 20;
