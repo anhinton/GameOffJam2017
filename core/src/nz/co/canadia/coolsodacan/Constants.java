@@ -32,6 +32,9 @@ public class Constants {
     public static final float CURSOR_START_X = 1 / 2f;
     public static final float CURSOR_START_Y = 1 / 2f;
 
+    // Font constants
+    public static final int GAMEUI_FONT_SIZE = 32;
+
     // Player constants
     public enum PlayerName { BLUE, ORANGE, PURPLE, SILVER, YELLOW }
     public static final String BLUE_NAME = "blue_soda_small";

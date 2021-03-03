@@ -1,5 +1,5 @@
 # todo.md
-      
+
   + Implement scoring UI
       - Cans thrown
       - Cans delivered

@@ -4,17 +4,21 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.loaders.TextureLoader;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 /**
@@ -27,30 +31,31 @@ public class GameScreen implements Screen, InputProcessor {
     private final Player player;
     private final Viewport viewport;
     private final Stage bannerStage;
+    private final Stage uiStage;
     private final TextureAtlas atlas;
     private final Array<GameObject> gameObjectArray;
     private final Array<Hittable> hittableArray;
     private final Array<AnimatedCan> animatedCanArray;
+    private final BitmapFont gameUiFont;
     private float nextAnimatedCan;
     private float timeElapsed;
     private float nextGrass;
     private float nextPlant;
     private float nextAnimal;
     private boolean playerIsFiring;
+    private int cansThrown;
+    private int cansDelivered;
+    private int score;
 
     GameScreen(CoolSodaCan game) {
         this.game = game;
         timeElapsed = 0;
         playerIsFiring = false;
+        cansThrown = 0;
+        cansDelivered = 0;
+        score = 0;
 
-        // Load assets
-        game.manager.load("graphics/graphics.atlas", TextureAtlas.class);
-        TextureLoader.TextureParameter param = new TextureLoader.TextureParameter();
-        param.minFilter = Texture.TextureFilter.Linear;
-        param.magFilter = Texture.TextureFilter.Linear;
-        game.manager.load("banner/banner_left.jpg", Texture.class, param);
-        game.manager.load("banner/banner_right.jpg", Texture.class, param);
-        game.manager.finishLoading();
+        gameUiFont = game.manager.get("fonts/Podkova-VariableFont_wght.ttf", BitmapFont.class);
 
         atlas = game.manager.get("graphics/graphics.atlas", TextureAtlas.class);
 
@@ -105,7 +110,7 @@ public class GameScreen implements Screen, InputProcessor {
 
         // Create the side banners.
         // These are in a different Viewport to game objects so they can be wholly or partially "off-screen"
-        FillViewport bannerViewport = new FillViewport(Constants.BANNER_WIDTH, Constants.BANNER_HEIGHT);
+        Viewport bannerViewport = new FillViewport(Constants.BANNER_WIDTH, Constants.BANNER_HEIGHT);
         bannerStage = new Stage(bannerViewport);
         Texture bannerLeftTexture = game.manager.get("banner/banner_left.jpg", Texture.class);
         Texture bannerRightTexture = game.manager.get("banner/banner_right.jpg", Texture.class);
@@ -116,8 +121,20 @@ public class GameScreen implements Screen, InputProcessor {
         bannerRightImage.setPosition(bannerStage.getWidth() - bannerRightTexture.getWidth(), 0);
         bannerStage.addActor(bannerRightImage);
 
-        Gdx.input.setInputProcessor(this);
+        // Create the UI
+        Viewport uiViewport = new FitViewport(game.getGameUiWidth(), Gdx.graphics.getBackBufferHeight());
+        uiStage = new Stage(uiViewport);
+        Table uiTable = new Table();
+        uiTable.setFillParent(true);
+        uiTable.top();
+//        uiTable.top().left();
+        uiStage.addActor(uiTable);
 
+        Label.LabelStyle uiLabelStyle = new Label.LabelStyle(gameUiFont, Color.WHITE);
+        Label cansThrownLabel = new Label("Thrown: " + cansThrown, uiLabelStyle);
+        uiTable.add(cansThrownLabel);
+
+        Gdx.input.setInputProcessor(this);
         Gdx.input.setCursorCatched(true);
         Gdx.input.setCursorPosition(
                 MathUtils.round(Gdx.graphics.getBackBufferWidth() * Constants.CURSOR_START_X),
@@ -127,6 +144,7 @@ public class GameScreen implements Screen, InputProcessor {
     private void throwCan() {
         animatedCanArray.add(new AnimatedCan(player, atlas));
         nextAnimatedCan = timeElapsed + Constants.ANIMATED_CAN_DISTANCE / Constants.ANIMATED_CAN_SPEED;
+        cansThrown += 1;
     }
 
     private void addAnimal() {
@@ -225,30 +243,26 @@ public class GameScreen implements Screen, InputProcessor {
         }
         // Player
         player.draw(game.batch);
-        game.batch.end();
 
-        // DEBUG hitboxes
-//        game.shapeRenderer.setProjectionMatrix(viewport.getCamera().combined);
-//        game.shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-//        game.shapeRenderer.setColor(Color.RED);
-//        for (AnimatedCan ac : animatedCanArray) {
-//            game.shapeRenderer.rect(ac.getHitBox().x, ac.getHitBox().y, ac.getHitBox().width, ac.getHitBox().height);
-//        }
-//        game.shapeRenderer.setColor(Color.BLUE);
-//        for (Hittable h : hittableArray) {
-//            game.shapeRenderer.rect(h.getHitBox().x, h.getHitBox().y, h.getHitBox().width, h.getHitBox().height);
-//        }
-//        game.shapeRenderer.end();
+        // Ui
+        gameUiFont.draw(game.batch, "Thrown: " + cansThrown, 100, 100);
+
+        game.batch.end();
 
         // Draw side banners
         bannerStage.getViewport().apply();
         bannerStage.draw();
+
+        // Draw game UI
+        uiStage.getViewport().apply();
+        uiStage.draw();
     }
 
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height);
         bannerStage.getViewport().update(width, height);
+        uiStage.getViewport().update(width, height);
     }
 
     @Override
@@ -270,6 +284,7 @@ public class GameScreen implements Screen, InputProcessor {
     public void dispose() {
         Gdx.input.setCursorCatched(false);
         bannerStage.dispose();
+        uiStage.dispose();
     }
 
     @Override
