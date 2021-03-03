@@ -13,7 +13,7 @@ import java.util.Comparator;
 
 @SuppressWarnings("NullableProblems")
 public class Plant implements GameObject, Hittable, Comparable<GameObject>, Comparator<GameObject> {
-    private final Sprite sprite;
+    private Sprite sprite;
     private final ParticleEffect explosion;
     private Constants.HittableState hitState;
     private int hitCount;
@@ -21,13 +21,25 @@ public class Plant implements GameObject, Hittable, Comparable<GameObject>, Comp
     Plant(int y, TextureAtlas atlas) {
         hitCount = 0;
         hitState = Constants.HittableState.NORMAL;
-        Array<String> plantNameArray = new Array<>();
-        plantNameArray.add("tree01");
-        plantNameArray.add("tree02");
-        plantNameArray.add("fern01");
-        plantNameArray.add("flower01");
-        String plantName = plantNameArray.random();
-        sprite = atlas.createSprite(plantName);
+
+        Constants.PlantName plantName =
+                Constants.PlantName.values()[
+                        MathUtils.random(Constants.PlantName.values().length - 1)];
+        switch(plantName) {
+            case FERN01:
+                sprite = atlas.createSprite(Constants.FERN01_TEXTURE);
+                break;
+            case FLOWER01:
+                sprite = atlas.createSprite(Constants.FLOWER01_TEXTURE);
+                break;
+            case TREE01:
+                sprite = atlas.createSprite(Constants.TREE01_TEXTURE);
+                break;
+            case TREE02:
+                sprite = atlas.createSprite(Constants.TREE02_TEXTURE);
+                break;
+        }
+
         sprite.flip(MathUtils.randomBoolean(), false);
         sprite.setCenterX(MathUtils.random(0, Constants.GAME_WIDTH));
         sprite.setY(y);
@@ -38,7 +50,8 @@ public class Plant implements GameObject, Hittable, Comparable<GameObject>, Comp
         explosion.getEmitters().first().getSpawnWidth().setHigh(sprite.getWidth());
         explosion.getEmitters().first().getSpawnHeight().setHigh(sprite.getHeight());
         // Increase scale of particle to match sprite (THIS IS SO BAD)
-        explosion.getEmitters().first().getXScale().setHigh(Math.min(sprite.getWidth(), sprite.getHeight()));
+        explosion.getEmitters().first().getXScale().setHigh(
+                Math.min(sprite.getWidth(), sprite.getHeight()) * Constants.PLANT_PARTICLE_SCALE);
     }
 
     @Override

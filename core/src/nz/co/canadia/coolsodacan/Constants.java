@@ -3,6 +3,8 @@ package nz.co.canadia.coolsodacan;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 
+import java.io.StringBufferInputStream;
+
 /**
  * Game constants
  */
@@ -49,6 +51,25 @@ public class Constants {
     public static final Color ORANGE_EXPLOSION = new Color(0.965f, 0.482f,0.122f, 1);
     public static final Color PURPLE_EXPLOSION = new Color(0.780f, 0, 0.6f, 1);
     public static final Color YELLOW_EXPLOSION = new Color(0.965f, 0.949f, 0.121f, 1);
+    // Particle size is set to min of sprite(width/height), scaled by the following
+    public static final float PLANT_PARTICLE_SCALE = 1;
+    public static final float ANIMAL_PARTICLE_SCALE = 0.5f;
+
+    // Animal constants
+    public enum AnimalName { COCO, HORSE01, HORSE02 }
+    public static final String COCO_TEXTURE = "coco";
+    public static final String HORSE01_TEXTURE = "horse01";
+    public static final String HORSE02_TEXTURE = "horse02";
+    public static final String COCO_SUPERHIT_TEXTURE = "coco_superhit";
+    public static final String HORSE01_SUPERHIT_TEXTURE = "horse01_superhit";
+    public static final String HORSE02_SUPERHIT_TEXTURE = "horse02_superhit";
+
+    // Plant constants
+    public enum PlantName { FERN01, FLOWER01, TREE01, TREE02}
+    public static final String FERN01_TEXTURE = "fern01";
+    public static final String FLOWER01_TEXTURE = "flower01";
+    public static final String TREE01_TEXTURE = "tree01";
+    public static final String TREE02_TEXTURE = "tree02";
 
     // Spawn constants
     public static final int MIN_GRASS_START = 5;

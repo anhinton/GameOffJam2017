@@ -1,24 +1,9 @@
 # todo.md
-
-  + Create animated small can for throwing
-      - ~~Each colour of big can gets its own small can~~
-          - ~~Blue can~~
-          - ~~Orange can~~
-          - ~~Purple can~~
-          - ~~Silver can~~
-          - ~~Yellow can~~
-      - ~~AnimatedCan object that does things~~
-          - ~~Update y position based on delta~~
-          - ~~New can added to GameScreen only after a time has elapsed~~
-          - ~~Only add new can when "firing"~~
-      - Create getHitBox() function
-      - GameScreen uses getHitBox() to check against GameObjects
-      - Does something when hits? Explodes?
           
-  + Create Hittable interface
+  + ~~Create Hittable interface~~
       - ~~Implemented by Animal and Plant classes~~
       - ~~Provides getHitBox() function~~
-      - Provides hit() function
+      - ~~Provides hit() function~~
       
   + Create animal objects
       - ~~Coco, Horse1, Horse2~~
@@ -29,10 +14,6 @@
       - ~~All animals: wiggle~~
           - ~~Define hitbox before wiggle starts~~
       - Change state when hit by can
-          
-  + Create explosion animation
-      - Used for trees and animals
-      - Also a tiny one for cans
       
   + Create destroyed tree sprite
       - After you hit a tree with X cans
@@ -79,6 +60,26 @@
         implement a loading screens, menu screens, etc
 
 ## Done
+          
+  + ~~Create explosion animation~~
+      - ~~Used for trees and animals~~
+      - ~~Also a tiny one for cans~~
+      - ~~Actually a single ParticleEffect that I modify for different sizes/colours~~
+
+  + ~~Create animated small can for throwing~~
+      - ~~Each colour of big can gets its own small can~~
+          - ~~Blue can~~
+          - ~~Orange can~~
+          - ~~Purple can~~
+          - ~~Silver can~~
+          - ~~Yellow can~~
+      - ~~AnimatedCan object that does things~~
+          - ~~Update y position based on delta~~
+          - ~~New can added to GameScreen only after a time has elapsed~~
+          - ~~Only add new can when "firing"~~
+      - ~~Create getHitBox() function~~
+      - ~~GameScreen uses getHitBox() to check against GameObjects~~
+      - ~~Explodes when it hits something Hittable~~
       
   + ~~Change grass colour to differentiate from plants~~
 
