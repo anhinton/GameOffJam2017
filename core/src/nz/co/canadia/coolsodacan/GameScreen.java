@@ -4,16 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -38,9 +34,7 @@ public class GameScreen implements Screen, InputProcessor {
     private final Array<GameObject> gameObjectArray;
     private final Array<Hittable> hittableArray;
     private final Array<AnimatedCan> animatedCanArray;
-    private final Label.LabelStyle uiLabelStyle;
     private final Table uiTable;
-    private final TextButton.TextButtonStyle uiButtonStyle;
     private float nextAnimatedCan;
     private float timeElapsed;
     private float nextGrass;
@@ -62,8 +56,6 @@ public class GameScreen implements Screen, InputProcessor {
         cansThrown = 0;
         cansDelivered = 0;
         score = 0;
-
-        BitmapFont gameUiFont = game.fontLoader.getGameUiFont(game.manager);
 
         atlas = game.manager.get("graphics/graphics.atlas", TextureAtlas.class);
 
@@ -135,8 +127,6 @@ public class GameScreen implements Screen, InputProcessor {
         uiTable = new Table();
         uiTable.setFillParent(true);
         uiStage.addActor(uiTable);
-        uiLabelStyle = new Label.LabelStyle(gameUiFont, Color.WHITE);
-        uiButtonStyle = new TextButton.TextButtonStyle(game.skin.get("default", TextButton.TextButtonStyle.class));
 
         showGameUi();
 
@@ -151,26 +141,26 @@ public class GameScreen implements Screen, InputProcessor {
         uiTable.clear();
         uiTable.top().left();
 
-        cansThrownLabel = new Label("", uiLabelStyle);
+        cansThrownLabel = new Label("", game.skin.get("default", Label.LabelStyle.class));
         incrementThrown(0);
         uiTable.add(cansThrownLabel);
         uiTable.row();
 
-        cansDeliveredLabel = new Label("", uiLabelStyle);
+        cansDeliveredLabel = new Label("", game.skin.get("default", Label.LabelStyle.class));
         incrementDelivered(0);
         uiTable.add(cansDeliveredLabel);
         uiTable.row();
 
-        scoreLabel = new Label("", uiLabelStyle);
+        scoreLabel = new Label("", game.skin.get("default", Label.LabelStyle.class));
         incrementScore(0);
         uiTable.add(scoreLabel);
         uiTable.row();
 
-        timeLabel = new Label("00:00", uiLabelStyle);
+        timeLabel = new Label("00:00", game.skin.get("default", Label.LabelStyle.class));
         uiTable.add(timeLabel);
         uiTable.row();
 
-        Label exitLabel = new Label(game.bundle.get("gameUiDesktopExitLabel"), uiLabelStyle);
+        Label exitLabel = new Label(game.bundle.get("gameUiDesktopExitLabel"), game.skin.get("default", Label.LabelStyle.class));
         uiTable.add(exitLabel);
         uiTable.row();
 
