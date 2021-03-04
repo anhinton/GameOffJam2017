@@ -33,7 +33,10 @@ public class Constants {
     public static final float CURSOR_START_Y = 1 / 2f;
 
     // Font constants
+    public static final Color FONT_COLOR = Color.WHITE;
+    public static final Color FONT_SHADOW_COLOR = Color.BLACK;
     public static final int GAMEUI_FONT_SIZE = 32;
+    public static final int FONT_SHADOW_OFFSET = 2;
 
     // Player constants
     public enum PlayerName { BLUE, ORANGE, PURPLE, SILVER, YELLOW }
@@ -66,6 +69,9 @@ public class Constants {
     public static final String COCO_SUPERHIT_TEXTURE = "coco_superhit";
     public static final String HORSE01_SUPERHIT_TEXTURE = "horse01_superhit";
     public static final String HORSE02_SUPERHIT_TEXTURE = "horse02_superhit";
+    public static final int ANIMAL_SODAS_DRUNK = 1;
+    public static final int ANIMAL_BASE_SCORE = 6;
+    public static final int ANIMAL_HIGH_SCORE = 666;
 
     // Plant constants
     public enum PlantName { FERN01, FLOWER01, TREE01, TREE02}
@@ -77,6 +83,9 @@ public class Constants {
     public static final String FLOWER01_HIT_TEXTURE = "flower01_hit";
     public static final String TREE01_HIT_TEXTURE = "tree01_hit";
     public static final String TREE02_HIT_TEXTURE = "tree02_hit";
+    public static final int PLANT_SODAS_DRUNK = 0;
+    public static final int PLANT_BASE_SCORE = 0;
+    public static final int PLANT_HIGH_SCORE = ANIMAL_BASE_SCORE;
 
     // Spawn constants
     public static final int MIN_GRASS_START = 5;

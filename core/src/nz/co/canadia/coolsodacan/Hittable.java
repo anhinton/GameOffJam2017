@@ -8,4 +8,8 @@ public interface Hittable {
     void hit();
 
     boolean isHittable();
+
+    int getSodasDrunk();
+
+    int getScore();
 }

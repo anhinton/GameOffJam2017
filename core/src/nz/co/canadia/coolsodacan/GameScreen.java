@@ -18,8 +18,9 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+
+import java.util.Locale;
 
 /**
  * Main game screen
@@ -37,6 +38,8 @@ public class GameScreen implements Screen, InputProcessor {
     private final Array<Hittable> hittableArray;
     private final Array<AnimatedCan> animatedCanArray;
     private final BitmapFont gameUiFont;
+    private final Label.LabelStyle uiLabelStyle;
+    private final Table uiTable;
     private float nextAnimatedCan;
     private float timeElapsed;
     private float nextGrass;
@@ -46,6 +49,11 @@ public class GameScreen implements Screen, InputProcessor {
     private int cansThrown;
     private int cansDelivered;
     private int score;
+    private Label cansThrownLabel;
+    private Label cansDeliveredLabel;
+    private Label scoreLabel;
+    private Label exitLabel;
+    private Label timeLabel;
 
     GameScreen(CoolSodaCan game) {
         this.game = game;
@@ -124,15 +132,12 @@ public class GameScreen implements Screen, InputProcessor {
         // Create the UI
         Viewport uiViewport = new FitViewport(game.getGameUiWidth(), Gdx.graphics.getBackBufferHeight());
         uiStage = new Stage(uiViewport);
-        Table uiTable = new Table();
+        uiTable = new Table();
         uiTable.setFillParent(true);
-        uiTable.top();
-//        uiTable.top().left();
         uiStage.addActor(uiTable);
+        uiLabelStyle = new Label.LabelStyle(gameUiFont, Color.WHITE);
 
-        Label.LabelStyle uiLabelStyle = new Label.LabelStyle(gameUiFont, Color.WHITE);
-        Label cansThrownLabel = new Label("Thrown: " + cansThrown, uiLabelStyle);
-        uiTable.add(cansThrownLabel);
+        showGameUi();
 
         Gdx.input.setInputProcessor(this);
         Gdx.input.setCursorCatched(true);
@@ -141,10 +146,47 @@ public class GameScreen implements Screen, InputProcessor {
                 MathUtils.round(Gdx.graphics.getBackBufferHeight() * Constants.CURSOR_START_Y));
     }
 
+    private void showGameUi() {
+        uiTable.clear();
+        uiTable.top().left();
+
+        cansThrownLabel = new Label("Thrown: " + cansThrown, uiLabelStyle);
+        uiTable.add(cansThrownLabel);
+        uiTable.row();
+
+        cansDeliveredLabel = new Label("", uiLabelStyle);
+        deliverCans(0);
+        uiTable.add(cansDeliveredLabel);
+        uiTable.row();
+
+        scoreLabel = new Label("", uiLabelStyle);
+        addScore(0);
+        uiTable.add(scoreLabel);
+        uiTable.row();
+
+        timeLabel = new Label("00:00", uiLabelStyle);
+        uiTable.add(timeLabel);
+        uiTable.row();
+
+        exitLabel = new Label("ESC (exit)", uiLabelStyle);
+        uiTable.add(exitLabel);
+    }
+
+    private void addScore(int score) {
+        this.score += score;
+        scoreLabel.setText("Score: " + String.format(Locale.getDefault(),"%,d", this.score));
+    }
+
     private void throwCan() {
         animatedCanArray.add(new AnimatedCan(player, atlas));
         nextAnimatedCan = timeElapsed + Constants.ANIMATED_CAN_DISTANCE / Constants.ANIMATED_CAN_SPEED;
         cansThrown += 1;
+        cansThrownLabel.setText("Thrown: " + cansThrown);
+    }
+
+    private void deliverCans(int n) {
+        cansDelivered += n;
+        cansDeliveredLabel.setText("Delivered: " + cansDelivered);
     }
 
     private void addAnimal() {
@@ -174,6 +216,9 @@ public class GameScreen implements Screen, InputProcessor {
     @Override
     public void render(float delta) {
         timeElapsed += delta;
+        int minutes = MathUtils.floor(timeElapsed / 60);
+        int seconds = MathUtils.floor(timeElapsed - minutes * 60);
+        timeLabel.setText(String.format(Locale.getDefault(),"%02d", minutes) + ":" + String.format(Locale.getDefault(),"%02d", seconds));
 
         ScreenUtils.clear(Constants.BACKGROUND_COLOUR);
         viewport.getCamera().update();
@@ -213,6 +258,8 @@ public class GameScreen implements Screen, InputProcessor {
             if (ac.isActive()) {
                 for (Hittable h : hittableArray) {
                     if (ac.getHitBox().overlaps(h.getHitBox()) & h.isHittable()) {
+                        deliverCans(h.getSodasDrunk());
+                        addScore(h.getScore());
                         h.hit();
                         ac.hit();
                     }
@@ -243,10 +290,6 @@ public class GameScreen implements Screen, InputProcessor {
         }
         // Player
         player.draw(game.batch);
-
-        // Ui
-        gameUiFont.draw(game.batch, "Thrown: " + cansThrown, 100, 100);
-
         game.batch.end();
 
         // Draw side banners

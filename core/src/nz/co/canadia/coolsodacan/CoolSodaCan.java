@@ -34,7 +34,7 @@ public class CoolSodaCan extends Game {
 		if (screenRatio < gameRatio) {
 			gameHeight = MathUtils.round(gameWidth / screenRatio);
 		} else {
-			gameUiWidth = MathUtils.round(gameUiHeight * screenRatio);
+			gameUiWidth = MathUtils.round(gameUiHeight * gameRatio);
 		}
 
 		// Load assets

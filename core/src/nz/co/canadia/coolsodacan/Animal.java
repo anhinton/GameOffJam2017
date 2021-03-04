@@ -140,4 +140,18 @@ public class Animal implements GameObject, Hittable, Comparable<GameObject>, Com
     public boolean isHittable() {
         return hitState == Constants.HittableState.NORMAL | hitState == Constants.HittableState.HIT;
     }
+
+    @Override
+    public int getSodasDrunk() {
+        return Constants.ANIMAL_SODAS_DRUNK;
+    }
+
+    @Override
+    public int getScore() {
+        if (hitCount < 2) {
+            return Constants.ANIMAL_BASE_SCORE;
+        } else {
+            return Constants.ANIMAL_HIGH_SCORE;
+        }
+    }
 }

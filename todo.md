@@ -1,11 +1,19 @@
 # todo.md
 
   + Implement scoring UI
-      - Cans thrown
-      - Cans delivered
-      - Score
-      - Time
+      - ~~Cans thrown~~
+      - ~~Cans delivered~~
+      - ~~Score~~
+      - ~~Time~~
+      - Make this look a lot better
       - Save these on exit
+      
+  + Implement localization
+      
+  + Implement statistics preferences
+      - Loaded by Title screen and Game screen
+      - During GameScreen these are incremented according to game actions
+      - Saved out to file when exiting GameScreen
       
   + Implement Exit UI from GameScreen
       
@@ -25,7 +33,7 @@
           - Trees destroyed
           - Sodas unlocked
           - Longest session
-          - Time played
+          - Total time played
       - Settings
           - Music volume
           - Sound volume

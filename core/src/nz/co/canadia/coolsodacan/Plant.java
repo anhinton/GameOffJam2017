@@ -128,4 +128,18 @@ public class Plant implements GameObject, Hittable, Comparable<GameObject>, Comp
     public boolean isHittable() {
         return hitState == Constants.HittableState.NORMAL;
     }
+
+    @Override
+    public int getSodasDrunk() {
+        return Constants.PLANT_SODAS_DRUNK;
+    }
+
+    @Override
+    public int getScore() {
+        if (hitCount < 2) {
+            return Constants.PLANT_BASE_SCORE;
+        } else {
+            return Constants.PLANT_HIGH_SCORE;
+        }
+    }
 }
