@@ -1,10 +1,13 @@
 # todo.md
 
-  + Implement scoring UI
+  + Implement game/scoring UI
       - ~~Cans thrown~~
       - ~~Cans delivered~~
       - ~~Score~~
       - ~~Time~~
+      - Quit
+          - ESC (exit) on ~~desktop~~/html
+          - X button on Android/iOS
       - Make this look a lot better
       - Save these on exit
       

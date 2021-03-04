@@ -13,6 +13,6 @@ public class AndroidLauncher extends AndroidApplication {
 		config.useAccelerometer = false;
 		config.useCompass = false;
 		config.useImmersiveMode = true;
-		initialize(new CoolSodaCan(), config);
+		initialize(new CoolSodaCan(new AndroidFontLoader()), config);
 	}
 }

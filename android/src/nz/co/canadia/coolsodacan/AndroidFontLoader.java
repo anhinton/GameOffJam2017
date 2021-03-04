@@ -1,4 +1,4 @@
-package nz.co.canadia.coolsodacan.desktop;
+package nz.co.canadia.coolsodacan;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
@@ -10,10 +10,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 import com.badlogic.gdx.math.MathUtils;
 
-import nz.co.canadia.coolsodacan.Constants;
-import nz.co.canadia.coolsodacan.FontLoader;
-
-public class DesktopFontLoader implements FontLoader {
+public class AndroidFontLoader implements FontLoader {
     @Override
     public void loadGameUiFont(AssetManager manager) {
         FileHandleResolver resolver = new InternalFileHandleResolver();
