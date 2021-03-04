@@ -175,7 +175,7 @@ public class GameScreen implements Screen, InputProcessor {
 
     private void incrementScore(int pointsScored) {
         score += pointsScored;
-        scoreLabel.setText(game.bundle.get("gameUiScoreLabel") + ": " + score);
+        scoreLabel.setText(game.bundle.get("gameUiScoreLabel") + ": " + game.printScore(score));
     }
 
     private void incrementThrown(int nThrown) {

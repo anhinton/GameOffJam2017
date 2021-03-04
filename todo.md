@@ -1,5 +1,7 @@
 # todo.md
 
+  + Work out nice way to put thousands commas in `scoreLabel` across all platforms
+
   + Implement game/scoring UI
       - ~~Cans thrown~~
       - ~~Cans delivered~~

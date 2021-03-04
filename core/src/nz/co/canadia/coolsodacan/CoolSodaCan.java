@@ -12,6 +12,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.I18NBundle;
 
+import java.text.MessageFormat;
+
 public class CoolSodaCan extends Game {
 	private int gameHeight;
 	private int gameUiWidth;
@@ -66,6 +68,9 @@ public class CoolSodaCan extends Game {
 		return gameUiWidth;
 	}
 
+	String printScore(int score) {
+		return Integer.toString(score);
+	}
 
 	String zeroPad(int i) {
 		String in = Integer.toString(i);
