@@ -10,12 +10,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.I18NBundle;
 
 public class CoolSodaCan extends Game {
 	private int gameHeight;
 	private int gameUiWidth;
 	AssetManager manager;
 	FontLoader fontLoader;
+	I18NBundle bundle;
 	SpriteBatch batch;
 	ShapeRenderer shapeRenderer;
 
@@ -39,6 +41,7 @@ public class CoolSodaCan extends Game {
 
 		// Load assets
 		manager = new AssetManager();
+		manager.load("il8n/Bundle", I18NBundle.class);
 		manager.load("graphics/graphics.atlas", TextureAtlas.class);
 		TextureLoader.TextureParameter param = new TextureLoader.TextureParameter();
 		param.minFilter = Texture.TextureFilter.Linear;
@@ -49,6 +52,7 @@ public class CoolSodaCan extends Game {
 		manager.finishLoading();
 
 		batch = new SpriteBatch();
+		bundle = manager.get("il8n/Bundle", I18NBundle.class);
 		// DEBUG hitboxes
 		shapeRenderer = new ShapeRenderer();
 		this.setScreen(new GameScreen(this));

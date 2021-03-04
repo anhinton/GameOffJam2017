@@ -19,6 +19,8 @@
       - Saved out to file when exiting GameScreen
       
   + Implement Exit UI from GameScreen
+  
+  + Add score particle to Animal/Plant when points are scored
       
   + Create a tutorial at start of game
       

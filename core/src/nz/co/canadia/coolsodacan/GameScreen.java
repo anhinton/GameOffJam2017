@@ -1,6 +1,5 @@
 package nz.co.canadia.coolsodacan;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
@@ -21,8 +20,6 @@ import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import java.util.Locale;
-
 /**
  * Main game screen
  */
@@ -38,7 +35,6 @@ public class GameScreen implements Screen, InputProcessor {
     private final Array<GameObject> gameObjectArray;
     private final Array<Hittable> hittableArray;
     private final Array<AnimatedCan> animatedCanArray;
-    private final BitmapFont gameUiFont;
     private final Label.LabelStyle uiLabelStyle;
     private final Table uiTable;
     private float nextAnimatedCan;
@@ -53,7 +49,6 @@ public class GameScreen implements Screen, InputProcessor {
     private Label cansThrownLabel;
     private Label cansDeliveredLabel;
     private Label scoreLabel;
-    private Label exitLabel;
     private Label timeLabel;
 
     GameScreen(CoolSodaCan game) {
@@ -64,7 +59,7 @@ public class GameScreen implements Screen, InputProcessor {
         cansDelivered = 0;
         score = 0;
 
-        gameUiFont = game.fontLoader.getGameUiFont(game.manager);
+        BitmapFont gameUiFont = game.fontLoader.getGameUiFont(game.manager);
 
         atlas = game.manager.get("graphics/graphics.atlas", TextureAtlas.class);
 
@@ -151,17 +146,18 @@ public class GameScreen implements Screen, InputProcessor {
         uiTable.clear();
         uiTable.top().left();
 
-        cansThrownLabel = new Label("Thrown: " + cansThrown, uiLabelStyle);
+        cansThrownLabel = new Label("", uiLabelStyle);
+        incrementThrown(0);
         uiTable.add(cansThrownLabel);
         uiTable.row();
 
         cansDeliveredLabel = new Label("", uiLabelStyle);
-        deliverCans(0);
+        incrementDelivered(0);
         uiTable.add(cansDeliveredLabel);
         uiTable.row();
 
         scoreLabel = new Label("", uiLabelStyle);
-        addScore(0);
+        incrementScore(0);
         uiTable.add(scoreLabel);
         uiTable.row();
 
@@ -169,44 +165,48 @@ public class GameScreen implements Screen, InputProcessor {
         uiTable.add(timeLabel);
         uiTable.row();
 
-        exitLabel = new Label("ESC (exit)", uiLabelStyle);
+        Label exitLabel = new Label(game.bundle.get("gameUiDesktopExitLabel"), uiLabelStyle);
         uiTable.add(exitLabel);
     }
 
-    private void addScore(int score) {
-        this.score += score;
-        scoreLabel.setText("Score: " + this.score);
+    private void incrementScore(int pointsScored) {
+        score += pointsScored;
+        scoreLabel.setText(game.bundle.get("gameUiScoreLabel") + ": " + score);
     }
 
-    private void throwCan() {
-        animatedCanArray.add(new AnimatedCan(player, atlas));
-        nextAnimatedCan = timeElapsed + Constants.ANIMATED_CAN_DISTANCE / Constants.ANIMATED_CAN_SPEED;
-        cansThrown += 1;
-        cansThrownLabel.setText("Thrown: " + cansThrown);
+    private void incrementThrown(int nThrown) {
+        cansThrown += nThrown;
+        cansThrownLabel.setText(game.bundle.get("gameUiThrownLabel") + ": " + cansThrown);
     }
 
-    private void deliverCans(int n) {
-        cansDelivered += n;
-        cansDeliveredLabel.setText("Delivered: " + cansDelivered);
+    private void incrementDelivered(int nCans) {
+        cansDelivered += nCans;
+        cansDeliveredLabel.setText(game.bundle.get("gameUiDeliveredLabel") + ": " + cansDelivered);
     }
 
-    private void addAnimal() {
+    private void spawnAnimal() {
         Animal animal = new Animal(game.getGameHeight(), atlas);
         gameObjectArray.add(animal);
         hittableArray.add(animal);
         nextAnimal = timeElapsed + MathUtils.randomTriangular(0, Constants.MAX_ANIMAL_DISTANCE) / Constants.WORLD_MOVEMENT_SPEED;
     }
 
-    private void addGrass() {
+    private void spawnGrass() {
         gameObjectArray.add(new Grass(game.getGameHeight(), atlas));
         nextGrass = timeElapsed + MathUtils.randomTriangular(0, Constants.MAX_GRASS_DISTANCE) / Constants.WORLD_MOVEMENT_SPEED;
     }
 
-    private void addPlant() {
+    private void spawnPlant() {
         Plant plant = new Plant(game.getGameHeight(), atlas);
         gameObjectArray.add(plant);
         hittableArray.add(plant);
         nextPlant = timeElapsed + MathUtils.randomTriangular(0, Constants.MAX_PLANT_DISTANCE) / Constants.WORLD_MOVEMENT_SPEED;
+    }
+
+    private void throwCan() {
+        animatedCanArray.add(new AnimatedCan(player, atlas));
+        nextAnimatedCan = timeElapsed + Constants.ANIMATED_CAN_DISTANCE / Constants.ANIMATED_CAN_SPEED;
+        incrementThrown(1);
     }
 
     @Override
@@ -246,13 +246,13 @@ public class GameScreen implements Screen, InputProcessor {
 
         // Add new objects to top of screen
         if (timeElapsed > nextAnimal) {
-            addAnimal();
+            spawnAnimal();
         }
         if (timeElapsed > nextGrass) {
-            addGrass();
+            spawnGrass();
         }
         if (timeElapsed > nextPlant) {
-            addPlant();
+            spawnPlant();
         }
 
         // Add new cans if player firing
@@ -267,8 +267,8 @@ public class GameScreen implements Screen, InputProcessor {
             if (ac.isActive()) {
                 for (Hittable h : hittableArray) {
                     if (ac.getHitBox().overlaps(h.getHitBox()) & h.isHittable()) {
-                        deliverCans(h.getSodasDrunk());
-                        addScore(h.getScore());
+                        incrementDelivered(h.getSodasDrunk());
+                        incrementScore(h.getScore());
                         h.hit();
                         ac.hit();
                     }
