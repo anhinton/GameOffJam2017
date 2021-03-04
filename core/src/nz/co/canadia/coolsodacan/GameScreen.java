@@ -11,9 +11,12 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FillViewport;
@@ -37,6 +40,7 @@ public class GameScreen implements Screen, InputProcessor {
     private final Array<AnimatedCan> animatedCanArray;
     private final Label.LabelStyle uiLabelStyle;
     private final Table uiTable;
+    private final TextButton.TextButtonStyle uiButtonStyle;
     private float nextAnimatedCan;
     private float timeElapsed;
     private float nextGrass;
@@ -132,6 +136,7 @@ public class GameScreen implements Screen, InputProcessor {
         uiTable.setFillParent(true);
         uiStage.addActor(uiTable);
         uiLabelStyle = new Label.LabelStyle(gameUiFont, Color.WHITE);
+        uiButtonStyle = new TextButton.TextButtonStyle(game.skin.get("default", TextButton.TextButtonStyle.class));
 
         showGameUi();
 
@@ -167,6 +172,10 @@ public class GameScreen implements Screen, InputProcessor {
 
         Label exitLabel = new Label(game.bundle.get("gameUiDesktopExitLabel"), uiLabelStyle);
         uiTable.add(exitLabel);
+        uiTable.row();
+
+        TextButton testButton = new TextButton("Good one", game.skin, "default");
+        uiTable.add(testButton);
     }
 
     private void incrementDelivered(int nCans) {
