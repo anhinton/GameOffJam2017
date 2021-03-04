@@ -29,6 +29,8 @@ public class CoolSodaCan extends Game {
 
 	@Override
 	public void create () {
+		I18NBundle.setSimpleFormatter(true);
+
 		int gameWidth = Constants.GAME_WIDTH;
 		gameHeight = Constants.GAME_HEIGHT;
 		float gameRatio = (float) gameWidth / gameHeight;
