@@ -12,6 +12,6 @@ public class DesktopLauncher {
 		config.setTitle(Constants.GAME_NAME);
 		config.setWindowedMode(Constants.DESKTOP_WIDTH, Constants.DESKTOP_HEIGHT);
 
-		new Lwjgl3Application(new CoolSodaCan(new DesktopFontLoader()), config);
+		new Lwjgl3Application(new CoolSodaCan(new DesktopFontLoader(), new DesktopFormatter()), config);
 	}
 }

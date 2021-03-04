@@ -169,19 +169,21 @@ public class GameScreen implements Screen, InputProcessor {
         uiTable.add(exitLabel);
     }
 
+    private void incrementDelivered(int nCans) {
+        cansDelivered += nCans;
+        cansDeliveredLabel.setText(game.bundle.get("gameUiDeliveredLabel") + ": " + cansDelivered);
+    }
+
     private void incrementScore(int pointsScored) {
         score += pointsScored;
-        scoreLabel.setText(game.bundle.get("gameUiScoreLabel") + ": " + game.printScore(score));
+        scoreLabel.setText(
+                game.bundle.get("gameUiScoreLabel") + ": "
+                        + game.formatter.printScore(score));
     }
 
     private void incrementThrown(int nThrown) {
         cansThrown += nThrown;
         cansThrownLabel.setText(game.bundle.get("gameUiThrownLabel") + ": " + cansThrown);
-    }
-
-    private void incrementDelivered(int nCans) {
-        cansDelivered += nCans;
-        cansDeliveredLabel.setText(game.bundle.get("gameUiDeliveredLabel") + ": " + cansDelivered);
     }
 
     private void spawnAnimal() {

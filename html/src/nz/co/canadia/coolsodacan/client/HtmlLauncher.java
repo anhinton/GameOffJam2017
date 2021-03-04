@@ -19,6 +19,6 @@ public class HtmlLauncher extends GwtApplication {
 
         @Override
         public ApplicationListener createApplicationListener () {
-                return new CoolSodaCan(new HtmlFontLoader());
+                return new CoolSodaCan(new HtmlFontLoader(), new HtmlFormatter());
         }
 }

@@ -1,6 +1,6 @@
 # todo.md
 
-  + Work out nice way to put thousands commas in `scoreLabel` across all platforms
+  + Test IOSFontLoader and IOSFormatter
 
   + Implement game/scoring UI
       - ~~Cans thrown~~
@@ -74,6 +74,11 @@
         implement a loading screens, menu screens, etc
 
 ## Done
+
+  + ~~Work out nice way to put thousands commas in `scoreLabel` across all platforms~~
+      - ~~Formatter interface~~
+      - ~~printScore(int score) method~~
+      - ~~implement in AndroidFormatter, DesktopFormatter, HtmlFormatter, IOSFormatter~~
       
   + ~~Implement localization~~
       

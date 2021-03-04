@@ -16,11 +16,13 @@ public class CoolSodaCan extends Game {
 	private int gameUiWidth;
 	AssetManager manager;
 	FontLoader fontLoader;
+	Formatter formatter;
 	I18NBundle bundle;
 	SpriteBatch batch;
 	ShapeRenderer shapeRenderer;
 
-	public CoolSodaCan(FontLoader fontLoader) {
+	public CoolSodaCan(FontLoader fontLoader, Formatter formatter) {
+		this.formatter = formatter;
 		this.fontLoader = fontLoader;
 	}
 
