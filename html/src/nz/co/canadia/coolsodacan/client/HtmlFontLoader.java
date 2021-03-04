@@ -10,4 +10,9 @@ public class HtmlFontLoader implements FontLoader {
     public void loadGameUiFont(AssetManager manager) {
         manager.load("fonts/Podkova18.fnt", BitmapFont.class);
     }
+
+    @Override
+    public BitmapFont getGameUiFont(AssetManager manager) {
+        return manager.get("fonts/Podkova18.fnt", BitmapFont.class);
+    }
 }

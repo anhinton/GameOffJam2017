@@ -64,7 +64,7 @@ public class GameScreen implements Screen, InputProcessor {
         cansDelivered = 0;
         score = 0;
 
-        gameUiFont = game.manager.get("fonts/Podkova-VariableFont_wght.ttf", BitmapFont.class);
+        gameUiFont = game.fontLoader.getGameUiFont(game.manager);
 
         atlas = game.manager.get("graphics/graphics.atlas", TextureAtlas.class);
 

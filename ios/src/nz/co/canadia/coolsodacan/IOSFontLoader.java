@@ -26,4 +26,9 @@ public class IOSFontLoader implements FontLoader {
         gameUiFont.fontParameters.shadowOffsetY = MathUtils.round((float) Constants.FONT_SHADOW_OFFSET / Constants.GAME_HEIGHT * Gdx.graphics.getBackBufferHeight());
         manager.load("fonts/Podkova-VariableFont_wght.ttf", BitmapFont.class, gameUiFont);
     }
+
+    @Override
+    public BitmapFont getGameUiFont(AssetManager manager) {
+        return manager.get("fonts/Podkova-VariableFont_wght.ttf", BitmapFont.class);
+    }
 }

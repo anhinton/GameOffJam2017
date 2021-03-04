@@ -12,10 +12,10 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 
 public class CoolSodaCan extends Game {
-	private final FontLoader fontLoader;
 	private int gameHeight;
 	private int gameUiWidth;
 	AssetManager manager;
+	FontLoader fontLoader;
 	SpriteBatch batch;
 	ShapeRenderer shapeRenderer;
 
