@@ -11,7 +11,7 @@ public class IOSLauncher extends IOSApplication.Delegate {
     @Override
     protected IOSApplication createApplication() {
         IOSApplicationConfiguration config = new IOSApplicationConfiguration();
-        return new IOSApplication(new CoolSodaCan(), config);
+        return new IOSApplication(new CoolSodaCan(new IOSFontLoader()), config);
     }
 
     public static void main(String[] argv) {
