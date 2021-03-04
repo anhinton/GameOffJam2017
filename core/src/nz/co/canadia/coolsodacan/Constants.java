@@ -23,7 +23,7 @@ public class Constants {
     public static final int DESKTOP_HEIGHT = 720;
 
     // app dimensions for Web
-    public static final int HTML_WIDTH = 1280;
+    public static final int HTML_WIDTH = 720;
     public static final int HTML_HEIGHT = 720;
 
     // Game constants
