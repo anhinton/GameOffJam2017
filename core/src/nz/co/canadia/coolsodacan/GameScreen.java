@@ -1,5 +1,6 @@
 package nz.co.canadia.coolsodacan;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
@@ -174,7 +175,7 @@ public class GameScreen implements Screen, InputProcessor {
 
     private void addScore(int score) {
         this.score += score;
-        scoreLabel.setText("Score: " + String.format(Locale.getDefault(),"%,d", this.score));
+        scoreLabel.setText("Score: " + this.score);
     }
 
     private void throwCan() {
@@ -218,7 +219,15 @@ public class GameScreen implements Screen, InputProcessor {
         timeElapsed += delta;
         int minutes = MathUtils.floor(timeElapsed / 60);
         int seconds = MathUtils.floor(timeElapsed - minutes * 60);
-        timeLabel.setText(String.format(Locale.getDefault(),"%02d", minutes) + ":" + String.format(Locale.getDefault(),"%02d", seconds));
+        String minutesFormatted = Integer.toString(minutes);
+        if (minutes < 10) {
+            minutesFormatted = "0" + minutesFormatted;
+        }
+        String secondsFormatted = Integer.toString(seconds);
+        if (seconds < 10) {
+            secondsFormatted = "0" + secondsFormatted;
+        }
+        timeLabel.setText(minutesFormatted + ":" + secondsFormatted);
 
         ScreenUtils.clear(Constants.BACKGROUND_COLOUR);
         viewport.getCamera().update();
