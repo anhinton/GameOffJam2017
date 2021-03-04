@@ -5,20 +5,23 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.I18NBundle;
 
 public class CoolSodaCan extends Game {
 	private int gameHeight;
 	private int gameUiWidth;
-	AssetManager manager;
+	SpriteBatch batch;
+	I18NBundle bundle;
 	FontLoader fontLoader;
 	Formatter formatter;
-	I18NBundle bundle;
-	SpriteBatch batch;
+	AssetManager manager;
+	Skin skin;
 	ShapeRenderer shapeRenderer;
 
 	public CoolSodaCan(FontLoader fontLoader, Formatter formatter) {
@@ -52,10 +55,14 @@ public class CoolSodaCan extends Game {
 		manager.load("banner/banner_left.jpg", Texture.class, param);
 		manager.load("banner/banner_right.jpg", Texture.class, param);
 		fontLoader.loadGameUiFont(manager);
+		manager.load("skin/uiskin.json", Skin.class);
 		manager.finishLoading();
 
 		batch = new SpriteBatch();
 		bundle = manager.get("il8n/Bundle", I18NBundle.class);
+		skin = new Skin();
+		skin = manager.get("skin/uiskin.json", Skin.class);
+		skin.add("default-font", fontLoader.getGameUiFont(manager), BitmapFont.class);
 		// DEBUG hitboxes
 		shapeRenderer = new ShapeRenderer();
 		this.setScreen(new GameScreen(this));
