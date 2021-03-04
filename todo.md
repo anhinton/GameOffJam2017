@@ -1,7 +1,5 @@
 # todo.md
 
-  + Test IOSFontLoader and IOSFormatter
-
   + Implement game/scoring UI
       - ~~Cans thrown~~
       - ~~Cans delivered~~
@@ -74,6 +72,9 @@
         implement a loading screens, menu screens, etc
 
 ## Done
+
+  + ~~Test IOSFontLoader and IOSFormatter~~
+      - ~~Add localization support to IOS~~
 
   + ~~Work out nice way to put thousands commas in `scoreLabel` across all platforms~~
       - ~~Formatter interface~~
