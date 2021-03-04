@@ -11,8 +11,6 @@
       - Make this look a lot better
       - Save these on exit
       
-  + Implement localization
-      
   + Implement statistics preferences
       - Loaded by Title screen and Game screen
       - During GameScreen these are incremented according to game actions
@@ -43,6 +41,8 @@
           - Music volume
           - Sound volume
           - Credits
+          
+  + Does my font have weird spacing on Web?
   
   + Re-evaluate how much Y-offset there is from touch point on mobile
       - Currently it feels like it might be too much
@@ -72,6 +72,8 @@
         implement a loading screens, menu screens, etc
 
 ## Done
+      
+  + ~~Implement localization~~
       
   + ~~Create destroyed tree sprite~~
       - ~~After you hit a tree with 3 cans~~

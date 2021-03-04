@@ -16,9 +16,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.StringBuilder;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+
+import java.text.MessageFormat;
+import java.util.Locale;
 
 /**
  * Main game screen
@@ -219,15 +223,7 @@ public class GameScreen implements Screen, InputProcessor {
         timeElapsed += delta;
         int minutes = MathUtils.floor(timeElapsed / 60);
         int seconds = MathUtils.floor(timeElapsed - minutes * 60);
-        String minutesFormatted = Integer.toString(minutes);
-        if (minutes < 10) {
-            minutesFormatted = "0" + minutesFormatted;
-        }
-        String secondsFormatted = Integer.toString(seconds);
-        if (seconds < 10) {
-            secondsFormatted = "0" + secondsFormatted;
-        }
-        timeLabel.setText(minutesFormatted + ":" + secondsFormatted);
+        timeLabel.setText(game.zeroPad(minutes) + ":" + game.zeroPad(seconds));
 
         ScreenUtils.clear(Constants.BACKGROUND_COLOUR);
         viewport.getCamera().update();

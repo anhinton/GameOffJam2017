@@ -58,12 +58,23 @@ public class CoolSodaCan extends Game {
 		this.setScreen(new GameScreen(this));
 	}
 
-	public int getGameHeight() {
+	int getGameHeight() {
 		return gameHeight;
 	}
 
-	public int getGameUiWidth() {
+	int getGameUiWidth() {
 		return gameUiWidth;
+	}
+
+
+	String zeroPad(int i) {
+		String in = Integer.toString(i);
+		StringBuilder out = new StringBuilder();
+		if (in.length() == 1) {
+			out.append("0");
+		}
+		out.append(in);
+		return out.toString();
 	}
 
 	@Override
