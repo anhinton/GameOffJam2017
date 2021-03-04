@@ -221,7 +221,7 @@ public class GameScreen implements Screen, InputProcessor {
         timeElapsed += delta;
         int minutes = (int) (timeElapsed / 60);
         int seconds = (int) (timeElapsed % 60);
-        timeLabel.setText(game.zeroPad(minutes) + ":" + game.zeroPad(seconds));
+        timeLabel.setText(game.formatter.zeroPadTime(minutes, game.bundle.getLocale()) + ":" + game.formatter.zeroPadTime(seconds, game.bundle.getLocale()));
 
         ScreenUtils.clear(Constants.BACKGROUND_COLOUR);
         viewport.getCamera().update();

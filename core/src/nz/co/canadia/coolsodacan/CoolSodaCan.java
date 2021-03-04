@@ -69,20 +69,6 @@ public class CoolSodaCan extends Game {
 		return gameUiWidth;
 	}
 
-	String printScore(int score) {
-		return Integer.toString(score);
-	}
-
-	String zeroPad(int i) {
-		String in = Integer.toString(i);
-		StringBuilder out = new StringBuilder();
-		if (in.length() == 1) {
-			out.append("0");
-		}
-		out.append(in);
-		return out.toString();
-	}
-
 	@Override
 	public void render () {
 		super.render();
