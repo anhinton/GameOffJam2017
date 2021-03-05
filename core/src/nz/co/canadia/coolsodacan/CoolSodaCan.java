@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 public class CoolSodaCan extends Game {
 	private int gameHeight;
 	private int gameUiWidth;
+	private int uiPadding;
 	SpriteBatch batch;
 	I18NBundle bundle;
 	FontLoader fontLoader;
@@ -44,6 +45,7 @@ public class CoolSodaCan extends Game {
 		} else {
 			gameUiWidth = MathUtils.round(gameUiHeight * gameRatio);
 		}
+		uiPadding = MathUtils.round((float) Constants.UI_PADDING / Constants.GAME_HEIGHT * Gdx.graphics.getBackBufferHeight());
 
 		// Load assets
 		manager = new AssetManager();
@@ -55,14 +57,20 @@ public class CoolSodaCan extends Game {
 		manager.load("banner/banner_left.jpg", Texture.class, param);
 		manager.load("banner/banner_right.jpg", Texture.class, param);
 		fontLoader.loadGameUiFont(manager);
-		manager.load("skin/uiskin.json", Skin.class);
+		manager.load("skin/uiskin.atlas", TextureAtlas.class);
 		manager.finishLoading();
+
+		// Prepare skin
+		skin = new Skin();
+		// Manually load fonts with dynamic sizes
+		skin.add("default-font", fontLoader.getGameUiFont(manager), BitmapFont.class);
+		// Load Texture atlas and skinFile
+		skin.addRegions(manager.get("skin/uiskin.atlas", TextureAtlas.class));
+		// Note skinFile does *not* contain a BitmapFont `default-font`, this must be loaded previously
+		skin.load(Gdx.files.internal("skin/uiskin.json"));
 
 		batch = new SpriteBatch();
 		bundle = manager.get("il8n/Bundle", I18NBundle.class);
-		skin = new Skin();
-		skin = manager.get("skin/uiskin.json", Skin.class);
-		skin.add("default-font", fontLoader.getGameUiFont(manager), BitmapFont.class);
 		// DEBUG hitboxes
 		shapeRenderer = new ShapeRenderer();
 		this.setScreen(new GameScreen(this));
