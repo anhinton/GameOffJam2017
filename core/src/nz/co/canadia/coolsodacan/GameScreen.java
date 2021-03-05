@@ -153,13 +153,14 @@ public class GameScreen implements Screen, InputProcessor {
 
         Table middleColumn = new Table().center();
 
+        timeLabel = new Label("", game.skin.get("default", Label.LabelStyle.class));
+        updateTimeLabel();
+        middleColumn.add(timeLabel);
+        middleColumn.row();
+
         scoreLabel = new Label("", game.skin.get("default", Label.LabelStyle.class));
         incrementScore(0);
         middleColumn.add(scoreLabel).center();
-        middleColumn.row();
-
-        timeLabel = new Label("00:00", game.skin.get("default", Label.LabelStyle.class));
-        middleColumn.add(timeLabel);
 
         Table rightColumn = new Table().right();
 
@@ -183,9 +184,7 @@ public class GameScreen implements Screen, InputProcessor {
 
     private void incrementScore(int pointsScored) {
         score += pointsScored;
-        scoreLabel.setText(
-                game.bundle.get("gameUiScoreLabel") + ": "
-                        + game.formatter.printScore(score));
+        scoreLabel.setText(game.formatter.printScore(score));
     }
 
     private void incrementThrown(int nThrown) {
@@ -218,6 +217,13 @@ public class GameScreen implements Screen, InputProcessor {
         incrementThrown(1);
     }
 
+    private void updateTimeLabel() {
+        int minutes = (int) (timeElapsed / 60);
+        int seconds = (int) (timeElapsed % 60);
+        timeLabel.setText(game.formatter.zeroPadTime(minutes, game.bundle.getLocale())
+                + ":" + game.formatter.zeroPadTime(seconds, game.bundle.getLocale()));
+    }
+
     @Override
     public void show() {
 
@@ -226,9 +232,7 @@ public class GameScreen implements Screen, InputProcessor {
     @Override
     public void render(float delta) {
         timeElapsed += delta;
-        int minutes = (int) (timeElapsed / 60);
-        int seconds = (int) (timeElapsed % 60);
-        timeLabel.setText(game.formatter.zeroPadTime(minutes, game.bundle.getLocale()) + ":" + game.formatter.zeroPadTime(seconds, game.bundle.getLocale()));
+        updateTimeLabel();
 
         ScreenUtils.clear(Constants.BACKGROUND_COLOUR);
         viewport.getCamera().update();
