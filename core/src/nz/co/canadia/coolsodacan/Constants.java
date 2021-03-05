@@ -37,7 +37,7 @@ public class Constants {
     public static final Color FONT_SHADOW_COLOR = Color.BLACK;
     public static final int GAMEUI_FONT_SIZE = 32;
     public static final int FONT_SHADOW_OFFSET = 2;
-    public static final int UI_PADDING = 10;
+    public static final int UI_PADDING = 5;
 
     // Player constants
     public enum PlayerName { BLUE, ORANGE, PURPLE, SILVER, YELLOW }

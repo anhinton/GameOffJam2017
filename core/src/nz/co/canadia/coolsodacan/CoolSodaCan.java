@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 public class CoolSodaCan extends Game {
 	private int gameHeight;
 	private int gameUiWidth;
+
 	private int uiPadding;
 	SpriteBatch batch;
 	I18NBundle bundle;
@@ -84,6 +85,10 @@ public class CoolSodaCan extends Game {
 		return gameUiWidth;
 	}
 
+	public int getUiPadding() {
+		return uiPadding;
+	}
+
 	@Override
 	public void render () {
 		super.render();
@@ -93,5 +98,6 @@ public class CoolSodaCan extends Game {
 	public void dispose () {
 		batch.dispose();
 		manager.dispose();
+		skin.dispose();
 	}
 }

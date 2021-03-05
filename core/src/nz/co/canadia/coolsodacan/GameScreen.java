@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FillViewport;
@@ -126,6 +127,7 @@ public class GameScreen implements Screen, InputProcessor {
         uiStage = new Stage(uiViewport);
         uiTable = new Table();
         uiTable.setFillParent(true);
+        uiTable.pad(game.getUiPadding());
         uiStage.addActor(uiTable);
 
         showGameUi();
@@ -143,7 +145,7 @@ public class GameScreen implements Screen, InputProcessor {
 
         cansThrownLabel = new Label("", game.skin.get("default", Label.LabelStyle.class));
         incrementThrown(0);
-        uiTable.add(cansThrownLabel);
+        uiTable.add(cansThrownLabel).left();
         uiTable.row();
 
         cansDeliveredLabel = new Label("", game.skin.get("default", Label.LabelStyle.class));
