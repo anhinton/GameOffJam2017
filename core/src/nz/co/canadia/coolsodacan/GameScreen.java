@@ -12,8 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FillViewport;
@@ -35,7 +33,7 @@ public class GameScreen implements Screen, InputProcessor {
     private final Array<GameObject> gameObjectArray;
     private final Array<Hittable> hittableArray;
     private final Array<AnimatedCan> animatedCanArray;
-    private final Table uiTable;
+    private final Table gameUiTable;
     private float nextAnimatedCan;
     private float timeElapsed;
     private float nextGrass;
@@ -125,10 +123,10 @@ public class GameScreen implements Screen, InputProcessor {
         // Create the UI
         Viewport uiViewport = new FitViewport(game.getGameUiWidth(), Gdx.graphics.getBackBufferHeight());
         uiStage = new Stage(uiViewport);
-        uiTable = new Table();
-        uiTable.setFillParent(true);
-        uiTable.pad(game.getUiPadding());
-        uiStage.addActor(uiTable);
+        gameUiTable = new Table();
+        gameUiTable.setFillParent(true);
+        gameUiTable.pad(game.getUiPadding());
+        uiStage.addActor(gameUiTable);
 
         showGameUi();
 
@@ -140,34 +138,42 @@ public class GameScreen implements Screen, InputProcessor {
     }
 
     private void showGameUi() {
-        uiTable.clear();
-        uiTable.top().left();
+        gameUiTable.clear();
+        gameUiTable.top().left();
+
+        Table leftColumn = new Table().left();
 
         cansThrownLabel = new Label("", game.skin.get("default", Label.LabelStyle.class));
         incrementThrown(0);
-        uiTable.add(cansThrownLabel).left();
-        uiTable.row();
-
+        leftColumn.add(cansThrownLabel).left();
+        leftColumn.row();
         cansDeliveredLabel = new Label("", game.skin.get("default", Label.LabelStyle.class));
         incrementDelivered(0);
-        uiTable.add(cansDeliveredLabel);
-        uiTable.row();
+        leftColumn.add(cansDeliveredLabel).left();
+
+        Table middleColumn = new Table().center();
 
         scoreLabel = new Label("", game.skin.get("default", Label.LabelStyle.class));
         incrementScore(0);
-        uiTable.add(scoreLabel);
-        uiTable.row();
+        middleColumn.add(scoreLabel).center();
+        middleColumn.row();
 
         timeLabel = new Label("00:00", game.skin.get("default", Label.LabelStyle.class));
-        uiTable.add(timeLabel);
-        uiTable.row();
+        middleColumn.add(timeLabel);
+
+        Table rightColumn = new Table().right();
 
         Label exitLabel = new Label(game.bundle.get("gameUiDesktopExitLabel"), game.skin.get("default", Label.LabelStyle.class));
-        uiTable.add(exitLabel);
-        uiTable.row();
+        rightColumn.add(exitLabel).right();
 
-        TextButton testButton = new TextButton("Good one", game.skin, "default");
-        uiTable.add(testButton);
+        gameUiTable.add(leftColumn).prefWidth(game.getGameUiWidth() / 3f).left();
+        gameUiTable.add(middleColumn).prefWidth(game.getGameUiWidth() / 3f).center();
+        gameUiTable.add(rightColumn).prefWidth(game.getGameUiWidth() / 3f).right();
+
+//        TextButton testButton = new TextButton("Good one", game.skin, "default");
+//        gameUiTable.add(testButton);
+//
+//        gameUiTable.row();
     }
 
     private void incrementDelivered(int nCans) {

@@ -3,8 +3,6 @@ package nz.co.canadia.coolsodacan;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 
-import java.io.StringBufferInputStream;
-
 /**
  * Game constants
  */
