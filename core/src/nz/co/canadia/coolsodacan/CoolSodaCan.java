@@ -98,6 +98,7 @@ public class CoolSodaCan extends Game {
 	public void dispose () {
 		batch.dispose();
 		manager.dispose();
-		skin.dispose();
+		// NB I am not doing skin.dispose() because its TextureAtlas and BitmapFont *should*
+		// be disposed in manager.dispose()
 	}
 }
