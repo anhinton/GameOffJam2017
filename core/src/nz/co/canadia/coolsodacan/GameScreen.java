@@ -1,17 +1,22 @@
 package nz.co.canadia.coolsodacan;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FillViewport;
@@ -47,6 +52,8 @@ public class GameScreen implements Screen, InputProcessor {
     private Label cansDeliveredLabel;
     private Label scoreLabel;
     private Label timeLabel;
+    private enum GameState {ACTIVE, PAUSED }
+    private final GameState currentState;
 
     GameScreen(CoolSodaCan game) {
         this.game = game;
@@ -55,6 +62,7 @@ public class GameScreen implements Screen, InputProcessor {
         cansThrown = 0;
         cansDelivered = 0;
         score = 0;
+        currentState = GameState.ACTIVE;
 
         atlas = game.manager.get("graphics/graphics.atlas", TextureAtlas.class);
 
@@ -130,7 +138,10 @@ public class GameScreen implements Screen, InputProcessor {
 
         showGameUi();
 
-        Gdx.input.setInputProcessor(this);
+        InputMultiplexer multiplexer = new InputMultiplexer();
+        multiplexer.addProcessor(uiStage);
+        multiplexer.addProcessor(this);
+        Gdx.input.setInputProcessor(multiplexer);
         Gdx.input.setCursorCatched(true);
         Gdx.input.setCursorPosition(
                 MathUtils.round(Gdx.graphics.getBackBufferWidth() * Constants.CURSOR_START_X),
@@ -142,39 +153,65 @@ public class GameScreen implements Screen, InputProcessor {
         gameUiTable.top().left();
 
         Table leftColumn = new Table().left();
-
+        // Cans thrown
         cansThrownLabel = new Label("", game.skin.get("default", Label.LabelStyle.class));
         incrementThrown(0);
         leftColumn.add(cansThrownLabel).left();
         leftColumn.row();
+        // Cans delivered
         cansDeliveredLabel = new Label("", game.skin.get("default", Label.LabelStyle.class));
         incrementDelivered(0);
         leftColumn.add(cansDeliveredLabel).left();
 
-        Table middleColumn = new Table().center();
-
+        Table middleColumn = new Table();
+        // Score
+        scoreLabel = new Label("", game.skin.get("default", Label.LabelStyle.class));
+        incrementScore(0);
+        middleColumn.add(scoreLabel).left();
+        middleColumn.row();
+        // Timer
         timeLabel = new Label("", game.skin.get("default", Label.LabelStyle.class));
         updateTimeLabel();
         middleColumn.add(timeLabel);
-        middleColumn.row();
-
-        scoreLabel = new Label("", game.skin.get("default", Label.LabelStyle.class));
-        incrementScore(0);
-        middleColumn.add(scoreLabel).center();
 
         Table rightColumn = new Table().right();
+        switch (Gdx.app.getType()) {
+            case Desktop:
+            case WebGL:
+                // Menu label Desktop
+                Label menuLabel = new Label(game.bundle.get("gameUiMenuLabelDesktop"), game.skin.get("default", Label.LabelStyle.class));
+                rightColumn.add(menuLabel).right();
+                break;
+            case Android:
+            case iOS:
+                // Menu button mobile
+                TextButton menuButton = new TextButton(game.bundle.get("gameUiMenuButton"),
+                        game.skin.get("default", TextButton.TextButtonStyle.class));
+                menuButton.addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent event, Actor actor) {
+                        goBack();
+                    }
+                });
+                rightColumn.add(menuButton)
+                        .prefWidth(menuButton.getPrefWidth() * Constants.GAMEUI_MENUBUTTON_SCALE)
+                        .prefHeight(menuButton.getPrefHeight() * Constants.GAMEUI_MENUBUTTON_SCALE);
+                break;
+        }
 
-        Label exitLabel = new Label(game.bundle.get("gameUiDesktopExitLabel"), game.skin.get("default", Label.LabelStyle.class));
-        rightColumn.add(exitLabel).right();
+        gameUiTable.add(leftColumn).prefWidth(game.getGameUiWidth() * Constants.GAMEUI_COLUMN_PROPORTION).left();
+        gameUiTable.add(middleColumn).prefWidth(game.getGameUiWidth() * Constants.GAMEUI_COLUMN_PROPORTION).center();
+        gameUiTable.add(rightColumn).prefWidth(game.getGameUiWidth() * Constants.GAMEUI_COLUMN_PROPORTION).right();
+    }
 
-        gameUiTable.add(leftColumn).prefWidth(game.getGameUiWidth() / 3f).left();
-        gameUiTable.add(middleColumn).prefWidth(game.getGameUiWidth() / 3f).center();
-        gameUiTable.add(rightColumn).prefWidth(game.getGameUiWidth() / 3f).right();
-
-//        TextButton testButton = new TextButton("Good one", game.skin, "default");
-//        gameUiTable.add(testButton);
-//
-//        gameUiTable.row();
+    private void goBack() {
+        switch (currentState) {
+            case ACTIVE:
+                Gdx.app.exit();
+                break;
+            case PAUSED:
+                break;
+        }
     }
 
     private void incrementDelivered(int nCans) {
@@ -184,7 +221,7 @@ public class GameScreen implements Screen, InputProcessor {
 
     private void incrementScore(int pointsScored) {
         score += pointsScored;
-        scoreLabel.setText(game.formatter.printScore(score));
+        scoreLabel.setText(game.bundle.get("gameUiScoreLabel") + ": " + game.formatter.printScore(score));
     }
 
     private void incrementThrown(int nThrown) {
@@ -220,7 +257,8 @@ public class GameScreen implements Screen, InputProcessor {
     private void updateTimeLabel() {
         int minutes = (int) (timeElapsed / 60);
         int seconds = (int) (timeElapsed % 60);
-        timeLabel.setText(game.formatter.zeroPadTime(minutes, game.bundle.getLocale())
+        timeLabel.setText(game.bundle.get("gameUiTimeLabel") + ": "
+                + game.formatter.zeroPadTime(minutes, game.bundle.getLocale())
                 + ":" + game.formatter.zeroPadTime(seconds, game.bundle.getLocale()));
     }
 
@@ -349,7 +387,7 @@ public class GameScreen implements Screen, InputProcessor {
         switch(keycode) {
             case Input.Keys.ESCAPE:
             case Input.Keys.BACK:
-                Gdx.app.exit();
+                goBack();
                 break;
             case Input.Keys.F:
                 if (Gdx.graphics.isFullscreen()) {

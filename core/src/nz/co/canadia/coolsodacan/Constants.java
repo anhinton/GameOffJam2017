@@ -35,7 +35,11 @@ public class Constants {
     public static final Color FONT_SHADOW_COLOR = Color.BLACK;
     public static final int GAMEUI_FONT_SIZE = 32;
     public static final int FONT_SHADOW_OFFSET = 2;
+
+    // UI constants
     public static final int UI_PADDING = 5;
+    public static final float GAMEUI_COLUMN_PROPORTION = 1 / 3f;
+    public static final float GAMEUI_MENUBUTTON_SCALE = 1.5f;
 
     // Player constants
     public enum PlayerName { BLUE, ORANGE, PURPLE, SILVER, YELLOW }
@@ -97,8 +101,6 @@ public class Constants {
     public static final int MAX_ANIMAL_START = 6;
     public static final int MAX_ANIMAL_DISTANCE = MathUtils.round((float) GAME_HEIGHT / MIN_ANIMAL_START);
 
-    // Hittable constants
-    public enum HittableState { NORMAL, HIT, SUPER_HIT }
     public enum AnimatedCanState { ACTIVE, INACTIVE }
 
     // Animal constants

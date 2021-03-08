@@ -5,9 +5,9 @@
       - ~~Cans delivered~~
       - ~~Score~~
       - ~~Time~~
-      - Quit
-          - ESC (exit) on ~~desktop~~/html
-          - X button on Android/iOS
+      - ~~Menu button~~
+          - ~~ESC (menu) on desktop/html~~
+          - ~~"Menu" button on Android/iOS~~
       - Make this look a lot better
       - Save these on exit
       
