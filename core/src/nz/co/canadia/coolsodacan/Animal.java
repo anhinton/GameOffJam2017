@@ -17,12 +17,12 @@ public class Animal implements GameObject, Hittable, Comparable<GameObject>, Com
     private final ParticleEffect explosion;
     private float rot;
     private int hitCount;
-    private Constants.HittableState hitState;
+    private State hitState;
     private Sprite currentSprite;
 
     Animal(int y, TextureAtlas atlas) {
         hitCount = 0;
-        hitState = Constants.HittableState.NORMAL;
+        hitState = State.NORMAL;
 
         Constants.AnimalName animalName = Constants.AnimalName.values()[MathUtils.random(Constants.AnimalName.values().length - 1)];
         switch (animalName) {
@@ -68,7 +68,7 @@ public class Animal implements GameObject, Hittable, Comparable<GameObject>, Com
 
     @Override
     public void update(float delta) {
-        if (hitState != Constants.HittableState.SUPER_HIT) {
+        if (hitState != State.SUPER_HIT) {
             wiggle(delta);
         } else {
             explosion.update(delta);
@@ -80,7 +80,7 @@ public class Animal implements GameObject, Hittable, Comparable<GameObject>, Com
 
     public void draw(SpriteBatch batch) {
         currentSprite.draw(batch);
-        if (hitState == Constants.HittableState.HIT) {
+        if (hitState == State.HIT) {
             explosion.draw(batch);
         }
     }
@@ -125,12 +125,12 @@ public class Animal implements GameObject, Hittable, Comparable<GameObject>, Com
     public void hit() {
         hitCount += 1;
         if (hitCount < 3) {
-            hitState = Constants.HittableState.HIT;
+            hitState = State.HIT;
             currentSprite.flip(true, false);
         } else if (hitCount == 3) {
             currentSprite = superhitSprite;
             currentSprite.flip(false, true);
-            hitState = Constants.HittableState.SUPER_HIT;
+            hitState = State.SUPER_HIT;
             explosion.start();
         }
 
@@ -138,7 +138,7 @@ public class Animal implements GameObject, Hittable, Comparable<GameObject>, Com
 
     @Override
     public boolean isHittable() {
-        return hitState == Constants.HittableState.NORMAL | hitState == Constants.HittableState.HIT;
+        return hitState == State.NORMAL | hitState == State.HIT;
     }
 
     @Override

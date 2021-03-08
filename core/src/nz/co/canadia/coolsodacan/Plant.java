@@ -16,12 +16,12 @@ public class Plant implements GameObject, Hittable, Comparable<GameObject>, Comp
     private Sprite hitSprite;
     private Sprite currentSprite;
     private final ParticleEffect explosion;
-    private Constants.HittableState hitState;
+    private Hittable.State hitState;
     private int hitCount;
 
     Plant(int y, TextureAtlas atlas) {
         hitCount = 0;
-        hitState = Constants.HittableState.NORMAL;
+        hitState = State.NORMAL;
 
         Constants.PlantName plantName =
                 Constants.PlantName.values()[
@@ -72,7 +72,7 @@ public class Plant implements GameObject, Hittable, Comparable<GameObject>, Comp
 
     public void draw(SpriteBatch batch) {
         currentSprite.draw(batch);
-        if (hitState == Constants.HittableState.HIT) {
+        if (hitState == State.HIT) {
             explosion.draw(batch);
         }
     }
@@ -119,14 +119,14 @@ public class Plant implements GameObject, Hittable, Comparable<GameObject>, Comp
         if (hitCount >= 3) {
             hitSprite.setPosition(currentSprite.getX(), currentSprite.getY());
             currentSprite = hitSprite;
-            hitState = Constants.HittableState.HIT;
+            hitState = State.HIT;
             explosion.start();
         }
     }
 
     @Override
     public boolean isHittable() {
-        return hitState == Constants.HittableState.NORMAL;
+        return hitState == State.NORMAL;
     }
 
     @Override
