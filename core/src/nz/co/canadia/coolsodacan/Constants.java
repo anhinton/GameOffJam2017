@@ -70,15 +70,6 @@ public class Constants {
     public static final int ANIMAL_HIGH_SCORE = 666;
 
     // Plant constants
-    public enum PlantName { FERN01, FLOWER01, TREE01, TREE02}
-    public static final String FERN01_TEXTURE = "fern01";
-    public static final String FLOWER01_TEXTURE = "flower01";
-    public static final String TREE01_TEXTURE = "tree01";
-    public static final String TREE02_TEXTURE = "tree02";
-    public static final String FERN01_HIT_TEXTURE = "fern01_hit";
-    public static final String FLOWER01_HIT_TEXTURE = "flower01_hit";
-    public static final String TREE01_HIT_TEXTURE = "tree01_hit";
-    public static final String TREE02_HIT_TEXTURE = "tree02_hit";
     public static final int PLANT_SODAS_DRUNK = 0;
     public static final int PLANT_BASE_SCORE = 0;
     public static final int PLANT_HIGH_SCORE = ANIMAL_BASE_SCORE;

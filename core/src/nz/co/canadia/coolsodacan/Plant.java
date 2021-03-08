@@ -19,31 +19,29 @@ public class Plant implements GameObject, Hittable, Comparable<GameObject>, Comp
     private Hittable.State hitState;
     private int hitCount;
 
+    private enum PlantTextures {
+        FERN01      ("fern01",  "fern01_hit"),
+        FLOWER01    ("flower01","flower01_hit"),
+        TREE01      ("tree01",  "tree01_hit"),
+        TREE02      ("tree02",  "tree02_hit");
+
+        private final String normalTexture;
+        private final String hitTexture;
+
+        PlantTextures(String normalTexture, String hitTexture) {
+            this.normalTexture = normalTexture;
+            this.hitTexture = hitTexture;
+        }
+    }
+
     Plant(int y, TextureAtlas atlas) {
         hitCount = 0;
         hitState = State.NORMAL;
 
-        Constants.PlantName plantName =
-                Constants.PlantName.values()[
-                        MathUtils.random(Constants.PlantName.values().length - 1)];
-        switch(plantName) {
-            case FERN01:
-                normalSprite = atlas.createSprite(Constants.FERN01_TEXTURE);
-                hitSprite = atlas.createSprite(Constants.FERN01_HIT_TEXTURE);
-                break;
-            case FLOWER01:
-                normalSprite = atlas.createSprite(Constants.FLOWER01_TEXTURE);
-                hitSprite = atlas.createSprite(Constants.FLOWER01_HIT_TEXTURE);
-                break;
-            case TREE01:
-                normalSprite = atlas.createSprite(Constants.TREE01_TEXTURE);
-                hitSprite = atlas.createSprite(Constants.TREE01_HIT_TEXTURE);
-                break;
-            case TREE02:
-                normalSprite = atlas.createSprite(Constants.TREE02_TEXTURE);
-                hitSprite = atlas.createSprite(Constants.TREE02_HIT_TEXTURE);
-                break;
-        }
+        // Give us a random set of PlantTextures
+        PlantTextures plantTextures = PlantTextures.values()[MathUtils.random(PlantTextures.values().length - 1)];
+        normalSprite = atlas.createSprite(plantTextures.normalTexture);
+        hitSprite = atlas.createSprite(plantTextures.hitTexture);
 
         boolean flipSprite = MathUtils.randomBoolean();
         normalSprite.flip(flipSprite, false);
