@@ -65,13 +65,6 @@ public class Constants {
     public static final float ANIMAL_PARTICLE_SCALE = 0.5f;
 
     // Animal constants
-    public enum AnimalName { COCO, HORSE01, HORSE02 }
-    public static final String COCO_TEXTURE = "coco";
-    public static final String HORSE01_TEXTURE = "horse01";
-    public static final String HORSE02_TEXTURE = "horse02";
-    public static final String COCO_SUPERHIT_TEXTURE = "coco_superhit";
-    public static final String HORSE01_SUPERHIT_TEXTURE = "horse01_superhit";
-    public static final String HORSE02_SUPERHIT_TEXTURE = "horse02_superhit";
     public static final int ANIMAL_SODAS_DRUNK = 1;
     public static final int ANIMAL_BASE_SCORE = 6;
     public static final int ANIMAL_HIGH_SCORE = 666;

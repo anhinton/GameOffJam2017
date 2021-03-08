@@ -12,33 +12,36 @@ import java.util.Comparator;
 
 @SuppressWarnings("NullableProblems")
 public class Animal implements GameObject, Hittable, Comparable<GameObject>, Comparator<GameObject> {
-    private Sprite normalSprite;
-    private Sprite superhitSprite;
+    private final Sprite normalSprite;
+    private final Sprite superhitSprite;
     private final ParticleEffect explosion;
     private float rot;
     private int hitCount;
     private State hitState;
     private Sprite currentSprite;
 
+    private enum AnimalTextures {
+        COCO    ("coco", "coco_superhit"),
+        HORSE01 ("horse01", "horse01_superhit"),
+        HORSE02 ("horse02", "horse02_superhit");
+
+        private final String textureName;
+        private final String superhitTextureName;
+
+        AnimalTextures(String textureName, String superhitTextureName) {
+            this.textureName = textureName;
+            this.superhitTextureName = superhitTextureName;
+        }
+    }
+
     Animal(int y, TextureAtlas atlas) {
         hitCount = 0;
         hitState = State.NORMAL;
 
-        Constants.AnimalName animalName = Constants.AnimalName.values()[MathUtils.random(Constants.AnimalName.values().length - 1)];
-        switch (animalName) {
-            case COCO:
-                normalSprite = atlas.createSprite(Constants.COCO_TEXTURE);
-                superhitSprite = atlas.createSprite(Constants.COCO_SUPERHIT_TEXTURE);
-                break;
-            case HORSE01:
-                normalSprite = atlas.createSprite(Constants.HORSE01_TEXTURE);
-                superhitSprite = atlas.createSprite(Constants.HORSE01_SUPERHIT_TEXTURE);
-                break;
-            case HORSE02:
-                normalSprite = atlas.createSprite(Constants.HORSE02_TEXTURE);
-                superhitSprite = atlas.createSprite(Constants.HORSE02_SUPERHIT_TEXTURE);
-                break;
-        }
+        AnimalTextures animalTextures = AnimalTextures.values()[MathUtils.random(AnimalTextures.values().length - 1)];
+        normalSprite = atlas.createSprite(animalTextures.textureName);
+        superhitSprite = atlas.createSprite(animalTextures.superhitTextureName);
+
         boolean flipSprite = MathUtils.randomBoolean();
         normalSprite.flip(flipSprite, false);
         superhitSprite.flip(flipSprite, false);
