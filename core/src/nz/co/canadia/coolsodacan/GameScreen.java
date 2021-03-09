@@ -1,6 +1,5 @@
 package nz.co.canadia.coolsodacan;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
@@ -52,7 +51,7 @@ public class GameScreen implements Screen, InputProcessor {
     private Label cansDeliveredLabel;
     private Label scoreLabel;
     private Label timeLabel;
-    private enum GameState {ACTIVE, PAUSED }
+    private enum GameState { ACTIVE, PAUSED }
     private final GameState currentState;
 
     GameScreen(CoolSodaCan game) {
@@ -67,8 +66,8 @@ public class GameScreen implements Screen, InputProcessor {
         atlas = game.manager.get("graphics/graphics.atlas", TextureAtlas.class);
 
         // create player object
-        Constants.PlayerName playerName = Constants.PlayerName.values()[MathUtils.random(Constants.PlayerName.values().length - 1)];
-        player = new Player(game.getGameHeight(), atlas, playerName);
+        Player.PlayerType playerType = Player.PlayerType.values()[MathUtils.random(Player.PlayerType.values().length - 1)];
+        player = new Player(game.getGameHeight(), atlas, playerType);
 
         // create game objects
         gameObjectArray = new Array<>();

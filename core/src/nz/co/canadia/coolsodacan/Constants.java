@@ -41,25 +41,12 @@ public class Constants {
     public static final float GAMEUI_COLUMN_PROPORTION = 1 / 3f;
     public static final float GAMEUI_MENUBUTTON_SCALE = 1.5f;
 
-    // Player constants
-    public enum PlayerName { BLUE, ORANGE, PURPLE, SILVER, YELLOW }
-    public static final String BLUE_NAME = "blue_soda_small";
-    public static final String ORANGE_NAME = "orange_soda_small";
-    public static final String PURPLE_NAME = "purple_soda_small";
-    public static final String SILVER_NAME = "silver_soda_small";
-    public static final String YELLOW_NAME = "yellow_soda_small";
-    public static final String BLUE_ANIM_NAME = "blue_anim";
-    public static final String ORANGE_ANIM_NAME = "orange_anim";
-    public static final String PURPLE_ANIM_NAME = "purple_anim";
-    public static final String SILVER_ANIM_NAME = "silver_anim";
-    public static final String YELLOW_ANIM_NAME = "yellow_anim";
-
     // Particle effect constants
-    public static final Color BLUE_EXPLOSION = new Color(0.165f, 0.427f, 0.925f, 1);
-    public static final Color SILVER_EXPLOSION = new Color(0.808f, 0.808f,0.745f, 1);
-    public static final Color ORANGE_EXPLOSION = new Color(0.965f, 0.482f,0.122f, 1);
-    public static final Color PURPLE_EXPLOSION = new Color(0.780f, 0, 0.6f, 1);
-    public static final Color YELLOW_EXPLOSION = new Color(0.965f, 0.949f, 0.121f, 1);
+    public static final Color BLUE_COLOR = new Color(0.165f, 0.427f, 0.925f, 1);
+    public static final Color SILVER_COLOR = new Color(0.808f, 0.808f,0.745f, 1);
+    public static final Color ORANGE_COLOR = new Color(0.965f, 0.482f,0.122f, 1);
+    public static final Color PURPLE_COLOR = new Color(0.780f, 0, 0.6f, 1);
+    public static final Color YELLOW_COLOR = new Color(0.965f, 0.949f, 0.121f, 1);
     // Particle size is set to min of sprite(width/height), scaled by the following
     public static final float PLANT_PARTICLE_SCALE = 1;
     public static final float ANIMAL_PARTICLE_SCALE = 0.5f;
@@ -84,8 +71,6 @@ public class Constants {
     public static final int MIN_ANIMAL_START = 3;
     public static final int MAX_ANIMAL_START = 6;
     public static final int MAX_ANIMAL_DISTANCE = MathUtils.round((float) GAME_HEIGHT / MIN_ANIMAL_START);
-
-    public enum AnimatedCanState { ACTIVE, INACTIVE }
 
     // Animal constants
     public static final float DEGREES_PER_SECOND = 10.0f;

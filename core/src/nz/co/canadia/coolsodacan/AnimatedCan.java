@@ -14,40 +14,18 @@ public class AnimatedCan {
     private final Animation<TextureRegion> animation;
     private final ParticleEffect explosion;
     private float timeElapsed;
-    private Constants.AnimatedCanState canState;
+    private AnimatedCanState canState;
     private TextureRegion currentFrame;
     private float x;
     private float y;
 
+    private enum AnimatedCanState { ACTIVE, INACTIVE }
+
     public AnimatedCan(Player player, TextureAtlas atlas) throws IllegalStateException {
         timeElapsed = 0;
-        canState = Constants.AnimatedCanState.ACTIVE;
-        String animationName;
-        Color particleColor;
-        switch(player.getName()) {
-            case BLUE:
-                animationName = Constants.BLUE_ANIM_NAME;
-                particleColor = Constants.BLUE_EXPLOSION;
-                break;
-            case ORANGE:
-                animationName = Constants.ORANGE_ANIM_NAME;
-                particleColor = Constants.ORANGE_EXPLOSION;
-                break;
-            case PURPLE:
-                animationName = Constants.PURPLE_ANIM_NAME;
-                particleColor = Constants.PURPLE_EXPLOSION;
-                break;
-            case SILVER:
-                animationName = Constants.SILVER_ANIM_NAME;
-                particleColor = Constants.SILVER_EXPLOSION;
-                break;
-            case YELLOW:
-                animationName = Constants.YELLOW_ANIM_NAME;
-                particleColor = Constants.YELLOW_EXPLOSION;
-                break;
-            default:
-                throw new IllegalStateException("Unexpected animationName value: " + player.getName());
-        }
+        canState = AnimatedCanState.ACTIVE;
+        String animationName = player.getPlayerType().getAnimTexture();
+        Color particleColor = player.getPlayerType().getExplosionColor();
         animation = new Animation<TextureRegion>(
                 Constants.CAN_FRAME_DURATION,
                 atlas.findRegions(animationName),
@@ -96,11 +74,11 @@ public class AnimatedCan {
     }
 
     public void hit() {
-        canState = Constants.AnimatedCanState.INACTIVE;
+        canState = AnimatedCanState.INACTIVE;
         explosion.start();
     }
 
     public boolean isActive() {
-        return canState == Constants.AnimatedCanState.ACTIVE;
+        return canState == AnimatedCanState.ACTIVE;
     }
 }

@@ -2,6 +2,7 @@ package nz.co.canadia.coolsodacan;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -15,42 +16,48 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 class Player {
     private final Sprite sprite;
     private final int gameHeight;
-    private final Constants.PlayerName name;
+    private final PlayerType playerType;
     private Vector2 targetXY;
 
-    Player(int gameHeight, TextureAtlas atlas, Constants.PlayerName name) {
+    public enum PlayerType {
+        BLUE ("blue_soda_small", "blue_anim", Constants.BLUE_COLOR),
+        ORANGE ("orange_soda_small", "orange_anim", Constants.ORANGE_COLOR),
+        PURPLE ("purple_soda_small", "purple_anim", Constants.PURPLE_COLOR),
+        SILVER ("silver_soda_small", "silver_anim", Constants.SILVER_COLOR),
+        YELLOW ("yellow_soda_small", "yellow_anim", Constants.YELLOW_COLOR);
+
+        private final String smallTexture;
+        private final String animTexture;
+        private final Color explosionColor;
+
+        PlayerType(String smallTexture, String animTexture, Color explosionColor) {
+            this.smallTexture = smallTexture;
+            this.animTexture = animTexture;
+            this.explosionColor = explosionColor;
+        }
+
+        String getAnimTexture() {
+            return animTexture;
+        }
+
+        Color getExplosionColor() {
+            return explosionColor;
+        }
+    }
+
+    Player(int gameHeight, TextureAtlas atlas, PlayerType playerType) {
         this.gameHeight = gameHeight;
-        this.name = name;
+        this.playerType = playerType;
         targetXY = new Vector2(
                 Constants.GAME_WIDTH * Constants.CURSOR_START_X,
                 gameHeight * Constants.CURSOR_START_Y);
-        String spriteName;
-        switch(name) {
-            case BLUE:
-                spriteName = Constants.BLUE_NAME;
-                break;
-            case ORANGE:
-                spriteName = Constants.ORANGE_NAME;
-                break;
-            case PURPLE:
-                spriteName = Constants.PURPLE_NAME;
-                break;
-            case SILVER:
-                spriteName = Constants.SILVER_NAME;
-                break;
-            case YELLOW:
-                spriteName = Constants.YELLOW_NAME;
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + name);
-        }
-        sprite = atlas.createSprite(spriteName);
+        sprite = atlas.createSprite(playerType.smallTexture);
         sprite.setCenter(targetXY.x, targetXY.y);
         sprite.setSize(sprite.getWidth(), sprite.getHeight());
     }
 
-    public Constants.PlayerName getName() {
-        return name;
+    public PlayerType getPlayerType() {
+        return playerType;
     }
 
     void update(float delta) {
