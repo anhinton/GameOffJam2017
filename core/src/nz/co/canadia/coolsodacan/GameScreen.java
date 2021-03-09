@@ -1,5 +1,6 @@
 package nz.co.canadia.coolsodacan;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
@@ -33,11 +34,14 @@ public class GameScreen implements Screen, InputProcessor {
     private final Viewport viewport;
     private final Stage bannerStage;
     private final Stage uiStage;
+    private final Stage menuStage;
     private final TextureAtlas atlas;
     private final Array<GameObject> gameObjectArray;
     private final Array<Hittable> hittableArray;
     private final Array<AnimatedCan> animatedCanArray;
     private final Table gameUiTable;
+    private final Table menuUiTable;
+    private final InputMultiplexer multiplexer;
     private float nextAnimatedCan;
     private float timeElapsed;
     private float nextGrass;
@@ -52,7 +56,7 @@ public class GameScreen implements Screen, InputProcessor {
     private Label scoreLabel;
     private Label timeLabel;
     private enum GameState { ACTIVE, PAUSED }
-    private final GameState currentState;
+    private GameState currentState;
 
     GameScreen(CoolSodaCan game) {
         this.game = game;
@@ -127,27 +131,52 @@ public class GameScreen implements Screen, InputProcessor {
         bannerRightImage.setPosition(bannerStage.getWidth() - bannerRightTexture.getWidth(), 0);
         bannerStage.addActor(bannerRightImage);
 
-        // Create the UI
+        // Create the Game UI
         Viewport uiViewport = new FitViewport(game.getGameUiWidth(), Gdx.graphics.getBackBufferHeight());
         uiStage = new Stage(uiViewport);
         gameUiTable = new Table();
         gameUiTable.setFillParent(true);
-        gameUiTable.pad(game.getUiPadding());
+        gameUiTable.pad(game.getGameUiPadding());
         uiStage.addActor(gameUiTable);
+
+        // Create the Game Menu
+        menuStage = new Stage(uiViewport);
+        menuUiTable = new Table();
+        menuUiTable.setFillParent(true);
+        menuStage.addActor(menuUiTable);
 
         showGameUi();
 
-        InputMultiplexer multiplexer = new InputMultiplexer();
-        multiplexer.addProcessor(uiStage);
-        multiplexer.addProcessor(this);
-        Gdx.input.setInputProcessor(multiplexer);
-        Gdx.input.setCursorCatched(true);
+        multiplexer = new InputMultiplexer();
+        setGameInputs();
+
         Gdx.input.setCursorPosition(
                 MathUtils.round(Gdx.graphics.getBackBufferWidth() * Constants.CURSOR_START_X),
                 MathUtils.round(Gdx.graphics.getBackBufferHeight() * Constants.CURSOR_START_Y));
     }
 
+    private void setGameInputs() {
+        multiplexer.clear();
+        multiplexer.addProcessor(uiStage);
+        multiplexer.addProcessor(this);
+        Gdx.input.setInputProcessor(multiplexer);
+        if (Gdx.app.getType() == Application.ApplicationType.Desktop) {
+            Gdx.input.setCursorCatched(true);
+        }
+    }
+
+    private void setMenuInputs() {
+        multiplexer.clear();
+        multiplexer.addProcessor(menuStage);
+        multiplexer.addProcessor(this);
+        Gdx.input.setInputProcessor(multiplexer);
+        if (Gdx.app.getType() == Application.ApplicationType.Desktop) {
+            Gdx.input.setCursorCatched(false);
+        }
+    }
+
     private void showGameUi() {
+
         gameUiTable.clear();
         gameUiTable.top().left();
 
@@ -203,12 +232,71 @@ public class GameScreen implements Screen, InputProcessor {
         gameUiTable.add(rightColumn).prefWidth(game.getGameUiWidth() * Constants.GAMEUI_COLUMN_PROPORTION).right();
     }
 
+    private void showMenu() {
+
+        Table menuBox = new Table();
+        menuBox.pad(game.getMenuUiPadding());
+        menuBox.setSkin(game.skin);
+        menuBox.setBackground("default-rect");
+
+        Label pauseLabel = new Label(game.bundle.get("gameMenuLabel"), game.skin, "default");
+        menuBox.add(pauseLabel).space(game.getMenuUiPadding());
+        menuBox.row();
+
+        TextButton continueButton = new TextButton(game.bundle.get("gameMenuContinueButton"), game.skin, "default");
+        continueButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                continueGame();
+            }
+        });
+        menuBox.add(continueButton).prefWidth(game.getGameUiWidth() * Constants.GAMEUI_COLUMN_PROPORTION)
+                .prefHeight(continueButton.getPrefHeight() * Constants.GAMEUI_MENUBUTTON_SCALE)
+                .space(game.getMenuUiPadding());
+        menuBox.row();
+
+        TextButton exitButton = new TextButton(game.bundle.get("gameMenuExitButton"), game.skin, "default");
+        exitButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                exit();
+            }
+        });
+        menuBox.add(exitButton).prefWidth(game.getGameUiWidth() * Constants.GAMEUI_COLUMN_PROPORTION)
+                .prefHeight(exitButton.getPrefHeight() * Constants.GAMEUI_MENUBUTTON_SCALE)
+                .space(game.getMenuUiPadding());
+
+        menuUiTable.add(menuBox);
+    }
+
+    private void continueGame() {
+        menuUiTable.clear();
+        currentState = GameState.ACTIVE;
+        showGameUi();
+        setGameInputs();
+    }
+
+    private void exit() {
+        Gdx.app.exit();
+    }
+
     private void goBack() {
         switch (currentState) {
             case ACTIVE:
-                Gdx.app.exit();
+                showMenu();
+                setMenuInputs();
+                currentState = GameState.PAUSED;
                 break;
             case PAUSED:
+                switch (Gdx.app.getType()) {
+                    case Desktop:
+                    case WebGL:
+                        continueGame();
+                        break;
+                    case Android:
+                        exit();
+                        break;
+                }
                 break;
         }
     }
@@ -268,64 +356,66 @@ public class GameScreen implements Screen, InputProcessor {
 
     @Override
     public void render(float delta) {
-        timeElapsed += delta;
-        updateTimeLabel();
-
         ScreenUtils.clear(Constants.BACKGROUND_COLOUR);
         viewport.getCamera().update();
 
-        // Remove old objects
-        for (int i = 0; i < gameObjectArray.size; i++) {
-            if (gameObjectArray.get(i).getTopY() < 0) {
-                gameObjectArray.removeIndex(i);
-            }
-        }
-        for (int i = 0; i < animatedCanArray.size; i++) {
-            if (animatedCanArray.get(i).getY() > game.getGameHeight()) {
-                animatedCanArray.removeIndex(i);
-            }
-        }
+        if (currentState == GameState.ACTIVE) {
+            timeElapsed += delta;
+            updateTimeLabel();
 
-        // Add new objects to top of screen
-        if (timeElapsed > nextAnimal) {
-            spawnAnimal();
-        }
-        if (timeElapsed > nextGrass) {
-            spawnGrass();
-        }
-        if (timeElapsed > nextPlant) {
-            spawnPlant();
-        }
-
-        // Add new cans if player firing
-        if (playerIsFiring) {
-            if (timeElapsed > nextAnimatedCan) {
-                throwCan();
+            // Remove old objects
+            for (int i = 0; i < gameObjectArray.size; i++) {
+                if (gameObjectArray.get(i).getTopY() < 0) {
+                    gameObjectArray.removeIndex(i);
+                }
             }
-        }
+            for (int i = 0; i < animatedCanArray.size; i++) {
+                if (animatedCanArray.get(i).getY() > game.getGameHeight()) {
+                    animatedCanArray.removeIndex(i);
+                }
+            }
 
-        // Check for can/hittable collisions
-        for (AnimatedCan ac : animatedCanArray) {
-            if (ac.isActive()) {
-                for (Hittable h : hittableArray) {
-                    if (ac.getHitBox().overlaps(h.getHitBox()) & h.isHittable()) {
-                        incrementDelivered(h.getSodasDrunk());
-                        incrementScore(h.getScore());
-                        h.hit();
-                        ac.hit();
+            // Add new objects to top of screen
+            if (timeElapsed > nextAnimal) {
+                spawnAnimal();
+            }
+            if (timeElapsed > nextGrass) {
+                spawnGrass();
+            }
+            if (timeElapsed > nextPlant) {
+                spawnPlant();
+            }
+
+            // Add new cans if player firing
+            if (playerIsFiring) {
+                if (timeElapsed > nextAnimatedCan) {
+                    throwCan();
+                }
+            }
+
+            // Check for can/hittable collisions
+            for (AnimatedCan ac : animatedCanArray) {
+                if (ac.isActive()) {
+                    for (Hittable h : hittableArray) {
+                        if (ac.getHitBox().overlaps(h.getHitBox()) & h.isHittable()) {
+                            incrementDelivered(h.getSodasDrunk());
+                            incrementScore(h.getScore());
+                            h.hit();
+                            ac.hit();
+                        }
                     }
                 }
             }
-        }
 
-        // update objects
-        for (GameObject g : gameObjectArray) {
-            g.update(delta);
+            // update objects
+            for (GameObject g : gameObjectArray) {
+                g.update(delta);
+            }
+            for (AnimatedCan ac : animatedCanArray) {
+                ac.update(delta);
+            }
+            player.update(delta);
         }
-        for (AnimatedCan ac : animatedCanArray) {
-            ac.update(delta);
-        }
-        player.update(delta);
 
         // draw sprites
         viewport.apply();
@@ -350,6 +440,10 @@ public class GameScreen implements Screen, InputProcessor {
         // Draw game UI
         uiStage.getViewport().apply();
         uiStage.draw();
+
+        // Draw meny UI
+        menuStage.getViewport().apply();
+        menuStage.draw();
     }
 
     @Override
@@ -357,6 +451,7 @@ public class GameScreen implements Screen, InputProcessor {
         viewport.update(width, height);
         bannerStage.getViewport().update(width, height);
         uiStage.getViewport().update(width, height);
+        menuStage.getViewport().update(width, height);
     }
 
     @Override
@@ -414,20 +509,26 @@ public class GameScreen implements Screen, InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if (!playerIsFiring) playerIsFiring = true;
-        player.setTargetXY(screenX, screenY, viewport);
+        if (currentState == GameState.ACTIVE) {
+            if (!playerIsFiring) playerIsFiring = true;
+            player.setTargetXY(screenX, screenY, viewport);
+        }
         return true;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        playerIsFiring = false;
-        return false;
+        if (currentState == GameState.ACTIVE) {
+            playerIsFiring = false;
+        }
+        return true;
     }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        player.setTargetXY(screenX, screenY, viewport);
+        if (currentState == GameState.ACTIVE) {
+            player.setTargetXY(screenX, screenY, viewport);
+        }
         return true;
     }
 

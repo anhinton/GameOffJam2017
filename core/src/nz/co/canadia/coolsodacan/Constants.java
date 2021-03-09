@@ -37,9 +37,10 @@ public class Constants {
     public static final int FONT_SHADOW_OFFSET = 2;
 
     // UI constants
-    public static final int UI_PADDING = 5;
+    public static final int GAMEUI_PADDING = 5;
     public static final float GAMEUI_COLUMN_PROPORTION = 1 / 3f;
     public static final float GAMEUI_MENUBUTTON_SCALE = 1.5f;
+    public static final int MENUUI_PADDING = 20;
 
     // Particle effect constants
     public static final Color BLUE_COLOR = new Color(0.165f, 0.427f, 0.925f, 1);

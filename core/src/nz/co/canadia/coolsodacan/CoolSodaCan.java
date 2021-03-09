@@ -2,6 +2,7 @@ package nz.co.canadia.coolsodacan;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.graphics.Texture;
@@ -16,8 +17,8 @@ import com.badlogic.gdx.utils.I18NBundle;
 public class CoolSodaCan extends Game {
 	private int gameHeight;
 	private int gameUiWidth;
-
-	private int uiPadding;
+	private int gameUiPadding;
+	private int menuUiPadding;
 	SpriteBatch batch;
 	I18NBundle bundle;
 	FontLoader fontLoader;
@@ -34,6 +35,7 @@ public class CoolSodaCan extends Game {
 	@Override
 	public void create () {
 		I18NBundle.setSimpleFormatter(true);
+		Gdx.input.setCatchKey(Input.Keys.BACK, true);
 
 		int gameWidth = Constants.GAME_WIDTH;
 		gameHeight = Constants.GAME_HEIGHT;
@@ -46,7 +48,8 @@ public class CoolSodaCan extends Game {
 		} else {
 			gameUiWidth = MathUtils.round(gameUiHeight * gameRatio);
 		}
-		uiPadding = MathUtils.round((float) Constants.UI_PADDING / Constants.GAME_HEIGHT * Gdx.graphics.getBackBufferHeight());
+		gameUiPadding = MathUtils.round((float) Constants.GAMEUI_PADDING / Constants.GAME_HEIGHT * Gdx.graphics.getBackBufferHeight());
+		menuUiPadding = MathUtils.round((float) Constants.MENUUI_PADDING / Constants.GAME_HEIGHT * Gdx.graphics.getBackBufferHeight());
 
 		// Load assets
 		manager = new AssetManager();
@@ -85,9 +88,11 @@ public class CoolSodaCan extends Game {
 		return gameUiWidth;
 	}
 
-	public int getUiPadding() {
-		return uiPadding;
+	public int getGameUiPadding() {
+		return gameUiPadding;
 	}
+
+	public int getMenuUiPadding() { return menuUiPadding; }
 
 	@Override
 	public void render () {

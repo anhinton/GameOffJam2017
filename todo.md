@@ -8,7 +8,7 @@
       - ~~Menu button~~
           - ~~ESC (menu) on desktop/html~~
           - ~~"Menu" button on Android/iOS~~
-      - Make this look a lot better
+      - ~~Make this look a lot better~~
       - Save these on exit
       
   + Implement statistics preferences
@@ -72,6 +72,11 @@
         implement a loading screens, menu screens, etc
 
 ## Done
+      
+  + ~~Implement in-game menu~~
+      - ~~When Menu button/ESC pressed pause game and show menu~~
+      - ~~Continue~~
+      - ~~Exit~~
 
   + ~~Test IOSFontLoader and IOSFormatter~~
       - ~~Add localization support to IOS~~
