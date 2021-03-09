@@ -183,18 +183,18 @@ public class GameScreen implements Screen, InputProcessor {
         Table leftColumn = new Table().left();
         // Cans thrown
         cansThrownLabel = new Label("", game.skin.get("default", Label.LabelStyle.class));
-        incrementThrown(0);
+        updateCansThrownLabel();
         leftColumn.add(cansThrownLabel).left();
         leftColumn.row();
         // Cans delivered
         cansDeliveredLabel = new Label("", game.skin.get("default", Label.LabelStyle.class));
-        incrementDelivered(0);
+        updateCansDeliveredLabel();
         leftColumn.add(cansDeliveredLabel).left();
 
         Table middleColumn = new Table();
         // Score
         scoreLabel = new Label("", game.skin.get("default", Label.LabelStyle.class));
-        incrementScore(0);
+        updateScoreLabel();
         middleColumn.add(scoreLabel).left();
         middleColumn.row();
         // Timer
@@ -301,21 +301,6 @@ public class GameScreen implements Screen, InputProcessor {
         }
     }
 
-    private void incrementDelivered(int nCans) {
-        cansDelivered += nCans;
-        cansDeliveredLabel.setText(game.bundle.get("gameUiDeliveredLabel") + ": " + cansDelivered);
-    }
-
-    private void incrementScore(int pointsScored) {
-        score += pointsScored;
-        scoreLabel.setText(game.bundle.get("gameUiScoreLabel") + ": " + game.formatter.printScore(score));
-    }
-
-    private void incrementThrown(int nThrown) {
-        cansThrown += nThrown;
-        cansThrownLabel.setText(game.bundle.get("gameUiThrownLabel") + ": " + cansThrown);
-    }
-
     private void spawnAnimal() {
         Animal animal = new Animal(game.getGameHeight(), atlas);
         gameObjectArray.add(animal);
@@ -338,7 +323,20 @@ public class GameScreen implements Screen, InputProcessor {
     private void throwCan() {
         animatedCanArray.add(new AnimatedCan(player, atlas));
         nextAnimatedCan = timeElapsed + Constants.ANIMATED_CAN_DISTANCE / Constants.ANIMATED_CAN_SPEED;
-        incrementThrown(1);
+        cansThrown++;
+        updateCansThrownLabel();
+    }
+
+    private void updateCansDeliveredLabel() {
+        cansDeliveredLabel.setText(game.bundle.get("gameUiDeliveredLabel") + ": " + cansDelivered);
+    }
+
+    private void updateCansThrownLabel() {
+        cansThrownLabel.setText(game.bundle.get("gameUiThrownLabel") + ": " + cansThrown);
+    }
+
+    private void updateScoreLabel() {
+        scoreLabel.setText(game.bundle.get("gameUiScoreLabel") + ": " + game.formatter.printScore(score));
     }
 
     private void updateTimeLabel() {
@@ -398,8 +396,10 @@ public class GameScreen implements Screen, InputProcessor {
                 if (ac.isActive()) {
                     for (Hittable h : hittableArray) {
                         if (ac.getHitBox().overlaps(h.getHitBox()) & h.isHittable()) {
-                            incrementDelivered(h.getSodasDrunk());
-                            incrementScore(h.getScore());
+                            cansDelivered += h.getSodasDrunk();
+                            updateCansDeliveredLabel();
+                            score += h.getScore();
+                            updateScoreLabel();
                             h.hit();
                             ac.hit();
                         }
