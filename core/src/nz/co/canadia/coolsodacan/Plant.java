@@ -12,25 +12,31 @@ import java.util.Comparator;
 
 @SuppressWarnings("NullableProblems")
 public class Plant implements GameObject, Hittable, Comparable<GameObject>, Comparator<GameObject> {
-    private Sprite normalSprite;
-    private Sprite hitSprite;
+    private final Sprite hitSprite;
+    private final PlantType plantType;
     private Sprite currentSprite;
     private final ParticleEffect explosion;
     private Hittable.State hitState;
     private int hitCount;
 
     private enum PlantType {
-        FERN01      ("fern01",  "fern01_hit"),
-        FLOWER01    ("flower01","flower01_hit"),
-        TREE01      ("tree01",  "tree01_hit"),
-        TREE02      ("tree02",  "tree02_hit");
+        FERN01      ("fern01",  "fern01_hit",   "Fern"),
+        FLOWER01    ("flower01","flower01_hit", "Flower"),
+        TREE01      ("tree01",  "tree01_hit",   "Tree"),
+        TREE02      ("tree02",  "tree02_hit",   "Tree");
 
         private final String normalTexture;
         private final String hitTexture;
+        private final String type;
 
-        PlantType(String normalTexture, String hitTexture) {
+        PlantType(String normalTexture, String hitTexture, String type) {
             this.normalTexture = normalTexture;
             this.hitTexture = hitTexture;
+            this.type = type;
+        }
+
+        String getType() {
+            return type;
         }
     }
 
@@ -39,8 +45,8 @@ public class Plant implements GameObject, Hittable, Comparable<GameObject>, Comp
         hitState = State.NORMAL;
 
         // Give us a random set of PlantTextures
-        PlantType plantType = PlantType.values()[MathUtils.random(PlantType.values().length - 1)];
-        normalSprite = atlas.createSprite(plantType.normalTexture);
+        plantType = PlantType.values()[MathUtils.random(PlantType.values().length - 1)];
+        Sprite normalSprite = atlas.createSprite(plantType.normalTexture);
         hitSprite = atlas.createSprite(plantType.hitTexture);
 
         boolean flipSprite = MathUtils.randomBoolean();
@@ -112,19 +118,25 @@ public class Plant implements GameObject, Hittable, Comparable<GameObject>, Comp
     }
 
     @Override
+    public State getHitState() {
+        return hitState;
+    }
+
+    @Override
     public void hit() {
         hitCount += 1;
+        hitState = State.HIT;
         if (hitCount >= 3) {
             hitSprite.setPosition(currentSprite.getX(), currentSprite.getY());
             currentSprite = hitSprite;
-            hitState = State.HIT;
+            hitState = State.SUPER_HIT;
             explosion.start();
         }
     }
 
     @Override
     public boolean isHittable() {
-        return hitState == State.NORMAL;
+        return hitState == State.NORMAL | hitState == State.HIT;
     }
 
     @Override
@@ -133,11 +145,23 @@ public class Plant implements GameObject, Hittable, Comparable<GameObject>, Comp
     }
 
     @Override
-    public int getScore() {
-        if (hitCount < 2) {
-            return Constants.PLANT_BASE_SCORE;
-        } else {
-            return Constants.PLANT_HIGH_SCORE;
+    public int getPoints() {
+        int score;
+        switch (hitState) {
+            case NORMAL:
+            case HIT:
+            default:
+                score = Constants.PLANT_BASE_POINTS;
+                break;
+            case SUPER_HIT:
+                score = Constants.PLANT_HIGH_POINTS;
+                break;
         }
+        return score;
+    }
+
+    @Override
+    public String getType() {
+        return plantType.getType();
     }
 }

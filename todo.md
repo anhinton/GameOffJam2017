@@ -1,6 +1,6 @@
 # todo.md
 
-  + Keep a String Array of types of Animal objects 
+  + Keep a String Array of types of Animal and Plant objects which have been super hit
 
   + Implement game/scoring UI
       - ~~Cans thrown~~

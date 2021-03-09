@@ -15,22 +15,31 @@ public class Animal implements GameObject, Hittable, Comparable<GameObject>, Com
     private final Sprite normalSprite;
     private final Sprite superhitSprite;
     private final ParticleEffect explosion;
+
+    private final AnimalType animalType;
     private float rot;
     private int hitCount;
+
     private State hitState;
     private Sprite currentSprite;
 
     private enum AnimalType {
-        COCO    ("coco",    "coco_superhit"),
-        HORSE01 ("horse01", "horse01_superhit"),
-        HORSE02 ("horse02", "horse02_superhit");
+        COCO    ("coco",    "coco_superhit",    "Guinea pig"),
+        HORSE01 ("horse01", "horse01_superhit", "Horse"),
+        HORSE02 ("horse02", "horse02_superhit", "Horse");
 
         private final String textureName;
         private final String superhitTextureName;
+        private final String type;
 
-        AnimalType(String textureName, String superhitTextureName) {
+        AnimalType(String textureName, String superhitTextureName, String type) {
             this.textureName = textureName;
             this.superhitTextureName = superhitTextureName;
+            this.type = type;
+        }
+
+        String getType() {
+            return type;
         }
     }
 
@@ -39,7 +48,7 @@ public class Animal implements GameObject, Hittable, Comparable<GameObject>, Com
         hitState = State.NORMAL;
 
         // Give us a random set of AnimalTextures
-        AnimalType animalType = AnimalType.values()[MathUtils.random(AnimalType.values().length - 1)];
+        animalType = AnimalType.values()[MathUtils.random(AnimalType.values().length - 1)];
         normalSprite = atlas.createSprite(animalType.textureName);
         superhitSprite = atlas.createSprite(animalType.superhitTextureName);
 
@@ -126,6 +135,11 @@ public class Animal implements GameObject, Hittable, Comparable<GameObject>, Com
     }
 
     @Override
+    public State getHitState() {
+        return hitState;
+    }
+
+    @Override
     public void hit() {
         hitCount += 1;
         if (hitCount < 3) {
@@ -137,7 +151,6 @@ public class Animal implements GameObject, Hittable, Comparable<GameObject>, Com
             hitState = State.SUPER_HIT;
             explosion.start();
         }
-
     }
 
     @Override
@@ -146,16 +159,28 @@ public class Animal implements GameObject, Hittable, Comparable<GameObject>, Com
     }
 
     @Override
+    public String getType() {
+        return animalType.getType();
+    }
+
+    @Override
     public int getSodasDrunk() {
         return Constants.ANIMAL_SODAS_DRUNK;
     }
 
     @Override
-    public int getScore() {
-        if (hitCount < 2) {
-            return Constants.ANIMAL_BASE_SCORE;
-        } else {
-            return Constants.ANIMAL_HIGH_SCORE;
+    public int getPoints() {
+        int score;
+        switch (hitState) {
+            case NORMAL:
+            case HIT:
+            default:
+                score = Constants.ANIMAL_BASE_POINTS;
+                break;
+            case SUPER_HIT:
+                score = Constants.ANIMAL_HIGH_POINTS;
+                break;
         }
+        return score;
     }
 }

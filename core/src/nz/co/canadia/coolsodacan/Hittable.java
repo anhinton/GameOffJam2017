@@ -7,11 +7,15 @@ public interface Hittable {
 
     Rectangle getHitBox();
 
+    State getHitState();
+
     void hit();
 
     boolean isHittable();
 
     int getSodasDrunk();
 
-    int getScore();
+    int getPoints();
+
+    String getType();
 }

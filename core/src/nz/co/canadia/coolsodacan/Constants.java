@@ -55,13 +55,13 @@ public class Constants {
 
     // Animal constants
     public static final int ANIMAL_SODAS_DRUNK = 1;
-    public static final int ANIMAL_BASE_SCORE = 6;
-    public static final int ANIMAL_HIGH_SCORE = 666;
+    public static final int ANIMAL_BASE_POINTS = 6;
+    public static final int ANIMAL_HIGH_POINTS = 666;
 
     // Plant constants
     public static final int PLANT_SODAS_DRUNK = 0;
-    public static final int PLANT_BASE_SCORE = 0;
-    public static final int PLANT_HIGH_SCORE = ANIMAL_BASE_SCORE;
+    public static final int PLANT_BASE_POINTS = 0;
+    public static final int PLANT_HIGH_POINTS = ANIMAL_BASE_POINTS;
 
     // Spawn constants
     public static final int MIN_GRASS_START = 5;
