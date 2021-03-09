@@ -20,11 +20,11 @@ class Player {
     private Vector2 targetXY;
 
     public enum PlayerType {
-        BLUE ("blue_soda_small", "blue_anim", Constants.BLUE_COLOR),
-        ORANGE ("orange_soda_small", "orange_anim", Constants.ORANGE_COLOR),
-        PURPLE ("purple_soda_small", "purple_anim", Constants.PURPLE_COLOR),
-        SILVER ("silver_soda_small", "silver_anim", Constants.SILVER_COLOR),
-        YELLOW ("yellow_soda_small", "yellow_anim", Constants.YELLOW_COLOR);
+        BLUE    ("blue_soda_small",     "blue_anim",    Constants.BLUE_COLOR),
+        ORANGE  ("orange_soda_small",   "orange_anim",  Constants.ORANGE_COLOR),
+        PURPLE  ("purple_soda_small",   "purple_anim",  Constants.PURPLE_COLOR),
+        SILVER  ("silver_soda_small",   "silver_anim",  Constants.SILVER_COLOR),
+        YELLOW  ("yellow_soda_small",   "yellow_anim",  Constants.YELLOW_COLOR);
 
         private final String smallTexture;
         private final String animTexture;
