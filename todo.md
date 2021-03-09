@@ -9,7 +9,18 @@
           - ~~ESC (menu) on desktop/html~~
           - ~~"Menu" button on Android/iOS~~
       - ~~Make this look a lot better~~
-      - Save these on exit
+      - Save statistics on exit
+          - ~~Cans thrown~~
+          - ~~Cans delivered~~
+          - ~~High score~~
+          - ~~Total points scored~~
+          - ~~Longest session~~
+          - ~~Total time played~~
+          - Animals sated
+              - Horses
+              - Guinea pigs
+              - Others?
+          - Trees destroyed
       
   + Implement statistics preferences
       - Loaded by Title screen and Game screen
@@ -29,6 +40,8 @@
       - Statistics
           - Number of sodas thrown
           - Number of sodas drunk
+          - Highest score
+          - Total points scored
           - Animals sated
               - Horses
               - Guinea pigs

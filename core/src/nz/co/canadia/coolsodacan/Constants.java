@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.MathUtils;
 
 public class Constants {
     public static final String GAME_NAME = "Cool Soda Can by Ashley Noel Hinton";
+    public static final String GAME_STATISTICS_PATH = "nz.co.canadia.coolsodacan.statistics";
 
     public static final Color BACKGROUND_COLOUR = new Color(0f / 255, 205f / 255, 111f / 255, 1);
     public static final int GAME_WIDTH = 720;

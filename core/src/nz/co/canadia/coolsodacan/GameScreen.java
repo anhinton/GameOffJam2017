@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -42,6 +43,7 @@ public class GameScreen implements Screen, InputProcessor {
     private final Table gameUiTable;
     private final Table menuUiTable;
     private final InputMultiplexer multiplexer;
+    private final Preferences gameStatistics;
     private float nextAnimatedCan;
     private float timeElapsed;
     private float nextGrass;
@@ -59,6 +61,7 @@ public class GameScreen implements Screen, InputProcessor {
     private GameState currentState;
 
     GameScreen(CoolSodaCan game) {
+        gameStatistics = Gdx.app.getPreferences(Constants.GAME_STATISTICS_PATH);
         this.game = game;
         timeElapsed = 0;
         playerIsFiring = false;
@@ -277,6 +280,13 @@ public class GameScreen implements Screen, InputProcessor {
     }
 
     private void exit() {
+        gameStatistics.putInteger("cansThrown", gameStatistics.getInteger("cansThrown", 0) + cansThrown);
+        gameStatistics.putInteger("cansDelivered", gameStatistics.getInteger("cansDelivered", 0) + cansDelivered);
+        gameStatistics.putFloat("totalTimePlayed", gameStatistics.getFloat("totalTimePlayed", 0) + timeElapsed);
+        gameStatistics.putFloat("longestSession", Math.max(gameStatistics.getFloat("longestSession", 0), timeElapsed));
+        gameStatistics.putInteger("totalPointsScored", gameStatistics.getInteger("totalPointsScored", 0) + score);
+        gameStatistics.putInteger("highScore", Math.max(gameStatistics.getInteger("highScore", 0), score));
+        gameStatistics.flush();
         Gdx.app.exit();
     }
 
