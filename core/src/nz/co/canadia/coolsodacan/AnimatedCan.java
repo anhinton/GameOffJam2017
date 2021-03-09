@@ -21,7 +21,7 @@ public class AnimatedCan {
 
     private enum AnimatedCanState { ACTIVE, INACTIVE }
 
-    public AnimatedCan(Player player, TextureAtlas atlas) throws IllegalStateException {
+    public AnimatedCan(Player player, TextureAtlas atlas) {
         timeElapsed = 0;
         canState = AnimatedCanState.ACTIVE;
         String animationName = player.getPlayerType().getAnimTexture();
