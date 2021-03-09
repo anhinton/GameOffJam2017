@@ -20,7 +20,7 @@ public class Animal implements GameObject, Hittable, Comparable<GameObject>, Com
     private State hitState;
     private Sprite currentSprite;
 
-    private enum AnimalTextures {
+    private enum AnimalType {
         COCO    ("coco",    "coco_superhit"),
         HORSE01 ("horse01", "horse01_superhit"),
         HORSE02 ("horse02", "horse02_superhit");
@@ -28,7 +28,7 @@ public class Animal implements GameObject, Hittable, Comparable<GameObject>, Com
         private final String textureName;
         private final String superhitTextureName;
 
-        AnimalTextures(String textureName, String superhitTextureName) {
+        AnimalType(String textureName, String superhitTextureName) {
             this.textureName = textureName;
             this.superhitTextureName = superhitTextureName;
         }
@@ -39,9 +39,9 @@ public class Animal implements GameObject, Hittable, Comparable<GameObject>, Com
         hitState = State.NORMAL;
 
         // Give us a random set of AnimalTextures
-        AnimalTextures animalTextures = AnimalTextures.values()[MathUtils.random(AnimalTextures.values().length - 1)];
-        normalSprite = atlas.createSprite(animalTextures.textureName);
-        superhitSprite = atlas.createSprite(animalTextures.superhitTextureName);
+        AnimalType animalType = AnimalType.values()[MathUtils.random(AnimalType.values().length - 1)];
+        normalSprite = atlas.createSprite(animalType.textureName);
+        superhitSprite = atlas.createSprite(animalType.superhitTextureName);
 
         boolean flipSprite = MathUtils.randomBoolean();
         normalSprite.flip(flipSprite, false);

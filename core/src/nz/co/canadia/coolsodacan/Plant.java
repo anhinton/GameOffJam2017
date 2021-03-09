@@ -19,7 +19,7 @@ public class Plant implements GameObject, Hittable, Comparable<GameObject>, Comp
     private Hittable.State hitState;
     private int hitCount;
 
-    private enum PlantTextures {
+    private enum PlantType {
         FERN01      ("fern01",  "fern01_hit"),
         FLOWER01    ("flower01","flower01_hit"),
         TREE01      ("tree01",  "tree01_hit"),
@@ -28,7 +28,7 @@ public class Plant implements GameObject, Hittable, Comparable<GameObject>, Comp
         private final String normalTexture;
         private final String hitTexture;
 
-        PlantTextures(String normalTexture, String hitTexture) {
+        PlantType(String normalTexture, String hitTexture) {
             this.normalTexture = normalTexture;
             this.hitTexture = hitTexture;
         }
@@ -39,9 +39,9 @@ public class Plant implements GameObject, Hittable, Comparable<GameObject>, Comp
         hitState = State.NORMAL;
 
         // Give us a random set of PlantTextures
-        PlantTextures plantTextures = PlantTextures.values()[MathUtils.random(PlantTextures.values().length - 1)];
-        normalSprite = atlas.createSprite(plantTextures.normalTexture);
-        hitSprite = atlas.createSprite(plantTextures.hitTexture);
+        PlantType plantType = PlantType.values()[MathUtils.random(PlantType.values().length - 1)];
+        normalSprite = atlas.createSprite(plantType.normalTexture);
+        hitSprite = atlas.createSprite(plantType.hitTexture);
 
         boolean flipSprite = MathUtils.randomBoolean();
         normalSprite.flip(flipSprite, false);

@@ -1,5 +1,7 @@
 # todo.md
 
+  + Keep a String Array of types of Animal objects 
+
   + Implement game/scoring UI
       - ~~Cans thrown~~
       - ~~Cans delivered~~
