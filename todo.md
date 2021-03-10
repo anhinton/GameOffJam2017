@@ -1,11 +1,5 @@
 # todo.md
       
-  + Implement Exit UI from GameScreen
-  
-  + Add score particle to Animal/Plant when points are scored
-      
-  + Create a tutorial at start of game
-      
   + Title screen
       - New game
           - Choose from one of five cans
@@ -27,6 +21,10 @@
           - Music volume
           - Sound volume
           - Credits
+  
+  + Add score particle to Animal/Plant when points are scored
+      
+  + Create a tutorial at start of game
           
   + Can unlock ideas
       - Score more than 50,000 points overall
