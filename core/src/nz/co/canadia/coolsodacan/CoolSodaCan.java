@@ -26,6 +26,7 @@ public class CoolSodaCan extends Game {
 	AssetManager manager;
 	Skin skin;
 	ShapeRenderer shapeRenderer;
+	Statistics statistics;
 
 	public CoolSodaCan(FontLoader fontLoader, Formatter formatter) {
 		this.formatter = formatter;
@@ -36,6 +37,8 @@ public class CoolSodaCan extends Game {
 	public void create () {
 		I18NBundle.setSimpleFormatter(true);
 		Gdx.input.setCatchKey(Input.Keys.BACK, true);
+		statistics = new Statistics();
+		statistics.load();
 
 		int gameWidth = Constants.GAME_WIDTH;
 		gameHeight = Constants.GAME_HEIGHT;
@@ -101,6 +104,7 @@ public class CoolSodaCan extends Game {
 
 	@Override
 	public void dispose () {
+		statistics.save();
 		batch.dispose();
 		manager.dispose();
 		// NB I am not doing skin.dispose() because its TextureAtlas and BitmapFont *should*

@@ -5,7 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -43,7 +42,6 @@ public class GameScreen implements Screen, InputProcessor {
     private final Table gameUiTable;
     private final Table menuUiTable;
     private final InputMultiplexer multiplexer;
-    private final Preferences gameStatistics;
     private float nextAnimatedCan;
     private float timeElapsed;
     private float nextGrass;
@@ -64,7 +62,6 @@ public class GameScreen implements Screen, InputProcessor {
     private GameState currentState;
 
     GameScreen(CoolSodaCan game) {
-        gameStatistics = Gdx.app.getPreferences(Constants.GAME_STATISTICS_PATH);
         this.game = game;
         timeElapsed = 0;
         playerIsFiring = false;
@@ -191,23 +188,23 @@ public class GameScreen implements Screen, InputProcessor {
         Table leftColumn = new Table().left();
         // Cans thrown
         cansThrownLabel = new Label("", game.skin.get("default", Label.LabelStyle.class));
-        updateCansThrownLabel();
+        setCansThrownLabel();
         leftColumn.add(cansThrownLabel).left();
         leftColumn.row();
         // Cans delivered
         cansDeliveredLabel = new Label("", game.skin.get("default", Label.LabelStyle.class));
-        updateCansDeliveredLabel();
+        setCansDeliveredLabel();
         leftColumn.add(cansDeliveredLabel).left();
 
         Table middleColumn = new Table();
         // Score
         scoreLabel = new Label("", game.skin.get("default", Label.LabelStyle.class));
-        updateScoreLabel();
+        setScoreLabel();
         middleColumn.add(scoreLabel).left();
         middleColumn.row();
         // Timer
         timeLabel = new Label("", game.skin.get("default", Label.LabelStyle.class));
-        updateTimeLabel();
+        setTimeLabel();
         middleColumn.add(timeLabel);
 
         Table rightColumn = new Table().right();
@@ -284,14 +281,27 @@ public class GameScreen implements Screen, InputProcessor {
         setGameInputs();
     }
 
+    private void spawnAnimal() {
+        Animal animal = new Animal(game.getGameHeight(), atlas);
+        gameObjectArray.add(animal);
+        hittableArray.add(animal);
+        nextAnimal = timeElapsed + MathUtils.randomTriangular(0, Constants.MAX_ANIMAL_DISTANCE) / Constants.WORLD_MOVEMENT_SPEED;
+    }
+
+    private void spawnGrass() {
+        gameObjectArray.add(new Grass(game.getGameHeight(), atlas));
+        nextGrass = timeElapsed + MathUtils.randomTriangular(0, Constants.MAX_GRASS_DISTANCE) / Constants.WORLD_MOVEMENT_SPEED;
+    }
+
+    private void spawnPlant() {
+        Plant plant = new Plant(game.getGameHeight(), atlas);
+        gameObjectArray.add(plant);
+        hittableArray.add(plant);
+        nextPlant = timeElapsed + MathUtils.randomTriangular(0, Constants.MAX_PLANT_DISTANCE) / Constants.WORLD_MOVEMENT_SPEED;
+    }
+
     private void exit() {
-        gameStatistics.putInteger("cansThrown", gameStatistics.getInteger("cansThrown", 0) + cansThrown);
-        gameStatistics.putInteger("cansDelivered", gameStatistics.getInteger("cansDelivered", 0) + cansDelivered);
-        gameStatistics.putFloat("totalTimePlayed", gameStatistics.getFloat("totalTimePlayed", 0) + timeElapsed);
-        gameStatistics.putFloat("longestSession", Math.max(gameStatistics.getFloat("longestSession", 0), timeElapsed));
-        gameStatistics.putInteger("totalPointsScored", gameStatistics.getInteger("totalPointsScored", 0) + score);
-        gameStatistics.putInteger("highScore", Math.max(gameStatistics.getInteger("highScore", 0), score));
-        gameStatistics.flush();
+        game.statistics.save();
         Gdx.app.exit();
     }
 
@@ -316,50 +326,52 @@ public class GameScreen implements Screen, InputProcessor {
         }
     }
 
-    private void spawnAnimal() {
-        Animal animal = new Animal(game.getGameHeight(), atlas);
-        gameObjectArray.add(animal);
-        hittableArray.add(animal);
-        nextAnimal = timeElapsed + MathUtils.randomTriangular(0, Constants.MAX_ANIMAL_DISTANCE) / Constants.WORLD_MOVEMENT_SPEED;
+    private void updateCansDelivered(int nCans) {
+        cansDelivered += nCans;
+        game.statistics.updateTotalCansDelivered(nCans);
+        setCansDeliveredLabel();
     }
 
-    private void spawnGrass() {
-        gameObjectArray.add(new Grass(game.getGameHeight(), atlas));
-        nextGrass = timeElapsed + MathUtils.randomTriangular(0, Constants.MAX_GRASS_DISTANCE) / Constants.WORLD_MOVEMENT_SPEED;
+    private void setCansDeliveredLabel() {
+        cansDeliveredLabel.setText(game.bundle.get("gameUiDeliveredLabel") + ": " + cansDelivered);
     }
 
-    private void spawnPlant() {
-        Plant plant = new Plant(game.getGameHeight(), atlas);
-        gameObjectArray.add(plant);
-        hittableArray.add(plant);
-        nextPlant = timeElapsed + MathUtils.randomTriangular(0, Constants.MAX_PLANT_DISTANCE) / Constants.WORLD_MOVEMENT_SPEED;
+    private void updateScore(int points) {
+        score += points;
+        game.statistics.updateTotalPointsScored(points);
+        game.statistics.updateHighScore(score);
+        setScoreLabel();
+    }
+
+    private void setScoreLabel() {
+        scoreLabel.setText(game.bundle.get("gameUiScoreLabel") + ": " + game.formatter.printScore(score));
+    }
+
+    private void updateTime(float delta) {
+        timeElapsed += delta;
+        game.statistics.updateTotalTimePlayed(delta);
+        game.statistics.updateLongestSession(timeElapsed);
+        setTimeLabel();
+    }
+
+    private void setTimeLabel() {
+        int minutes = (int) (timeElapsed / 60);
+        int seconds = (int) (timeElapsed % 60);
+        timeLabel.setText(game.bundle.get("gameUiTimeLabel") + ": "
+                + game.formatter.zeroPadTime(minutes, game.bundle.getLocale())
+                + ":" + game.formatter.zeroPadTime(seconds, game.bundle.getLocale()));
     }
 
     private void throwCan() {
         animatedCanArray.add(new AnimatedCan(player, atlas));
         nextAnimatedCan = timeElapsed + Constants.ANIMATED_CAN_DISTANCE / Constants.ANIMATED_CAN_SPEED;
         cansThrown++;
-        updateCansThrownLabel();
+        game.statistics.incrementTotalCansThrown();
+        setCansThrownLabel();
     }
 
-    private void updateCansDeliveredLabel() {
-        cansDeliveredLabel.setText(game.bundle.get("gameUiDeliveredLabel") + ": " + cansDelivered);
-    }
-
-    private void updateCansThrownLabel() {
+    private void setCansThrownLabel() {
         cansThrownLabel.setText(game.bundle.get("gameUiThrownLabel") + ": " + cansThrown);
-    }
-
-    private void updateScoreLabel() {
-        scoreLabel.setText(game.bundle.get("gameUiScoreLabel") + ": " + game.formatter.printScore(score));
-    }
-
-    private void updateTimeLabel() {
-        int minutes = (int) (timeElapsed / 60);
-        int seconds = (int) (timeElapsed % 60);
-        timeLabel.setText(game.bundle.get("gameUiTimeLabel") + ": "
-                + game.formatter.zeroPadTime(minutes, game.bundle.getLocale())
-                + ":" + game.formatter.zeroPadTime(seconds, game.bundle.getLocale()));
     }
 
     @Override
@@ -373,8 +385,7 @@ public class GameScreen implements Screen, InputProcessor {
         viewport.getCamera().update();
 
         if (currentState == GameState.ACTIVE) {
-            timeElapsed += delta;
-            updateTimeLabel();
+            updateTime(delta);
 
             // Remove old objects
             for (int i = 0; i < gameObjectArray.size; i++) {
@@ -412,10 +423,8 @@ public class GameScreen implements Screen, InputProcessor {
                     for (Hittable h : hittableArray) {
                         if (ac.getHitBox().overlaps(h.getHitBox()) & h.isHittable()) {
                             h.hit();
-                            score += h.getPoints();
-                            cansDelivered += h.getSodasDrunk();
-                            updateCansDeliveredLabel();
-                            updateScoreLabel();
+                            updateCansDelivered(h.getSodasDrunk());
+                            updateScore(h.getPoints());
                             if (h.getHitState() == Hittable.State.SUPER_HIT) {
                                 String type = h.getType();
                                 if (Animal.class.equals(h.getClass())) {
