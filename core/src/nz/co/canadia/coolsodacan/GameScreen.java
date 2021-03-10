@@ -44,6 +44,7 @@ public class GameScreen implements Screen, InputProcessor {
     private final InputMultiplexer multiplexer;
     private float nextAnimatedCan;
     private float timeElapsed;
+    private float lastSaved;
     private float nextGrass;
     private float nextPlant;
     private float nextAnimal;
@@ -62,6 +63,7 @@ public class GameScreen implements Screen, InputProcessor {
     GameScreen(CoolSodaCan game) {
         this.game = game;
         timeElapsed = 0;
+        lastSaved = 0;
         playerIsFiring = false;
         cansThrown = 0;
         cansDelivered = 0;
@@ -345,6 +347,7 @@ public class GameScreen implements Screen, InputProcessor {
 
     private void updateTime(float delta) {
         timeElapsed += delta;
+        lastSaved += delta;
         game.statistics.updateTotalTimePlayed(delta);
         game.statistics.updateLongestSession(timeElapsed);
         setTimeLabel();
@@ -382,6 +385,11 @@ public class GameScreen implements Screen, InputProcessor {
 
         if (currentState == GameState.ACTIVE) {
             updateTime(delta);
+
+            if (lastSaved > Constants.AUTOSAVE_INTERVAL) {
+                game.statistics.save();
+                lastSaved = 0;
+            }
 
             // Remove old objects
             for (int i = 0; i < gameObjectArray.size; i++) {
