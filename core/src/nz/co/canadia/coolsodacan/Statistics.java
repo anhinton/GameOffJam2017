@@ -2,7 +2,6 @@ package nz.co.canadia.coolsodacan;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
-import com.badlogic.gdx.utils.ObjectMap;
 
 public class Statistics {
     private final Preferences statistics;
@@ -12,6 +11,10 @@ public class Statistics {
     private int totalCansThrown;
     private int totalPointsScored;
     private float totalTimePlayed;
+
+    private int guineapigsSuperhit;
+    private int horsesSuperhit;
+    private int plantsSuperHit;
 
     public Statistics() {
         statistics = Gdx.app.getPreferences(Constants.GAME_STATISTICS_PATH);
@@ -54,6 +57,24 @@ public class Statistics {
             Gdx.app.error("Statistics", "totalTimePlayed value is invalid " + e.getLocalizedMessage());
             totalTimePlayed = 0;
         }
+        try {
+            guineapigsSuperhit = statistics.getInteger("guineapigsSuperhit", 0);
+        } catch (RuntimeException e) {
+            Gdx.app.error("Statistics", "guineapigsSuperhit value is invalid " + e.getLocalizedMessage());
+            guineapigsSuperhit = 0;
+        }
+        try {
+            horsesSuperhit = statistics.getInteger("horsesSuperhit", 0);
+        } catch (RuntimeException e) {
+            Gdx.app.error("Statistics", "horsesSuperhit value is invalid " + e.getLocalizedMessage());
+            horsesSuperhit = 0;
+        }
+        try {
+            plantsSuperHit = statistics.getInteger("plantsSuperHit", 0);
+        } catch (RuntimeException e) {
+            Gdx.app.error("Statistics", "plantsSuperHit value is invalid " + e.getLocalizedMessage());
+            plantsSuperHit = 0;
+        }
     }
 
     public void save() {
@@ -82,6 +103,22 @@ public class Statistics {
 
     public float getTotalTimePlayed() {
         return totalTimePlayed;
+    }
+
+    public int getGuineapigsSuperhit() {
+        return guineapigsSuperhit;
+    }
+
+    public int getHorsesSuperhit() {
+        return horsesSuperhit;
+    }
+
+    public int getAnimalsSuperhit() {
+        return guineapigsSuperhit + horsesSuperhit;
+    }
+
+    public int getPlantsSuperHit() {
+        return plantsSuperHit;
     }
 
     public void updateHighScore(int score) {
@@ -113,5 +150,32 @@ public class Statistics {
     public void incrementTotalCansThrown() {
         this.totalCansThrown++;
         statistics.putInteger("totalCansThrown", totalCansThrown);
+    }
+
+    public void incrementSuperHit(String type) {
+        try {
+            switch (type) {
+                case "COCO":
+                    guineapigsSuperhit++;
+                    statistics.putInteger("guineapigsSuperhit", guineapigsSuperhit);
+                    break;
+                case "HORSE01":
+                case "HORSE02":
+                    horsesSuperhit++;
+                    statistics.putInteger("horsesSuperhit", horsesSuperhit);
+                    break;
+                case "FERN01":
+                case "FLOWER01":
+                case "TREE01":
+                case "TREE02":
+                    plantsSuperHit++;
+                    statistics.putInteger("plantsSuperHit", plantsSuperHit);
+                    break;
+                default:
+                    throw new RuntimeException("Unrecognised Hittable type: '" + type + "'");
+            }
+        } catch (RuntimeException e) {
+            Gdx.app.error("Statistics", "Unable to do incrementSuperHit " + e.getLocalizedMessage());
+        }
     }
 }

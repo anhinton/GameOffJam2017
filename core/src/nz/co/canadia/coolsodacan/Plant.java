@@ -20,23 +20,17 @@ public class Plant implements GameObject, Hittable, Comparable<GameObject>, Comp
     private int hitCount;
 
     private enum PlantType {
-        FERN01      ("fern01",  "fern01_hit",   "Fern"),
-        FLOWER01    ("flower01","flower01_hit", "Flower"),
-        TREE01      ("tree01",  "tree01_hit",   "Tree"),
-        TREE02      ("tree02",  "tree02_hit",   "Tree");
+        FERN01      ("fern01",  "fern01_hit"),
+        FLOWER01    ("flower01","flower01_hit"),
+        TREE01      ("tree01",  "tree01_hit"),
+        TREE02      ("tree02",  "tree02_hit");
 
         private final String normalTexture;
         private final String hitTexture;
-        private final String type;
 
-        PlantType(String normalTexture, String hitTexture, String type) {
+        PlantType(String normalTexture, String hitTexture) {
             this.normalTexture = normalTexture;
             this.hitTexture = hitTexture;
-            this.type = type;
-        }
-
-        String getType() {
-            return type;
         }
     }
 
@@ -162,6 +156,6 @@ public class Plant implements GameObject, Hittable, Comparable<GameObject>, Comp
 
     @Override
     public String getType() {
-        return plantType.getType();
+        return plantType.name();
     }
 }

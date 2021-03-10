@@ -24,22 +24,16 @@ public class Animal implements GameObject, Hittable, Comparable<GameObject>, Com
     private Sprite currentSprite;
 
     private enum AnimalType {
-        COCO    ("coco",    "coco_superhit",    "Guinea pig"),
-        HORSE01 ("horse01", "horse01_superhit", "Horse"),
-        HORSE02 ("horse02", "horse02_superhit", "Horse");
+        COCO    ("coco",    "coco_superhit"),
+        HORSE01 ("horse01", "horse01_superhit"),
+        HORSE02 ("horse02", "horse02_superhit");
 
         private final String textureName;
         private final String superhitTextureName;
-        private final String type;
 
-        AnimalType(String textureName, String superhitTextureName, String type) {
+        AnimalType(String textureName, String superhitTextureName) {
             this.textureName = textureName;
             this.superhitTextureName = superhitTextureName;
-            this.type = type;
-        }
-
-        String getType() {
-            return type;
         }
     }
 
@@ -160,7 +154,7 @@ public class Animal implements GameObject, Hittable, Comparable<GameObject>, Com
 
     @Override
     public String getType() {
-        return animalType.getType();
+        return animalType.name();
     }
 
     @Override

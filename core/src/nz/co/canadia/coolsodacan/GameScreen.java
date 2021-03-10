@@ -55,8 +55,6 @@ public class GameScreen implements Screen, InputProcessor {
     private Label cansDeliveredLabel;
     private Label scoreLabel;
     private Label timeLabel;
-    private final Array<String> animalsSuperHit;
-    private final Array<String> plantsSuperHit;
 
     private enum GameState { ACTIVE, PAUSED }
     private GameState currentState;
@@ -69,8 +67,6 @@ public class GameScreen implements Screen, InputProcessor {
         cansDelivered = 0;
         score = 0;
         currentState = GameState.ACTIVE;
-        animalsSuperHit = new Array<>();
-        plantsSuperHit = new Array<>();
 
         atlas = game.manager.get("graphics/graphics.atlas", TextureAtlas.class);
 
@@ -422,17 +418,14 @@ public class GameScreen implements Screen, InputProcessor {
                 if (ac.isActive()) {
                     for (Hittable h : hittableArray) {
                         if (ac.getHitBox().overlaps(h.getHitBox()) & h.isHittable()) {
+                            // Hit the hittable
                             h.hit();
                             updateCansDelivered(h.getSodasDrunk());
                             updateScore(h.getPoints());
                             if (h.getHitState() == Hittable.State.SUPER_HIT) {
-                                String type = h.getType();
-                                if (Animal.class.equals(h.getClass())) {
-                                    animalsSuperHit.add(type);
-                                } else if (Plant.class.equals(h.getClass())) {
-                                    plantsSuperHit.add(type);
-                                }
+                                game.statistics.incrementSuperHit(h.getType());
                             }
+                            // Hit the can
                             ac.hit();
                         }
                     }

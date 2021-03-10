@@ -1,32 +1,5 @@
 # todo.md
       
-  + Implement Statistics class
-      - ~~Use Preferences~~
-      - ~~Loaded on game load in CoolSodaCan.create()~~
-      - ~~During GameScreen these are incremented according to game actions~~
-      - ~~Saved out to file when exiting GameScreen~~
-      - ~~Saved out to file when exiting game~~
-      - ~~Cans thrown~~
-      - ~~Cans delivered~~
-      - ~~High score~~
-      - ~~Total points scored~~
-      - ~~Longest session~~
-      - ~~Total time played~~
-      - Animals sated
-          - Horses
-          - Guinea pigs
-      - Trees destroyed
-
-  + Implement game/scoring UI
-      - ~~Cans thrown~~
-      - ~~Cans delivered~~
-      - ~~Score~~
-      - ~~Time~~
-      - ~~Menu button~~
-          - ~~ESC (menu) on desktop/html~~
-          - ~~"Menu" button on Android/iOS~~
-      - ~~Make this look a lot better~~
-      
   + Implement Exit UI from GameScreen
   
   + Add score particle to Animal/Plant when points are scored
@@ -99,6 +72,34 @@
         implement a loading screens, menu screens, etc
 
 ## Done
+      
+  + ~~Implement Statistics class~~
+      - ~~Use Preferences~~
+      - ~~Loaded on game load in CoolSodaCan.create()~~
+      - ~~During GameScreen these are incremented according to game actions~~
+      - ~~Saved out to file when exiting GameScreen~~
+      - ~~Saved out to file when exiting game~~
+      - ~~Cans thrown~~
+      - ~~Cans delivered~~
+      - ~~High score~~
+      - ~~Total points scored~~
+      - ~~Longest session~~
+      - ~~Total time played~~
+      - ~~Animals super hit~~
+          - ~~Horses~~
+          - ~~Guinea pigs~~
+      - ~~Trees super hit~~
+      - ~~getters for everything~~
+
+  + ~~Implement game/scoring UI~~
+      - ~~Cans thrown~~
+      - ~~Cans delivered~~
+      - ~~Score~~
+      - ~~Time~~
+      - ~~Menu button~~
+          - ~~ESC (menu) on desktop/html~~
+          - ~~"Menu" button on Android/iOS~~
+      - ~~Make this look a lot better~~
       
   + ~~Implement in-game menu~~
       - ~~When Menu button/ESC pressed pause game and show menu~~
