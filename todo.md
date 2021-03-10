@@ -1,6 +1,21 @@
 # todo.md
-
-  + Keep a String Array of types of Animal and Plant objects which have been super hit
+      
+  + Implement Statistics class
+      - ~~Use Preferences~~
+      - ~~Loaded on game load in CoolSodaCan.create()~~
+      - ~~During GameScreen these are incremented according to game actions~~
+      - ~~Saved out to file when exiting GameScreen~~
+      - ~~Saved out to file when exiting game~~
+      - ~~Cans thrown~~
+      - ~~Cans delivered~~
+      - ~~High score~~
+      - ~~Total points scored~~
+      - ~~Longest session~~
+      - ~~Total time played~~
+      - Animals sated
+          - Horses
+          - Guinea pigs
+      - Trees destroyed
 
   + Implement game/scoring UI
       - ~~Cans thrown~~
@@ -11,23 +26,6 @@
           - ~~ESC (menu) on desktop/html~~
           - ~~"Menu" button on Android/iOS~~
       - ~~Make this look a lot better~~
-      - Save statistics on exit
-          - ~~Cans thrown~~
-          - ~~Cans delivered~~
-          - ~~High score~~
-          - ~~Total points scored~~
-          - ~~Longest session~~
-          - ~~Total time played~~
-          - Animals sated
-              - Horses
-              - Guinea pigs
-              - Others?
-          - Trees destroyed
-      
-  + Implement statistics preferences
-      - Loaded by Title screen and Game screen
-      - During GameScreen these are incremented according to game actions
-      - Saved out to file when exiting GameScreen
       
   + Implement Exit UI from GameScreen
   
@@ -56,6 +54,18 @@
           - Music volume
           - Sound volume
           - Credits
+          
+  + Can unlock ideas
+      - Score more than 50,000 points overall
+          - Should I calculate this based on fire rate and points per can? This is my guess at 5
+            minutes of super-sating animals
+      - Play one session for longer than 5 minutes
+      - Super-sate 50 guinea pigs
+      - Destroy 100 plants
+      
+  + Add two new Animals
+      - Blue hedgehog
+      - Yellow rat    
           
   + Does my font have weird spacing on Web?
   
