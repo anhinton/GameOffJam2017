@@ -1,7 +1,4 @@
 # todo.md
-
-  + Replace animal superhit sprites with smiling sprite
-      - No violence!
       
   + Title screen
       - New game
@@ -73,6 +70,9 @@
         implement a loading screens, menu screens, etc
 
 ## Done
+
+  + ~~Replace animal superhit sprites with smiling sprite~~
+      - ~~No violence!~~
       
   + ~~Implement Statistics class~~
       - ~~Use Preferences~~
