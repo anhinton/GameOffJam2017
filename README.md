@@ -6,7 +6,7 @@ This game is built using the libGDX Java game development
 framework <http://libgdx.badlogicgames.com/>. Instructions for
 importing and running the project in IntelliJ IDEA or Android Studio
 can be found
-at <https://github.com/libgdx/libgdx/wiki/Gradle-and-Intellij-IDEA>.
+at <https://libgdx.com/dev/setup/>.
 
 ### License
 
