@@ -2,10 +2,6 @@
 
 by Ashley Noel Hinton
 
-A video game that started as a game
-for [GameOff Jam 2017](https://itch.io/jam/game-off-2017), but didn't
-get finished, so now it's just a game.
-
 This game is built using the libGDX Java game development
 framework <http://libgdx.badlogicgames.com/>. Instructions for
 importing and running the project in IntelliJ IDEA or Android Studio
