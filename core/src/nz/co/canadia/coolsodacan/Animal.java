@@ -13,7 +13,7 @@ import java.util.Comparator;
 @SuppressWarnings("NullableProblems")
 public class Animal implements GameObject, Hittable, Comparable<GameObject>, Comparator<GameObject> {
     private final Sprite normalSprite;
-    private final Sprite superhitSprite;
+    private final Sprite hitSprite;
     private final ParticleEffect explosion;
 
     private final AnimalType animalType;
@@ -24,16 +24,16 @@ public class Animal implements GameObject, Hittable, Comparable<GameObject>, Com
     private Sprite currentSprite;
 
     private enum AnimalType {
-        COCO    ("coco",    "coco_superhit"),
-        HORSE01 ("horse01", "horse01_superhit"),
-        HORSE02 ("horse02", "horse02_superhit");
+        COCO    ("coco",    "coco_smile"),
+        HORSE01 ("horse01", "horse01_smile"),
+        HORSE02 ("horse02", "horse02_smile");
 
         private final String textureName;
-        private final String superhitTextureName;
+        private final String hitTextureName;
 
-        AnimalType(String textureName, String superhitTextureName) {
+        AnimalType(String textureName, String hitTextureName) {
             this.textureName = textureName;
-            this.superhitTextureName = superhitTextureName;
+            this.hitTextureName = hitTextureName;
         }
     }
 
@@ -44,11 +44,11 @@ public class Animal implements GameObject, Hittable, Comparable<GameObject>, Com
         // Give us a random set of AnimalTextures
         animalType = AnimalType.values()[MathUtils.random(AnimalType.values().length - 1)];
         normalSprite = atlas.createSprite(animalType.textureName);
-        superhitSprite = atlas.createSprite(animalType.superhitTextureName);
+        hitSprite = atlas.createSprite(animalType.hitTextureName);
 
         boolean flipSprite = MathUtils.randomBoolean();
         normalSprite.flip(flipSprite, false);
-        superhitSprite.flip(flipSprite, false);
+        hitSprite.flip(flipSprite, false);
 
         currentSprite = normalSprite;
         currentSprite.setCenterX(MathUtils.random(0 + normalSprite.getWidth() / 2, Constants.GAME_WIDTH - normalSprite.getWidth() / 2));
@@ -81,7 +81,7 @@ public class Animal implements GameObject, Hittable, Comparable<GameObject>, Com
             explosion.update(delta);
         }
         currentSprite.setY(currentSprite.getY() - Constants.WORLD_MOVEMENT_SPEED * delta);
-        superhitSprite.setPosition(currentSprite.getX(), currentSprite.getY());
+        hitSprite.setPosition(currentSprite.getX(), currentSprite.getY());
         explosion.setPosition(currentSprite.getX() + currentSprite.getWidth() / 2, currentSprite.getY() + currentSprite.getHeight() / 2);
     }
 
@@ -138,9 +138,9 @@ public class Animal implements GameObject, Hittable, Comparable<GameObject>, Com
         hitCount += 1;
         if (hitCount < 3) {
             hitState = State.HIT;
+            currentSprite = hitSprite;
             currentSprite.flip(true, false);
         } else if (hitCount == 3) {
-            currentSprite = superhitSprite;
             currentSprite.flip(false, true);
             hitState = State.SUPER_HIT;
             explosion.start();

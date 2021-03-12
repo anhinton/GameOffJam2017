@@ -1,4 +1,7 @@
 # todo.md
+
+  + Replace animal superhit sprites with smiling sprite
+      - No violence!
       
   + Title screen
       - New game

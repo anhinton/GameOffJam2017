@@ -74,7 +74,7 @@ coco
   orig: 181, 130
   offset: 0, 0
   index: -1
-coco_superhit
+coco_smile
   rotate: false
   xy: 517, 422
   size: 181, 130
@@ -144,7 +144,7 @@ horse01
   orig: 197, 130
   offset: 0, 0
   index: -1
-horse01_superhit
+horse01_smile
   rotate: false
   xy: 318, 433
   size: 197, 130
@@ -158,7 +158,7 @@ horse02
   orig: 184, 130
   offset: 0, 0
   index: -1
-horse02_superhit
+horse02_smile
   rotate: false
   xy: 829, 752
   size: 184, 130
